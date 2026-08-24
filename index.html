@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Y2JoeyFSU — Jefferson Pointe, Tallahassee FL — Fall 2000</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
+
+/* ════════════════════════════════════════
+   GLOBAL RESET & CANVAS
+════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh;
+  font-family: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+  overflow: hidden;
+}
+#canvas {
+  width: 1024px; height: 768px;
+  position: relative; overflow: hidden;
+  flex-shrink: 0;
+  background: #000;
+}
+.screen {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none;
+}
+.screen.flex { display: flex; }
+
+/* ════════════════════════════════════════
+   SCREEN 1 — GATEWAY POWER ON
+════════════════════════════════════════ */
+#screen-poweron {
+  background: #000;
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 0;
+}
+.gw-poweron-box {
+  border: 2px solid #555;
+  padding: 30px 50px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  background: #000;
+}
+.gw-logo-row {
+  display: flex; align-items: center; gap: 20px;
+}
+/* Gateway cow spot SVG logo */
+.gw-cow-box {
+  width: 70px; height: 70px; position: relative;
+}
+.gw-brand-text {
+  display: flex; flex-direction: column;
+}
+.gw-brand-gateway {
+  color: #fff;
+  font-size: 36px;
+  font-family: 'Times New Roman', serif;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+.gw-brand-2000 {
+  color: #aaa;
+  font-size: 13px;
+  font-family: 'Tahoma', Arial;
+  letter-spacing: 6px;
+  margin-top: -4px;
+}
+.gw-poweron-prompt {
+  color: #ccc;
+  font-size: 13px;
+  font-family: 'Tahoma', Arial;
+  text-align: center;
+  line-height: 1.8;
+  border-top: 1px solid #333;
+  padding-top: 16px;
+  width: 100%;
+}
+.gw-poweron-btns {
+  display: flex; gap: 20px;
+}
+.gw-poweron-btn {
+  padding: 6px 28px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 13px; font-family: 'Tahoma', Arial;
+  cursor: pointer; font-weight: bold;
+  min-width: 80px; text-align: center;
+}
+.gw-poweron-btn:active { border-color: #808080 #fff #fff #808080; }
+
+/* ════════════════════════════════════════
+   SCREEN 2 — GATEWAY SPLASH / BIOS
+════════════════════════════════════════ */
+#screen-gwbios {
+  background: #000;
+  align-items: flex-start; justify-content: flex-start;
+  flex-direction: column;
+  padding: 14px 18px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px; color: #aaa;
+  line-height: 1.7;
+}
+#screen-gwbios .bios-white { color: #fff; }
+#screen-gwbios .bios-line { display: block; }
+
+/* ════════════════════════════════════════
+   SCREEN 3 — WIN98 BOOT SPLASH
+════════════════════════════════════════ */
+#screen-win98boot {
+  background: #000;
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 30px;
+}
+.w98-boot-logo {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.w98-boot-flag {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+  width: 64px; height: 64px;
+}
+.w98-flag-q { border-radius: 2px; }
+.w98-boot-text {
+  color: #fff;
+  font-family: 'Times New Roman', serif;
+  font-size: 24px; font-style: italic;
+}
+.w98-boot-text strong { font-style: normal; font-size: 26px; }
+.w98-boot-bar-wrap {
+  width: 200px; height: 8px;
+  border: 1px solid #555;
+  background: #000;
+}
+.w98-boot-bar-inner {
+  height: 100%; width: 0%;
+  background: #0831d9;
+}
+
+/* ════════════════════════════════════════
+   SCREEN 4 — WIN98 LOGIN
+════════════════════════════════════════ */
+#screen-win98login {
+  background: #008080;
+  align-items: center; justify-content: center;
+}
+.w98-login-dialog {
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 0 #000;
+  width: 380px;
+}
+.w98-login-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 3px 6px; display: flex; align-items: center;
+  justify-content: space-between; height: 22px;
+}
+.w98-login-titlebar-left { display: flex; align-items: center; gap: 6px; }
+.w98-login-body { padding: 16px 20px; }
+.w98-login-banner {
+  background: #000080; color: #fff;
+  font-size: 18px; font-weight: bold;
+  font-family: 'Times New Roman', serif;
+  padding: 10px 14px; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.w98-login-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px; font-size: 12px;
+}
+.w98-login-row label { width: 90px; text-align: right; font-size: 12px; }
+.w98-login-input {
+  flex: 1; height: 22px; border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  font-size: 12px; padding: 0 4px;
+  font-family: 'Tahoma', Arial; background: #fff;
+}
+.w98-login-divider { height: 1px; background: #808080; margin: 12px 0; border-bottom: 1px solid #fff; }
+.w98-login-btns { display: flex; gap: 8px; justify-content: center; }
+.w98-login-btn {
+  padding: 4px 20px; font-size: 12px;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer; font-weight: bold; font-family: 'Tahoma', Arial;
+  min-width: 75px;
+}
+.w98-login-btn:active { border-color: #808080 #fff #fff #808080; }
+.w98-login-error {
+  color: #cc0000; font-size: 11px; text-align: center;
+  min-height: 16px; margin-top: 6px; font-family: 'Tahoma', Arial;
+}
+
+/* ════════════════════════════════════════
+   SCREEN 5 — WIN98 DESKTOP
+════════════════════════════════════════ */
+#screen-desktop {
+  background: #008080;
+  flex-direction: column;
+}
+.desktop-wallpaper {
+  position: absolute; top: 0; left: 0; width: 100%; height: calc(100% - 30px);
+  object-fit: cover; display: block;
+}
+/* Desktop icons */
+.desktop-icons {
+  position: absolute; top: 10px; left: 10px;
+  display: flex; flex-direction: column; gap: 6px;
+  z-index: 10;
+}
+.desktop-icon {
+  display: flex; flex-direction: column; align-items: center;
+  width: 72px; padding: 4px;
+  cursor: pointer; border: 1px solid transparent;
+  user-select: none;
+}
+.desktop-icon:hover { border-color: #fff; background: rgba(0,0,128,0.3); }
+.desktop-icon.selected { border-color: #fff; background: rgba(0,0,128,0.5); }
+.desktop-icon img, .desktop-icon svg { width: 32px; height: 32px; }
+.desktop-icon-label {
+  color: #fff; font-size: 11px; text-align: center;
+  text-shadow: 1px 1px 1px #000, -1px -1px 1px #000;
+  margin-top: 3px; line-height: 1.2;
+  font-family: 'Tahoma', Arial;
+}
+
+/* ════════════════════════════════════════
+   WIN98 TASKBAR
+════════════════════════════════════════ */
+#win98-taskbar {
+  position: absolute; bottom: 0; left: 0; width: 100%;
+  height: 30px; background: #c0c0c0;
+  border-top: 2px solid #fff;
+  display: flex; align-items: center;
+  padding: 0 2px; gap: 2px;
+  z-index: 1000;
+}
+#start-btn {
+  height: 22px; padding: 0 8px 0 4px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  display: flex; align-items: center; gap: 4px;
+  cursor: pointer; font-size: 12px; font-weight: bold;
+  font-family: 'Tahoma', Arial; color: #000;
+  flex-shrink: 0;
+}
+#start-btn:active { border-color: #808080 #fff #fff #808080; }
+#start-btn .start-flag {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  width: 16px; height: 16px; flex-shrink: 0;
+}
+.start-flag-q { border-radius: 0; }
+/* Quick Launch */
+#quick-launch {
+  display: flex; align-items: center; gap: 1px;
+  border-left: 1px solid #808080; border-right: 1px solid #fff;
+  padding: 0 4px; height: 22px; flex-shrink: 0;
+}
+.ql-btn {
+  width: 22px; height: 22px; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; font-size: 14px;
+  border: 1px solid transparent;
+}
+.ql-btn:hover { border-color: #fff #808080 #808080 #fff; background: #d0d0d0; }
+/* Taskbar programs area */
+#taskbar-programs {
+  flex: 1; display: flex; align-items: center;
+  gap: 2px; padding: 0 2px; overflow: hidden;
+}
+.tb-prog-btn {
+  height: 22px; min-width: 120px; max-width: 150px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 6px; cursor: pointer; flex-shrink: 0;
+  font-family: 'Tahoma', Arial; font-size: 11px; font-weight: bold;
+  color: #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  user-select: none;
+  box-shadow: inset 1px 1px 0 #808080;
+}
+.tb-prog-btn.active {
+  border-color: #fff #808080 #808080 #fff;
+  background: #d4d4d4; box-shadow: none;
+}
+/* System tray */
+#sys-tray {
+  display: flex; align-items: center; gap: 4px;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  padding: 0 6px; height: 22px; flex-shrink: 0;
+  font-size: 11px; font-family: 'Tahoma', Arial;
+}
+#tray-clock { cursor: default; font-size: 11px; }
+
+/* ════════════════════════════════════════
+   START MENU — Win98 style
+════════════════════════════════════════ */
+#start-menu {
+  position: absolute; bottom: 30px; left: 0;
+  width: 240px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000;
+  display: none; z-index: 2000;
+}
+#start-menu.open { display: flex; }
+.sm-sidebar {
+  width: 26px; background: #808080;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 8px; flex-shrink: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Tahoma', Arial;
+  font-size: 14px; font-weight: bold;
+  color: #c0c0c0; letter-spacing: 2px;
+}
+.sm-sidebar span.sm-win { color: #fff; }
+.sm-items { flex: 1; display: flex; flex-direction: column; }
+.sm-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 8px; font-size: 12px;
+  font-family: 'Tahoma', Arial; color: #000;
+  cursor: pointer; position: relative;
+  border-bottom: 1px solid #d0d0d0;
+}
+.sm-item:hover { background: #000080; color: #fff; }
+.sm-item:hover .sm-sub { color: #ccc; }
+.sm-item:hover .sm-arrow { color: #fff; }
+.sm-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
+.sm-label { font-weight: bold; flex: 1; }
+.sm-sub { font-size: 9px; color: #555; display: block; font-weight: normal; }
+.sm-arrow { font-size: 10px; color: #555; flex-shrink: 0; }
+.sm-divider { height: 1px; background: #808080; border-bottom: 1px solid #fff; margin: 2px 0; }
+.sm-submenu {
+  display: none; position: absolute; left: 100%; top: -2px;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; min-width: 180px; z-index: 2100;
+}
+.sm-item:hover .sm-submenu { display: block; }
+.sm-submenu .sm-item { border-bottom: 1px solid #d0d0d0; }
+
+/* ════════════════════════════════════════
+   WIN98 WINDOW CHROME (shared)
+════════════════════════════════════════ */
+.w98-window {
+  position: absolute;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000;
+  display: none; flex-direction: column;
+  min-width: 200px;
+}
+.w98-window.open { display: flex; }
+.w98-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 22px;
+  cursor: grab; flex-shrink: 0; user-select: none;
+}
+.w98-titlebar:active { cursor: grabbing; }
+.w98-titlebar-left { display: flex; align-items: center; gap: 5px; }
+.w98-title-icon { font-size: 12px; }
+.w98-win-btns { display: flex; gap: 2px; }
+.w98-win-btn {
+  width: 16px; height: 14px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 9px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; font-weight: bold; flex-shrink: 0;
+}
+.w98-win-btn:active { border-color: #808080 #fff #fff #808080; }
+.w98-menubar {
+  display: flex; background: #c0c0c0; padding: 1px 2px;
+  border-bottom: 1px solid #808080; flex-shrink: 0;
+}
+.w98-menu {
+  font-size: 12px; padding: 2px 8px; cursor: pointer;
+  color: #000; position: relative;
+}
+.w98-menu:hover { background: #000080; color: #fff; }
+.w98-menu-dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; z-index: 3000; min-width: 140px;
+}
+.w98-menu:hover .w98-menu-dropdown { display: block; }
+.w98-menu-item {
+  font-size: 12px; padding: 4px 20px; color: #000;
+  cursor: pointer; white-space: nowrap; font-family: 'Tahoma', Arial;
+}
+.w98-menu-item:hover { background: #000080; color: #fff; }
+.w98-menu-item.disabled { color: #808080; cursor: default; }
+.w98-menu-item.disabled:hover { background: transparent; color: #808080; }
+.w98-menu-sep { height: 1px; background: #808080; margin: 2px 0; border-bottom: 1px solid #fff; }
+.w98-statusbar {
+  height: 20px; background: #c0c0c0; border-top: 1px solid #808080;
+  display: flex; align-items: center; padding: 0 4px;
+  font-size: 11px; font-family: 'Tahoma', Arial; flex-shrink: 0; gap: 4px;
+}
+.w98-status-panel {
+  border: 1px solid; border-color: #808080 #fff #fff #808080;
+  padding: 0 6px; font-size: 11px; height: 16px;
+  display: flex; align-items: center;
+}
+
+/* ════════════════════════════════════════
+   AOL 6.0 SIGN-IN SCREEN
+════════════════════════════════════════ */
+#screen-aolsignin {
+  background: #003366;
+  align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.aol6-signin-wrap {
+  width: 460px;
+  background: #fff;
+  border: 3px solid #003399;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.5);
+}
+.aol6-header {
+  background: linear-gradient(135deg, #003399 0%, #0055cc 60%, #0099ff 100%);
+  padding: 16px 20px; display: flex; align-items: center;
+  justify-content: space-between;
+}
+.aol6-logo-text {
+  font-size: 32px; font-weight: bold; font-family: Arial, sans-serif;
+  color: #fff; letter-spacing: -1px;
+}
+.aol6-logo-text span { color: #ffcc00; }
+.aol6-version { color: #99ccff; font-size: 11px; font-family: Arial; margin-top: 2px; }
+.aol6-running-man {
+  font-size: 42px; line-height: 1;
+}
+.aol6-body { padding: 24px; }
+.aol6-field-label {
+  font-size: 12px; font-weight: bold; font-family: Arial;
+  color: #003399; margin-bottom: 4px; display: block;
+}
+.aol6-input {
+  width: 100%; height: 28px; border: 2px solid #003399;
+  font-size: 13px; padding: 0 8px; font-family: Arial;
+  background: #fff; margin-bottom: 14px;
+}
+.aol6-input:focus { outline: none; border-color: #0066ff; }
+.aol6-btns { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
+.aol6-btn {
+  padding: 7px 28px; font-size: 13px; font-weight: bold;
+  font-family: Arial; cursor: pointer; border: none;
+  background: linear-gradient(180deg, #0066ff, #003399);
+  color: #fff; border-radius: 3px;
+}
+.aol6-btn:hover { background: linear-gradient(180deg, #0088ff, #0055cc); }
+.aol6-btn.secondary {
+  background: linear-gradient(180deg, #e0e0e0, #c0c0c0);
+  color: #000; border: 1px solid #808080;
+}
+.aol6-error {
+  color: #cc0000; font-size: 11px; font-family: Arial;
+  text-align: center; min-height: 16px; margin-top: 6px;
+}
+.aol6-footer {
+  background: #eef3ff; border-top: 1px solid #99bbff;
+  padding: 8px 20px; text-align: center;
+  font-size: 10px; color: #666; font-family: Arial;
+}
+
+/* ════════════════════════════════════════
+   AOL 6.0 MODEM LOADING
+════════════════════════════════════════ */
+#screen-aolloading {
+  background: linear-gradient(135deg, #003399 0%, #0055cc 60%, #0099ff 100%);
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px;
+}
+.aol6-loading-logo {
+  font-size: 52px; font-weight: bold; font-family: Arial;
+  color: #fff; letter-spacing: -2px;
+}
+.aol6-loading-logo span { color: #ffcc00; }
+.aol6-loading-msg { color: #fff; font-size: 14px; font-family: Arial; }
+.aol6-loading-bar-wrap {
+  width: 300px; height: 16px; background: #001a66;
+  border: 2px solid #99ccff; border-radius: 8px; overflow: hidden;
+}
+.aol6-loading-bar {
+  height: 100%; width: 0%; background: linear-gradient(90deg, #66aaff, #ffffff);
+  border-radius: 8px; transition: width 0.3s;
+}
+
+/* ════════════════════════════════════════
+   AOL 6.0 DESKTOP
+════════════════════════════════════════ */
+#screen-aoldesktop {
+  background: #003366;
+  flex-direction: column;
+}
+.aol6-desktop-header {
+  background: linear-gradient(90deg, #003399, #0066cc);
+  height: 48px; display: flex; align-items: center;
+  padding: 0 12px; gap: 12px; flex-shrink: 0;
+}
+.aol6-desktop-logo {
+  font-size: 22px; font-weight: bold; font-family: Arial;
+  color: #fff; letter-spacing: -1px; flex-shrink: 0;
+}
+.aol6-desktop-logo span { color: #ffcc00; }
+.aol6-nav-btn {
+  height: 30px; padding: 0 14px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff; font-size: 12px; font-family: Arial; font-weight: bold;
+  cursor: pointer; border-radius: 3px;
+  display: flex; align-items: center; gap: 5px;
+}
+.aol6-nav-btn:hover { background: rgba(255,255,255,0.25); }
+.aol6-desktop-body {
+  flex: 1; display: flex; overflow: hidden;
+}
+.aol6-sidebar {
+  width: 180px; background: #002255; flex-shrink: 0;
+  border-right: 1px solid #0044aa;
+  display: flex; flex-direction: column; padding: 8px;
+  gap: 4px; overflow-y: auto;
+}
+.aol6-sidebar-section {
+  color: #ffcc00; font-size: 10px; font-weight: bold;
+  font-family: Arial; padding: 4px 2px 2px;
+  border-bottom: 1px solid #0044aa; margin-bottom: 2px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.aol6-sidebar-item {
+  color: #99ccff; font-size: 12px; font-family: Arial;
+  padding: 3px 6px; cursor: pointer; border-radius: 2px;
+  display: flex; align-items: center; gap: 6px;
+}
+.aol6-sidebar-item:hover { background: #003399; color: #fff; }
+.aol6-main-content {
+  flex: 1; background: #fff; overflow-y: auto; padding: 0;
+}
+.aol6-welcome-banner {
+  background: linear-gradient(90deg, #003399, #0099ff);
+  color: #fff; padding: 12px 16px;
+  font-size: 15px; font-weight: bold; font-family: Arial;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.aol6-welcome-date { font-size: 11px; font-weight: normal; opacity: 0.8; }
+.aol6-content-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; padding: 12px;
+}
+.aol6-content-card {
+  border: 1px solid #ccddff; border-radius: 4px; overflow: hidden;
+}
+.aol6-card-header {
+  background: #e8f0ff; border-bottom: 1px solid #ccddff;
+  padding: 6px 10px; font-size: 12px; font-weight: bold;
+  font-family: Arial; color: #003399;
+}
+.aol6-card-body { padding: 8px 10px; font-size: 12px; font-family: Arial; line-height: 1.6; }
+.aol6-card-link { color: #0033cc; text-decoration: underline; cursor: pointer; display: block; }
+.aol6-card-link:hover { color: #0066ff; }
+
+/* ════════════════════════════════════════
+   BUDDY LIST — AOL 6.0 Style
+════════════════════════════════════════ */
+#buddy-list-window {
+  position: absolute; top: 60px; right: 10px;
+  width: 200px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000;
+  display: none; flex-direction: column;
+  z-index: 500;
+}
+#buddy-list-window.open { display: flex; }
+.bl-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 11px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 20px;
+  cursor: grab; flex-shrink: 0;
+}
+.bl-titlebar:active { cursor: grabbing; }
+.bl-win-btns { display: flex; gap: 1px; }
+.bl-win-btn {
+  width: 14px; height: 12px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 8px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; font-weight: bold;
+}
+/* AOL 6 buddy list header bar */
+.bl-aol-header {
+  background: linear-gradient(90deg, #003399, #0066cc);
+  padding: 5px 8px; display: flex; align-items: center;
+  justify-content: space-between;
+}
+.bl-aol-logo { color: #fff; font-weight: bold; font-size: 13px; font-family: Arial; }
+.bl-aol-logo span { color: #ffcc00; }
+.bl-aol-sn { color: #99ccff; font-size: 10px; font-family: Arial; }
+.bl-toolbar {
+  background: #e8e8e8; border-bottom: 1px solid #808080;
+  display: flex; gap: 2px; padding: 2px 3px;
+}
+.bl-tb-btn {
+  font-size: 10px; padding: 1px 5px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer; font-family: 'Tahoma', Arial;
+}
+.bl-tb-btn:active { border-color: #808080 #fff #fff #808080; }
+.bl-body { flex: 1; background: #fff; overflow-y: auto; }
+.bl-group-header {
+  background: #ddeeff; border-bottom: 1px solid #aaccee;
+  padding: 2px 6px; font-size: 11px; font-weight: bold;
+  color: #003399; font-family: 'Tahoma', Arial;
+  display: flex; align-items: center; gap: 4px; cursor: pointer;
+}
+.bl-buddy {
+  display: flex; align-items: center; gap: 5px;
+  padding: 2px 10px; font-size: 11px; font-family: 'Tahoma', Arial;
+  cursor: pointer; border-bottom: 1px solid #f5f5f5;
+}
+.bl-buddy:hover { background: #000080; color: #fff; }
+.bl-buddy.away { color: #888; }
+.bl-buddy.away:hover { color: #ccc; }
+.bl-buddy-icon { font-size: 12px; flex-shrink: 0; }
+.bl-buddy-name { flex: 1; }
+.bl-buddy-idle { font-size: 9px; color: #aaa; }
+.bl-statusbar {
+  background: #c0c0c0; border-top: 1px solid #808080;
+  padding: 2px 6px; font-size: 10px; font-family: 'Tahoma', Arial;
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════
+   IM CHAT WINDOW — AOL 6.0 Style
+════════════════════════════════════════ */
+.im-window {
+  position: absolute;
+  width: 420px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000;
+  display: flex; flex-direction: column;
+  z-index: 400;
+}
+.im-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 11px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 20px;
+  cursor: grab; flex-shrink: 0;
+}
+.im-titlebar:active { cursor: grabbing; }
+.im-win-btns { display: flex; gap: 1px; }
+.im-win-btn {
+  width: 14px; height: 12px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 8px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; font-weight: bold;
+}
+.im-aol-bar {
+  background: linear-gradient(90deg, #003399, #0066cc);
+  padding: 3px 8px; display: flex; align-items: center;
+  justify-content: space-between; flex-shrink: 0;
+}
+.im-aol-sn { color: #fff; font-weight: bold; font-size: 12px; font-family: Arial; }
+.im-aol-warning { color: #ffcc00; font-size: 10px; font-family: Arial; }
+.im-log {
+  height: 200px; background: #fff; overflow-y: auto;
+  padding: 6px 8px; font-size: 12px; font-family: Arial;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  margin: 4px; flex-shrink: 0; line-height: 1.5;
+}
+.im-msg-them { color: #cc0000; }
+.im-msg-me { color: #0000cc; }
+.im-msg-system { color: #008000; font-style: italic; font-size: 11px; }
+.im-input-area { padding: 4px; display: flex; flex-direction: column; gap: 3px; }
+.im-input-toolbar {
+  display: flex; gap: 2px; background: #e8e8e8;
+  border: 1px solid #808080; padding: 2px;
+}
+.im-font-btn {
+  font-size: 11px; padding: 1px 6px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer; font-family: 'Tahoma', Arial;
+}
+.im-textarea {
+  width: 100%; height: 56px; border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  font-size: 12px; font-family: Arial; padding: 4px;
+  resize: none; outline: none;
+}
+.im-send-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.im-send-btn {
+  padding: 3px 16px; font-size: 11px; font-weight: bold;
+  font-family: 'Tahoma', Arial; background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer;
+}
+.im-send-btn:active { border-color: #808080 #fff #fff #808080; }
+.im-action-btns { display: flex; gap: 4px; }
+.im-action-btn {
+  font-size: 11px; padding: 2px 8px;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer; font-family: 'Tahoma', Arial;
+}
+
+/* ════════════════════════════════════════
+   MY COMPUTER WINDOW
+════════════════════════════════════════ */
+#mycomp-window {
+  top: 80px; left: 80px; width: 480px; height: 340px;
+  z-index: 400;
+}
+.mycomp-toolbar {
+  background: #c0c0c0; border-bottom: 1px solid #808080;
+  padding: 2px 4px; display: flex; gap: 4px; flex-shrink: 0;
+}
+.mycomp-tb-btn {
+  font-size: 11px; padding: 2px 8px; background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer; font-family: 'Tahoma', Arial; display: flex; align-items: center; gap: 3px;
+}
+.mycomp-address-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 2px 6px; background: #c0c0c0; border-bottom: 1px solid #808080; flex-shrink: 0;
+}
+.mycomp-address-label { font-size: 11px; font-family: 'Tahoma', Arial; }
+.mycomp-address-input {
+  flex: 1; height: 20px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  font-size: 11px; padding: 0 4px; font-family: 'Tahoma', Arial; background: #fff;
+}
+.mycomp-body {
+  flex: 1; background: #fff; padding: 10px;
+  display: flex; flex-wrap: wrap; gap: 16px;
+  align-content: flex-start; overflow-y: auto;
+}
+.mycomp-icon {
+  display: flex; flex-direction: column; align-items: center;
+  width: 80px; padding: 6px 4px; cursor: pointer;
+  border: 1px solid transparent;
+}
+.mycomp-icon:hover { border-color: #000080; background: rgba(0,0,128,0.1); }
+.mycomp-icon-img { font-size: 36px; line-height: 1; margin-bottom: 4px; }
+.mycomp-icon-label {
+  font-size: 11px; text-align: center; font-family: 'Tahoma', Arial;
+  line-height: 1.2; color: #000;
+}
+
+/* ════════════════════════════════════════
+   ABOUT / DIALOG BOX
+════════════════════════════════════════ */
+.w98-dialog {
+  position: absolute;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 0 #000;
+  z-index: 5000; display: none;
+}
+.w98-dialog.open { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+<div id="canvas">
+
+  <!-- ══════════════════════════════════════
+       SCREEN 1 — GATEWAY POWER ON DIALOG
+  ══════════════════════════════════════ -->
+  <div class="screen flex" id="screen-poweron" style="background:#000;align-items:center;justify-content:center;flex-direction:column;">
+    <div class="gw-poweron-box">
+      <div class="gw-logo-row">
+        <!-- Gateway cow-spot logo SVG -->
+        <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+          <rect width="70" height="70" rx="4" fill="#fff" stroke="#555" stroke-width="1"/>
+          <!-- Cow spots -->
+          <ellipse cx="18" cy="15" rx="12" ry="9" fill="#000"/>
+          <ellipse cx="50" cy="12" rx="10" ry="7" fill="#000"/>
+          <ellipse cx="38" cy="30" rx="9" ry="12" fill="#000"/>
+          <ellipse cx="14" cy="38" rx="8" ry="10" fill="#000"/>
+          <ellipse cx="55" cy="35" rx="10" ry="8" fill="#000"/>
+          <ellipse cx="28" cy="56" rx="11" ry="8" fill="#000"/>
+          <ellipse cx="56" cy="56" rx="9" ry="9" fill="#000"/>
+        </svg>
+        <div class="gw-brand-text">
+          <div class="gw-brand-gateway">Gateway</div>
+          <div class="gw-brand-2000">2000</div>
+        </div>
+      </div>
+      <div class="gw-poweron-prompt">
+        Welcome to your Gateway 2000 Personal Computer<br>
+        Press <strong>Yes</strong> to start Windows 98
+      </div>
+      <div class="gw-poweron-btns">
+        <div class="gw-poweron-btn" onclick="startGateway()">Yes</div>
+        <div class="gw-poweron-btn" onclick="">No</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 2 — GATEWAY BIOS POST
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-gwbios" style="flex-direction:column;">
+    <span class="bios-line"><span class="bios-white">Award Modular BIOS v4.51PG, An Energy Star Ally</span></span>
+    <span class="bios-line">Copyright (C) 1984-98, Award Software Inc.</span>
+    <br>
+    <span class="bios-line"><span class="bios-white">Gateway 2000 E-3400</span> BIOS Version 1.03</span>
+    <br>
+    <span class="bios-line">Pentium III-500 processor detected</span>
+    <span class="bios-line">Memory test: <span id="bios-memcount">0</span>K OK</span>
+    <br>
+    <span class="bios-line">Detecting Primary Master... WDC WD102AA (10.2GB)</span>
+    <span class="bios-line">Detecting Primary Slave... None</span>
+    <span class="bios-line">Detecting Secondary Master... ATAPI CD-ROM 52X</span>
+    <span class="bios-line">Detecting Secondary Slave... None</span>
+    <br>
+    <span class="bios-line">PCI device listing:</span>
+    <span class="bios-line">  Bus No. Device No. Func No. Vendor/Device Class  IRQ</span>
+    <span class="bios-line">     0       7         1      8086/7111  IDE          14</span>
+    <span class="bios-line">     0      17         0      1106/3065  Ethernet      5</span>
+    <br>
+    <span class="bios-line" id="bios-starting" style="color:#fff;display:none;">Starting Windows 98...</span>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 3 — WIN98 BOOT SPLASH
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-win98boot" style="background:#000;align-items:center;justify-content:center;flex-direction:column;gap:30px;">
+    <div class="w98-boot-logo">
+      <div class="w98-boot-flag">
+        <div class="w98-flag-q" style="background:#ff0000;"></div>
+        <div class="w98-flag-q" style="background:#00aa00;"></div>
+        <div class="w98-flag-q" style="background:#0000cc;"></div>
+        <div class="w98-flag-q" style="background:#ffcc00;"></div>
+      </div>
+      <div class="w98-boot-text">Microsoft <strong>Windows 98</strong></div>
+      <div style="color:#aaa;font-size:11px;font-family:'Tahoma',Arial;margin-top:3px;">Second Edition</div>
+    </div>
+    <div class="w98-boot-bar-wrap">
+      <div class="w98-boot-bar-inner" id="w98-boot-bar"></div>
+    </div>
+    <div style="color:#aaa;font-size:10px;font-family:'Tahoma',Arial;">
+      Copyright © 1981-1999 Microsoft Corporation
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 4 — WIN98 LOGIN
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-win98login" style="background:#008080;align-items:center;justify-content:center;">
+    <div class="w98-login-dialog">
+      <div class="w98-login-titlebar">
+        <div class="w98-login-titlebar-left">
+          <div class="w98-boot-flag" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;width:14px;height:14px;">
+            <div style="background:#ff0000;"></div>
+            <div style="background:#00aa00;"></div>
+            <div style="background:#0000cc;"></div>
+            <div style="background:#ffcc00;"></div>
+          </div>
+          Enter Network Password
+        </div>
+      </div>
+      <div class="w98-login-body">
+        <div class="w98-login-banner">
+          <div>
+            <div style="font-size:11px;font-weight:normal;font-family:Arial;">Welcome to</div>
+            <div>Windows 98</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:28px;height:28px;">
+            <div style="background:#ff0000;border-radius:1px;"></div>
+            <div style="background:#00aa00;border-radius:1px;"></div>
+            <div style="background:#0000cc;border-radius:1px;"></div>
+            <div style="background:#ffcc00;border-radius:1px;"></div>
+          </div>
+        </div>
+        <div class="w98-login-row">
+          <label>User name:</label>
+          <input class="w98-login-input" id="login-username" value="Y2JoeyFSU" readonly>
+        </div>
+        <div class="w98-login-row">
+          <label>Password:</label>
+          <input class="w98-login-input" id="login-password" type="password"
+            onkeydown="if(event.key==='Enter')doWin98Login()">
+        </div>
+        <div class="w98-login-divider"></div>
+        <div class="w98-login-btns">
+          <button class="w98-login-btn" onclick="doWin98Login()">OK</button>
+          <button class="w98-login-btn" onclick="">Cancel</button>
+        </div>
+        <div class="w98-login-error" id="login-error"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 5 — WIN98 DESKTOP
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-desktop" style="background:#008080;">
+    <!-- Wallpaper -->
+    <img class="desktop-wallpaper" src="SallyHall.jpeg" alt="Sally Hall FSU" id="desktop-wallpaper"
+         onerror="this.style.display='none'">
+    <!-- Slight overlay so icons are readable -->
+    <div style="position:absolute;top:0;left:0;width:100%;height:calc(100% - 30px);background:rgba(0,0,0,0.18);pointer-events:none;z-index:1;"></div>
+
+    <!-- Desktop icons -->
+    <div class="desktop-icons" style="z-index:2;">
+      <div class="desktop-icon" ondblclick="openMyComputer()">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="28" height="20" rx="1" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+          <rect x="4" y="6" width="24" height="15" fill="#000080"/>
+          <rect x="10" y="24" width="12" height="3" fill="#a0a0a0"/>
+          <rect x="6" y="27" width="20" height="2" fill="#808080"/>
+          <rect x="12" y="10" width="8" height="6" fill="#00aaff" opacity="0.6"/>
+        </svg>
+        <span class="desktop-icon-label">My Computer</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openRecycleBin()">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 10 L24 10 L22 28 L10 28 Z" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+          <rect x="6" y="8" width="20" height="3" rx="1" fill="#a0a0a0" stroke="#808080" stroke-width="1"/>
+          <rect x="12" y="5" width="8" height="4" rx="1" fill="#a0a0a0" stroke="#808080" stroke-width="1"/>
+          <line x1="12" y1="13" x2="11" y2="25" stroke="#808080" stroke-width="1"/>
+          <line x1="16" y1="13" x2="16" y2="25" stroke="#808080" stroke-width="1"/>
+          <line x1="20" y1="13" x2="21" y2="25" stroke="#808080" stroke-width="1"/>
+        </svg>
+        <span class="desktop-icon-label">Recycle Bin</span>
+      </div>
+      <div class="desktop-icon" ondblclick="launchAOL()">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="14" fill="#003399"/>
+          <text x="16" y="21" text-anchor="middle" font-size="14" font-weight="bold" font-family="Arial" fill="#ffcc00">AOL</text>
+        </svg>
+        <span class="desktop-icon-label">AOL 6.0</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openWinamp()">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="3" fill="#1a1a1a"/>
+          <text x="16" y="22" text-anchor="middle" font-size="11" font-weight="bold" font-family="Arial" fill="#ffaa00">WA</text>
+          <polygon points="10,8 24,8 17,18" fill="#ffaa00"/>
+        </svg>
+        <span class="desktop-icon-label">Winamp</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openNapster()">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="3" fill="#000"/>
+          <circle cx="16" cy="14" r="7" fill="none" stroke="#fff" stroke-width="2"/>
+          <path d="M12 11 Q16 8 20 11" fill="none" stroke="#fff" stroke-width="1.5"/>
+          <rect x="13" y="18" width="6" height="8" rx="1" fill="#fff"/>
+        </svg>
+        <span class="desktop-icon-label">Napster</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openIE()">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="13" fill="#003399" stroke="#0055cc" stroke-width="1"/>
+          <ellipse cx="16" cy="16" rx="6" ry="13" fill="none" stroke="#99ccff" stroke-width="1.5"/>
+          <line x1="3" y1="16" x2="29" y2="16" stroke="#99ccff" stroke-width="1.5"/>
+          <line x1="5" y1="10" x2="27" y2="10" stroke="#99ccff" stroke-width="1"/>
+          <line x1="5" y1="22" x2="27" y2="22" stroke="#99ccff" stroke-width="1"/>
+          <path d="M22 6 L28 6 L28 12" fill="none" stroke="#ffcc00" stroke-width="2"/>
+          <path d="M22 6 L28 12" fill="none" stroke="#ffcc00" stroke-width="2"/>
+        </svg>
+        <span class="desktop-icon-label">Internet Explorer</span>
+      </div>
+    </div>
+
+    <!-- WIN98 TASKBAR -->
+    <div id="win98-taskbar">
+      <!-- Start Button -->
+      <button id="start-btn" onclick="toggleStartMenu()">
+        <div class="start-flag">
+          <div class="start-flag-q" style="background:#ff0000;"></div>
+          <div class="start-flag-q" style="background:#00aa00;"></div>
+          <div class="start-flag-q" style="background:#0000cc;"></div>
+          <div class="start-flag-q" style="background:#ffcc00;"></div>
+        </div>
+        <span>Start</span>
+      </button>
+      <!-- Quick Launch -->
+      <div id="quick-launch">
+        <div class="ql-btn" title="Launch Internet Explorer" onclick="openIE()">🌐</div>
+        <div class="ql-btn" title="AOL 6.0" onclick="launchAOL()">📡</div>
+        <div class="ql-btn" title="Show Desktop">🖥️</div>
+      </div>
+      <!-- Programs area -->
+      <div id="taskbar-programs"></div>
+      <!-- System Tray -->
+      <div id="sys-tray">
+        <span title="Volume">🔊</span>
+        <span title="Network Connected">🖧</span>
+        <span id="tray-clock">12:00 AM</span>
+      </div>
+    </div>
+
+    <!-- START MENU -->
+    <div id="start-menu">
+      <div class="sm-sidebar">
+        <span class="sm-win">Win</span>dows<span class="sm-win">98</span>
+      </div>
+      <div class="sm-items">
+        <div class="sm-item" onclick="launchAOL();toggleStartMenu()">
+          <span class="sm-icon">📡</span>
+          <div><span class="sm-label">AOL 6.0</span><span class="sm-sub">America Online</span></div>
+        </div>
+        <div class="sm-item" onclick="openIE();toggleStartMenu()">
+          <span class="sm-icon">🌐</span>
+          <div><span class="sm-label">Internet Explorer</span><span class="sm-sub">Browse the Web</span></div>
+        </div>
+        <div class="sm-divider"></div>
+        <div class="sm-item">
+          <span class="sm-icon">📂</span>
+          <div><span class="sm-label">Programs</span></div>
+          <span class="sm-arrow">▶</span>
+          <div class="sm-submenu">
+            <div class="sm-item" onclick="openWinamp();toggleStartMenu()">
+              <span class="sm-icon">🎵</span>
+              <div><span class="sm-label">Winamp</span></div>
+            </div>
+            <div class="sm-item" onclick="openNapster();toggleStartMenu()">
+              <span class="sm-icon">🎵</span>
+              <div><span class="sm-label">Napster</span></div>
+            </div>
+            <div class="sm-item">
+              <span class="sm-icon">📂</span>
+              <div><span class="sm-label">Accessories</span></div>
+              <span class="sm-arrow">▶</span>
+              <div class="sm-submenu">
+                <div class="sm-item" onclick="openNotepad();toggleStartMenu()">
+                  <span class="sm-icon">📝</span>
+                  <div><span class="sm-label">Notepad</span></div>
+                </div>
+                <div class="sm-item" onclick="openCalculator();toggleStartMenu()">
+                  <span class="sm-icon">🧮</span>
+                  <div><span class="sm-label">Calculator</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sm-item" onclick="openMyComputer();toggleStartMenu()">
+          <span class="sm-icon">🖥️</span>
+          <div><span class="sm-label">My Computer</span></div>
+        </div>
+        <div class="sm-divider"></div>
+        <div class="sm-item">
+          <span class="sm-icon">🔍</span>
+          <div><span class="sm-label">Find</span><span class="sm-sub">Files or Folders...</span></div>
+        </div>
+        <div class="sm-item">
+          <span class="sm-icon">❓</span>
+          <div><span class="sm-label">Help</span></div>
+        </div>
+        <div class="sm-item">
+          <span class="sm-icon">⚙️</span>
+          <div><span class="sm-label">Settings</span><span class="sm-sub">Control Panel, Taskbar...</span></div>
+        </div>
+        <div class="sm-divider"></div>
+        <div class="sm-item" onclick="doShutDown();toggleStartMenu()">
+          <span class="sm-icon">🔌</span>
+          <div><span class="sm-label">Shut Down...</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shut Down Dialog -->
+    <div class="w98-dialog" id="shutdown-dialog" style="top:200px;left:300px;width:340px;">
+      <div class="w98-titlebar">
+        <div class="w98-titlebar-left">
+          <div class="w98-title-icon">🖥️</div> Shut Down Windows
+        </div>
+        <div class="w98-win-btns">
+          <div class="w98-win-btn" onclick="cancelShutDown()">✕</div>
+        </div>
+      </div>
+      <div style="padding:16px 20px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:44px;height:44px;flex-shrink:0;">
+            <div style="background:#ff0000;border-radius:1px;"></div>
+            <div style="background:#00aa00;border-radius:1px;"></div>
+            <div style="background:#0000cc;border-radius:1px;"></div>
+            <div style="background:#ffcc00;border-radius:1px;"></div>
+          </div>
+          <div style="font-size:12px;font-family:'Tahoma',Arial;">
+            <strong style="display:block;margin-bottom:8px;">Are you sure you want to:</strong>
+            <label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;">
+              <input type="radio" name="sd" value="shutdown" checked> Shut down the computer?
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="radio" name="sd" value="restart"> Restart the computer?
+            </label>
+          </div>
+        </div>
+        <div class="w98-login-divider"></div>
+        <div style="display:flex;gap:8px;justify-content:center;">
+          <button class="w98-login-btn" onclick="confirmShutDown()">OK</button>
+          <button class="w98-login-btn" onclick="cancelShutDown()">Cancel</button>
+          <button class="w98-login-btn" onclick="cancelShutDown()">Help</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 6 — AOL 6.0 SIGN IN
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-aolsignin" style="background:linear-gradient(135deg,#001a4d,#003399,#0066cc);align-items:center;justify-content:center;">
+    <div class="aol6-signin-wrap">
+      <div class="aol6-header">
+        <div>
+          <div class="aol6-logo-text"><span>aol</span> 6.0</div>
+          <div class="aol6-version">America Online Version 6.0</div>
+        </div>
+        <div class="aol6-running-man">🏃</div>
+      </div>
+      <div class="aol6-body">
+        <label class="aol6-field-label">Screen Name:</label>
+        <select class="aol6-input" id="aol-sn-select" style="padding:2px 8px;">
+          <option value="Y2JoeyFSU">Y2JoeyFSU</option>
+        </select>
+        <label class="aol6-field-label">Password:</label>
+        <input class="aol6-input" id="aol-password" type="password" placeholder=""
+          onkeydown="if(event.key==='Enter')doAOLSignIn()">
+        <div class="aol6-error" id="aol-error"></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <input type="checkbox" id="aol-remember"> 
+          <label for="aol-remember" style="font-size:12px;font-family:Arial;">Remember Password</label>
+        </div>
+        <div class="aol6-btns">
+          <button class="aol6-btn" onclick="doAOLSignIn()">Sign On</button>
+          <button class="aol6-btn secondary" onclick="showScreen('screen-desktop')">Cancel</button>
+        </div>
+      </div>
+      <div class="aol6-footer">
+        <div>Having trouble signing on? Call 1-800-827-6364</div>
+        <div style="margin-top:3px;">AOL 6.0 © 2000 America Online, Inc. All Rights Reserved.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 7 — AOL MODEM LOADING
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-aolloading" style="background:linear-gradient(135deg,#001a4d,#003399,#0066cc);align-items:center;justify-content:center;flex-direction:column;gap:24px;">
+    <div class="aol6-loading-logo"><span>aol</span> 6.0</div>
+    <div class="aol6-loading-msg" id="aol-loading-msg">Initializing modem...</div>
+    <div class="aol6-loading-bar-wrap">
+      <div class="aol6-loading-bar" id="aol-loading-bar"></div>
+    </div>
+    <div style="color:#99ccff;font-size:11px;font-family:Arial;">
+      Connected to: aol.tallahassee.net — 56k
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 8 — AOL DESKTOP
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-aoldesktop" style="flex-direction:column;">
+    <div class="aol6-desktop-header">
+      <div class="aol6-desktop-logo"><span>aol</span> 6.0</div>
+      <div class="aol6-nav-btn" onclick="showScreen('screen-desktop')">🖥️ Desktop</div>
+      <div class="aol6-nav-btn" onclick="">📬 Mail</div>
+      <div class="aol6-nav-btn" onclick="">💬 Chat</div>
+      <div class="aol6-nav-btn" onclick="">🔍 Search</div>
+      <div style="flex:1;"></div>
+      <div style="color:#99ccff;font-size:11px;font-family:Arial;">
+        Y2JoeyFSU — <span style="color:#00ff88;">Online</span>
+      </div>
+    </div>
+    <div class="aol6-desktop-body">
+      <div class="aol6-sidebar">
+        <div class="aol6-sidebar-section">My AOL</div>
+        <div class="aol6-sidebar-item" onclick="openBuddyList()">👥 Buddy List</div>
+        <div class="aol6-sidebar-item">📬 Mail Center</div>
+        <div class="aol6-sidebar-item">📅 My Calendar</div>
+        <div class="aol6-sidebar-section">Channels</div>
+        <div class="aol6-sidebar-item">🎵 Music</div>
+        <div class="aol6-sidebar-item">🏈 Sports</div>
+        <div class="aol6-sidebar-item">🎬 Entertainment</div>
+        <div class="aol6-sidebar-item">💰 Personal Finance</div>
+        <div class="aol6-sidebar-item">🎓 College Life</div>
+        <div class="aol6-sidebar-section">People</div>
+        <div class="aol6-sidebar-item" onclick="openBuddyList()">💬 Instant Messages</div>
+        <div class="aol6-sidebar-item">🏠 Chat Rooms</div>
+      </div>
+      <div class="aol6-main-content">
+        <div class="aol6-welcome-banner">
+          <div>Welcome, Y2JoeyFSU! <span style="font-size:12px;font-weight:normal;">You have <strong>3 new messages</strong></span></div>
+          <div class="aol6-welcome-date" id="aol-welcome-date">Monday, October 16, 2000</div>
+        </div>
+        <div class="aol6-content-grid">
+          <div class="aol6-content-card">
+            <div class="aol6-card-header">📰 AOL News</div>
+            <div class="aol6-card-body">
+              <a class="aol6-card-link">Election 2000: Bush vs. Gore enters final stretch</a>
+              <a class="aol6-card-link">Napster defies RIAA — still running</a>
+              <a class="aol6-card-link">FSU Seminoles ranked #3 in AP Poll</a>
+              <a class="aol6-card-link">Eminem's Marshall Mathers LP goes Diamond</a>
+            </div>
+          </div>
+          <div class="aol6-content-card">
+            <div class="aol6-card-header">🎬 Entertainment</div>
+            <div class="aol6-card-body">
+              <a class="aol6-card-link">Survivor Season 1 finale breaks records</a>
+              <a class="aol6-card-link">New Found Glory drops "Nothing Gold Can Stay"</a>
+              <a class="aol6-card-link">WWF No Mercy PPV results</a>
+              <a class="aol6-card-link">Less Than Jake on tour with Weezer</a>
+            </div>
+          </div>
+          <div class="aol6-content-card">
+            <div class="aol6-card-header">🏈 Sports</div>
+            <div class="aol6-card-body">
+              <a class="aol6-card-link">Seminoles crush Clemson 54-7 on Senior Day</a>
+              <a class="aol6-card-link">Chris Weinke: Heisman favorite at FSU</a>
+              <a class="aol6-card-link">AJ's Sports Bar PPV special this Sunday</a>
+              <a class="aol6-card-link">NBA Preview: Will Shaq's Lakers repeat?</a>
+            </div>
+          </div>
+          <div class="aol6-content-card">
+            <div class="aol6-card-header">🎓 College Life</div>
+            <div class="aol6-card-body">
+              <a class="aol6-card-link">Tallahassee nightlife: The Strip guide</a>
+              <a class="aol6-card-link">Dorm room Napster: Don't get caught</a>
+              <a class="aol6-card-link">Study tips: Finals are 6 weeks away</a>
+              <a class="aol6-card-link">Cow Haus show listings — Nov/Dec 2000</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SHUT DOWN SCREENS
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-shutting-down" style="background:#000080;align-items:center;justify-content:center;flex-direction:column;gap:30px;">
+    <div style="text-align:center;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;width:56px;height:56px;margin:0 auto 10px;">
+        <div style="background:#ff0000;border-radius:1px;"></div>
+        <div style="background:#00aa00;border-radius:1px;"></div>
+        <div style="background:#0000cc;border-radius:1px;"></div>
+        <div style="background:#ffcc00;border-radius:1px;"></div>
+      </div>
+      <div style="color:#fff;font-family:'Times New Roman',serif;font-size:22px;font-style:italic;">
+        Microsoft <strong style="font-style:normal;">Windows 98</strong>
+      </div>
+    </div>
+    <div style="color:#fff;font-size:18px;font-family:'Tahoma',Arial;font-weight:bold;text-align:center;">
+      Windows is shutting down...
+    </div>
+    <div style="width:320px;height:16px;background:#000;border:2px solid #99ccff;border-radius:4px;overflow:hidden;">
+      <div id="sd-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3366ff,#99ccff);transition:width 2.8s linear;"></div>
+    </div>
+  </div>
+  <div class="screen" id="screen-safe-to-off" style="background:#000;align-items:center;justify-content:center;">
+    <div style="border:4px solid #808080;padding:30px 50px;text-align:center;">
+      <div style="color:#ffff00;font-size:22px;font-family:'Tahoma',Arial;font-weight:bold;margin-bottom:10px;">
+        It is now safe to turn off<br>your computer.
+      </div>
+      <div style="color:#c0c0c0;font-size:13px;font-family:'Tahoma',Arial;margin-bottom:20px;">
+        You may also press CTRL+ALT+DELETE to restart your computer.
+      </div>
+      <button onclick="doRestart()" style="padding:5px 24px;background:#c0c0c0;border:2px solid;border-color:#fff #808080 #808080 #fff;font-size:12px;font-family:'Tahoma',Arial;cursor:pointer;font-weight:bold;">
+        🔄 Restart
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       FLOATING WINDOWS (always in DOM)
+  ══════════════════════════════════════ -->
+
+  <!-- Buddy List -->
+  <div id="buddy-list-window">
+    <div class="bl-titlebar" id="bl-titlebar">
+      <span>Buddy List — Y2JoeyFSU</span>
+      <div class="bl-win-btns">
+        <div class="bl-win-btn">_</div>
+        <div class="bl-win-btn">□</div>
+        <div class="bl-win-btn" onclick="closeBuddyList()">✕</div>
+      </div>
+    </div>
+    <div class="bl-aol-header">
+      <div>
+        <div class="bl-aol-logo"><span>aol</span> IM</div>
+        <div class="bl-aol-sn">Y2JoeyFSU</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="color:#00ff88;font-size:10px;font-family:Arial;">● Online</div>
+      </div>
+    </div>
+    <div class="bl-toolbar">
+      <div class="bl-tb-btn" onclick="">IM</div>
+      <div class="bl-tb-btn" onclick="">Chat</div>
+      <div class="bl-tb-btn" onclick="">Away</div>
+      <div class="bl-tb-btn" onclick="">Profile</div>
+    </div>
+    <div class="bl-body" id="bl-body">
+      <!-- Populated by JS -->
+    </div>
+    <div class="bl-statusbar">
+      <span id="bl-online-count">0 Online</span>
+      <span>|</span>
+      <span id="bl-offline-count">0 Offline</span>
+    </div>
+  </div>
+
+  <!-- My Computer Window -->
+  <div class="w98-window" id="mycomp-window" style="top:80px;left:100px;width:480px;height:320px;z-index:400;">
+    <div class="w98-titlebar" id="mycomp-titlebar">
+      <div class="w98-titlebar-left">
+        <span class="w98-title-icon">🖥️</span> My Computer
+      </div>
+      <div class="w98-win-btns">
+        <div class="w98-win-btn">_</div>
+        <div class="w98-win-btn">□</div>
+        <div class="w98-win-btn" onclick="closeMyComputer()">✕</div>
+      </div>
+    </div>
+    <div class="w98-menubar">
+      <div class="w98-menu">File<div class="w98-menu-dropdown"><div class="w98-menu-item" onclick="closeMyComputer()">Close</div></div></div>
+      <div class="w98-menu">Edit</div>
+      <div class="w98-menu">View</div>
+      <div class="w98-menu">Help</div>
+    </div>
+    <div class="mycomp-toolbar">
+      <div class="mycomp-tb-btn">◀ Back</div>
+      <div class="mycomp-tb-btn">▶ Forward</div>
+      <div class="mycomp-tb-btn">⬆ Up</div>
+    </div>
+    <div class="mycomp-address-bar">
+      <span class="mycomp-address-label">Address</span>
+      <input class="mycomp-address-input" value="My Computer" readonly>
+    </div>
+    <div class="mycomp-body">
+      <div class="mycomp-icon">
+        <div class="mycomp-icon-img">💾</div>
+        <div class="mycomp-icon-label">3½ Floppy (A:)</div>
+      </div>
+      <div class="mycomp-icon">
+        <div class="mycomp-icon-img">💿</div>
+        <div class="mycomp-icon-label">Local Disk (C:)</div>
+      </div>
+      <div class="mycomp-icon">
+        <div class="mycomp-icon-img">📀</div>
+        <div class="mycomp-icon-label">CD-ROM (D:)</div>
+      </div>
+      <div class="mycomp-icon" style="border-top:1px solid #e0e0e0;padding-top:8px;margin-top:4px;width:100%;grid-column:1/-1;display:flex;gap:16px;flex-wrap:wrap;">
+      </div>
+      <div class="mycomp-icon">
+        <div class="mycomp-icon-img">🖨️</div>
+        <div class="mycomp-icon-label">Printers</div>
+      </div>
+      <div class="mycomp-icon">
+        <div class="mycomp-icon-img">⚙️</div>
+        <div class="mycomp-icon-label">Control Panel</div>
+      </div>
+      <div class="mycomp-icon">
+        <div class="mycomp-icon-img">🌐</div>
+        <div class="mycomp-icon-label">Dial-Up Networking</div>
+      </div>
+    </div>
+    <div class="w98-statusbar">
+      <div class="w98-status-panel">7 object(s)</div>
+    </div>
+  </div>
+
+</div><!-- /#canvas -->
+
+<script>
+'use strict';
+
+// ════════════════════════════════════════
+// GLOBALS
+// ════════════════════════════════════════
+var chatZBase = 300;
+var WIN98_PASSWORD = 'celica';
+var AOL_PASSWORD = 'celica';
+
+// ── Screen Manager ──
+var flexScreens = {
+  'screen-poweron': true,
+  'screen-aolsignin': true,
+  'screen-aolloading': true,
+  'screen-aoldesktop': true,
+  'screen-shutting-down': true,
+  'screen-safe-to-off': true,
+  'screen-win98login': true,
+};
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.style.display = 'none';
+  });
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = flexScreens[id] ? 'flex' : 'block';
+}
+
+// ════════════════════════════════════════
+// BOOT SEQUENCE
+// ════════════════════════════════════════
+function startGateway() {
+  // BIOS POST screen
+  showScreen('screen-gwbios');
+  // Animate memory count
+  var mem = 0;
+  var memEl = document.getElementById('bios-memcount');
+  var memInt = setInterval(function() {
+    mem += 4096;
+    if (memEl) memEl.textContent = mem.toLocaleString();
+    if (mem >= 262144) {
+      clearInterval(memInt);
+      // Show "Starting Windows 98..."
+      setTimeout(function() {
+        var startEl = document.getElementById('bios-starting');
+        if (startEl) startEl.style.display = 'block';
+        // Go to Win98 boot splash
+        setTimeout(function() {
+          showScreen('screen-win98boot');
+          animateWin98BootBar();
+        }, 1200);
+      }, 1000);
+    }
+  }, 30);
+}
+
+function animateWin98BootBar() {
+  var bar = document.getElementById('w98-boot-bar');
+  if (!bar) return;
+  bar.style.width = '0%';
+  var pct = 0;
+  var iv = setInterval(function() {
+    pct += Math.random() * 4 + 1;
+    if (pct >= 100) { pct = 100; clearInterval(iv); }
+    bar.style.width = pct + '%';
+    if (pct >= 100) {
+      setTimeout(function() {
+        showScreen('screen-win98login');
+        document.getElementById('login-password').focus();
+      }, 600);
+    }
+  }, 120);
+}
+
+// ════════════════════════════════════════
+// WIN98 LOGIN
+// ════════════════════════════════════════
+function doWin98Login() {
+  var pw = document.getElementById('login-password').value;
+  var err = document.getElementById('login-error');
+  if (pw === WIN98_PASSWORD) {
+    err.textContent = '';
+    showScreen('screen-desktop');
+    startDesktopClock();
+  } else {
+    err.textContent = 'Invalid password. Please try again.';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+  }
+}
+
+// ════════════════════════════════════════
+// DESKTOP CLOCK
+// ════════════════════════════════════════
+function startDesktopClock() {
+  function tick() {
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    var str = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+    var el = document.getElementById('tray-clock');
+    if (el) el.textContent = str;
+  }
+  tick();
+  setInterval(tick, 10000);
+
+  // AOL welcome date
+  var now = new Date();
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var dateStr = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+  var dateEl = document.getElementById('aol-welcome-date');
+  if (dateEl) dateEl.textContent = dateStr;
+}
+
+// ════════════════════════════════════════
+// START MENU
+// ════════════════════════════════════════
+var startMenuOpen = false;
+function toggleStartMenu() {
+  startMenuOpen = !startMenuOpen;
+  var sm = document.getElementById('start-menu');
+  if (startMenuOpen) sm.classList.add('open');
+  else sm.classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#start-menu') && !e.target.closest('#start-btn')) {
+    var sm = document.getElementById('start-menu');
+    if (sm) sm.classList.remove('open');
+    startMenuOpen = false;
+  }
+});
+
+// ════════════════════════════════════════
+// AOL 6.0 SIGN-IN
+// ════════════════════════════════════════
+function launchAOL() {
+  showScreen('screen-aolsignin');
+  setTimeout(function() {
+    var pw = document.getElementById('aol-password');
+    if (pw) pw.focus();
+  }, 100);
+}
+
+function doAOLSignIn() {
+  var pw = document.getElementById('aol-password').value;
+  var err = document.getElementById('aol-error');
+  if (pw === AOL_PASSWORD) {
+    err.textContent = '';
+    showScreen('screen-aolloading');
+    runAOLLoadingSequence();
+  } else {
+    err.textContent = 'Incorrect password. Please try again.';
+    document.getElementById('aol-password').value = '';
+    document.getElementById('aol-password').focus();
+  }
+}
+
+var aolLoadingMsgs = [
+  'Initializing modem...',
+  'Dialing AOL access number...',
+  'Connecting at 56,000 bps...',
+  'Verifying username and password...',
+  'Retrieving your Buddy List...',
+  'Welcome! You\'ve got mail!',
+];
+
+function runAOLLoadingSequence() {
+  var bar = document.getElementById('aol-loading-bar');
+  var msg = document.getElementById('aol-loading-msg');
+  var pct = 0;
+  var msgIdx = 0;
+  bar.style.width = '0%';
+  var iv = setInterval(function() {
+    pct += 14;
+    if (pct > 100) pct = 100;
+    bar.style.width = pct + '%';
+    if (msgIdx < aolLoadingMsgs.length) {
+      msg.textContent = aolLoadingMsgs[msgIdx++];
+    }
+    if (pct >= 100) {
+      clearInterval(iv);
+      setTimeout(function() {
+        showScreen('screen-aoldesktop');
+        openBuddyList();
+        initBuddyList();
+      }, 600);
+    }
+  }, 600);
+}
+
+// ════════════════════════════════════════
+// BUDDY LIST
+// ════════════════════════════════════════
+var buddies = [
+  // Roommates / Inner Circle
+  { sn: 'MrForresterCEO', name: 'Nick', group: 'Jefferson Pointe', online: true, away: false, awayMsg: 'AJs tonight. bring cash' },
+  { sn: 'Yukon242',       name: 'Ken',  group: 'Jefferson Pointe', online: true, away: false, awayMsg: '' },
+  // Dorm / Campus
+  { sn: 'KatieD99',       name: 'Katie',group: 'FSU Friends',      online: true, away: true,  awayMsg: 'at Strozier, dont bother me lol' },
+  { sn: 'MrMcMurrin',     name: 'John', group: 'FSU Friends',      online: true, away: false, awayMsg: '' },
+  // High school
+  { sn: 'EAS242',         name: 'Erik', group: 'Fort Myers',       online: true, away: true,  awayMsg: 'miami > tally. facts.' },
+  // Love interest / ex
+  { sn: 'Marles99',       name: 'Marli',group: 'Fort Myers',       online: true, away: false, awayMsg: '' },
+  // Parents
+  { sn: 'KBowen7452',     name: 'Mom',  group: 'Family',           online: true, away: false, awayMsg: '' },
+  { sn: 'Shiftcaps1',     name: 'Dad',  group: 'Family',           online: false,away: false, awayMsg: '' },
+];
+
+var openIMs = {}; // sn → window element
+
+function initBuddyList() {
+  renderBuddyList();
+  // Rotate away status every 45s
+  setInterval(rotateBuddyStatus, 45000);
+  // Random buddy opens IM after 10s
+  setTimeout(randomBuddyIM, 10000);
+}
+
+function renderBuddyList() {
+  var body = document.getElementById('bl-body');
+  if (!body) return;
+  body.innerHTML = '';
+
+  var groups = {};
+  buddies.forEach(function(b) {
+    if (!groups[b.group]) groups[b.group] = [];
+    groups[b.group].push(b);
+  });
+
+  var onlineCount = 0, offlineCount = 0;
+
+  Object.keys(groups).forEach(function(grp) {
+    var header = document.createElement('div');
+    header.className = 'bl-group-header';
+    var grpBuddies = groups[grp];
+    var grpOnline = grpBuddies.filter(function(b){ return b.online; }).length;
+    header.innerHTML = '▼ ' + grp + ' (' + grpOnline + '/' + grpBuddies.length + ')';
+    body.appendChild(header);
+
+    grpBuddies.forEach(function(b) {
+      if (!b.online) { offlineCount++; return; }
+      onlineCount++;
+      var row = document.createElement('div');
+      row.className = 'bl-buddy' + (b.away ? ' away' : '');
+      row.innerHTML =
+        '<span class="bl-buddy-icon">' + (b.away ? '🌙' : '💬') + '</span>'
+        + '<span class="bl-buddy-name">' + b.sn + '</span>'
+        + (b.away ? '<span class="bl-buddy-idle">Away</span>' : '');
+      row.addEventListener('click', function() { openIM(b); });
+      body.appendChild(row);
+    });
+  });
+
+  document.getElementById('bl-online-count').textContent = onlineCount + ' Online';
+  document.getElementById('bl-offline-count').textContent = offlineCount + ' Offline';
+}
+
+function rotateBuddyStatus() {
+  buddies.forEach(function(b) {
+    if (b.sn === 'KBowen7452' || b.sn === 'Shiftcaps1') return;
+    if (Math.random() < 0.25) {
+      b.away = !b.away;
+    }
+  });
+  renderBuddyList();
+}
+
+function randomBuddyIM() {
+  var onlineBuddies = buddies.filter(function(b){ return b.online && !b.away && b.sn !== 'KBowen7452'; });
+  if (!onlineBuddies.length) return;
+  var b = onlineBuddies[Math.floor(Math.random() * onlineBuddies.length)];
+  var openers = getOpenerFor(b.sn);
+  if (openers && openers.length) {
+    openIM(b, openers[Math.floor(Math.random() * openers.length)]);
+  }
+}
+
+function getOpenerFor(sn) {
+  var msgs = {
+    'MrForresterCEO': [
+      'yo u watching raw tonight',
+      'bro how much u got left this week',
+      'wendy\'s run at 11?',
+      'dude i\'m down to like $40',
+    ],
+    'Yukon242': [
+      'bro tuesday cannot come fast enough',
+      'u going to the cow haus show this weekend',
+      'how much u at rn',
+      'aristostle later?',
+    ],
+    'KatieD99': [
+      'hey! how are you doing :)',
+      'are you going to strozier later',
+      'omg did u hear about the show this weekend',
+    ],
+    'EAS242': [
+      'hows tally lol',
+      'miami is insane rn u missing out',
+      'u guys gonna watch the UM game',
+    ],
+    'Marles99': [
+      'hey',
+      'i miss you',
+      'what are you doing tonight',
+    ],
+    'MrMcMurrin': [
+      'yo you start the econ problem set yet',
+      'prof moved the midterm to next friday fyi',
+    ],
+  };
+  return msgs[sn] || null;
+}
+
+function openBuddyList() {
+  var win = document.getElementById('buddy-list-window');
+  if (!win) return;
+  win.classList.add('open');
+  win.style.zIndex = ++chatZBase;
+}
+function closeBuddyList() {
+  document.getElementById('buddy-list-window').classList.remove('open');
+}
+
+// ════════════════════════════════════════
+// IM WINDOWS
+// ════════════════════════════════════════
+function openIM(buddy, openingMsg) {
+  if (openIMs[buddy.sn]) {
+    openIMs[buddy.sn].style.zIndex = ++chatZBase;
+    if (openingMsg) appendIMMsg(buddy.sn, buddy.sn, openingMsg);
+    return;
+  }
+
+  var win = document.createElement('div');
+  win.className = 'im-window';
+  win.id = 'im-' + buddy.sn;
+
+  // Cascade position
+  var offset = Object.keys(openIMs).length;
+  win.style.top  = (80 + offset * 30) + 'px';
+  win.style.left = (80 + offset * 30) + 'px';
+  win.style.zIndex = ++chatZBase;
+
+  win.innerHTML =
+    '<div class="im-titlebar" id="im-tb-' + buddy.sn + '">'
+    + '<span>' + buddy.sn + ' - Instant Message</span>'
+    + '<div class="im-win-btns">'
+    + '<div class="im-win-btn">_</div>'
+    + '<div class="im-win-btn">□</div>'
+    + '<div class="im-win-btn" onclick="closeIM(\'' + buddy.sn + '\')">✕</div>'
+    + '</div></div>'
+    + '<div class="im-aol-bar">'
+    + '<div class="im-aol-sn">' + buddy.sn + '</div>'
+    + '<div class="im-aol-warning">Warning: 0%</div>'
+    + '</div>'
+    + '<div class="im-log" id="im-log-' + buddy.sn + '">'
+    + '<div class="im-msg-system">You are now chatting with ' + buddy.sn + '</div>'
+    + '</div>'
+    + '<div class="im-input-area">'
+    + '<div class="im-input-toolbar">'
+    + '<div class="im-font-btn"><b>B</b></div>'
+    + '<div class="im-font-btn"><i>I</i></div>'
+    + '<div class="im-font-btn"><u>U</u></div>'
+    + '</div>'
+    + '<textarea class="im-textarea" id="im-input-' + buddy.sn + '" placeholder="Type a message..." onkeydown="imKeyDown(event,\'' + buddy.sn + '\')"></textarea>'
+    + '<div class="im-send-row">'
+    + '<div class="im-action-btns">'
+    + '<div class="im-action-btn" onclick="imWarn(\'' + buddy.sn + '\')">Warn</div>'
+    + '<div class="im-action-btn" onclick="imBlock(\'' + buddy.sn + '\')">Block</div>'
+    + '</div>'
+    + '<div class="im-send-btn" onclick="sendIM(\'' + buddy.sn + '\')">Send</div>'
+    + '</div>'
+    + '</div>';
+
+  document.getElementById('canvas').appendChild(win);
+  openIMs[buddy.sn] = win;
+  makeDraggable(win, document.getElementById('im-tb-' + buddy.sn));
+
+  win.addEventListener('mousedown', function() {
+    win.style.zIndex = ++chatZBase;
+  });
+
+  if (openingMsg) {
+    setTimeout(function() { appendIMMsg(buddy.sn, buddy.sn, openingMsg); }, 400);
+  }
+}
+
+function closeIM(sn) {
+  var win = openIMs[sn];
+  if (win) { win.remove(); delete openIMs[sn]; }
+}
+
+function appendIMMsg(sn, from, text) {
+  var log = document.getElementById('im-log-' + sn);
+  if (!log) return;
+  var div = document.createElement('div');
+  var isMe = (from === 'Y2JoeyFSU');
+  div.className = isMe ? 'im-msg-me' : 'im-msg-them';
+  div.innerHTML = '<strong>' + from + ':</strong> ' + esc(text);
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
+function imKeyDown(e, sn) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendIM(sn); }
+}
+
+function sendIM(sn) {
+  var input = document.getElementById('im-input-' + sn);
+  if (!input) return;
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  appendIMMsg(sn, 'Y2JoeyFSU', text);
+  // Get AI reply
+  setTimeout(function() { getBuddyReply(sn, text); }, 800 + Math.random() * 1200);
+}
+
+async function getBuddyReply(sn, userMsg) {
+  var buddy = buddies.find(function(b){ return b.sn === sn; });
+  if (!buddy) return;
+
+  var systemPrompts = {
+    'MrForresterCEO': 'You are Nick, a college freshman at FSU in Tallahassee, Fall 2000. You live at Jefferson Pointe apartment with Joey (Y2JoeyFSU) and his twin Ken. You call yourself MrForresterCEO because you plan to run a company someday. You only talk about: money (your shared $182/week budget that resets Tuesday), beer, wrestling (WWF), what to do tonight, Wendy\'s runs, AJ\'s Sports Bar, The Strip, and hanging out. You NEVER talk about feelings or anything serious. Keep messages short, lowercase, casual. Max 12 words.',
+    'Yukon242': 'You are Ken, Joey\'s twin brother, also a freshman at FSU, Fall 2000. You live at Jefferson Pointe with Joey and Nick. You\'re basically identical in personality to Joey — beer, wrestling, the $182/week budget obsession (it resets Tuesday), Wendy\'s, Aristostle coffee, Less Than Jake, Cow Haus shows, Strozier library. You reference the budget constantly. Short lowercase messages. Max 12 words.',
+    'KatieD99': 'You are Katie, a friendly female FSU student Fall 2000. You\'re a good friend to Joey, like a sister. You\'re warm, ask real questions, occasionally tease him about his ex Marli. You reference campus life, Strozier, shows, classes. Slightly more emotionally intelligent than the guys. Casual girl texting style 2000. Max 15 words.',
+    'EAS242': 'You are Erik, a high school friend from Fort Myers now at University of Miami, Fall 2000. You love to make FSU sound lame compared to Miami. You reference the FSU-UM rivalry constantly. Cocky about Miami but still loyal Fort Myers friend underneath. Short messages. Max 12 words.',
+    'MrMcMurrin': 'You are John, a junior at FSU, Fall 2000, TA for economics. You give Joey practical college advice about classes, professors, and Tallahassee. Slightly older-brother energy. Occasionally mention The Strip or parties but mostly academic/campus stuff. Max 15 words.',
+    'Marles99': 'You are Marli, Joey\'s ex-girlfriend from Fort Myers, now at FGCU, Fall 2000. You are comically toxic in a sweet way — you miss him, you want him to come home, your go-to line is "you could come back and work at the Bistro" (a terrible fancy restaurant job he hated). You want him to move to Jacksonville with you (which makes no geographic sense). You reference your dad Roger who is obsessed with wildlife — climbing trees, trying to pet squirrels, making people guess what leaf is on their plate. Alternate between sweet and guilt-trippy. AIM style 2000. Max 20 words.',
+    'KBowen7452': 'You are Joey\'s mom, Fall 2000. You send him a $182 cash envelope every Tuesday. You type formally with full punctuation. You ask about food, sleep, and grades. You sometimes mention Roger\'s dad wildlife antics accidentally. You sign messages "Love, Mom". Sometimes accidentally send messages meant for someone else. Max 20 words.',
+    'Shiftcaps1': 'You are Joey\'s dad, Fall 2000. You type in caps occasionally because you confuse caps lock. Short practical messages. Ask about grades or money once in a while. Occasional unexpected dad wisdom. Max 10 words.',
+  };
+
+  var sys = systemPrompts[sn] || 'You are an AOL IM buddy in Fall 2000. Keep responses short and period-appropriate.';
+
+  // Get API key from localStorage
+  var apiKey = localStorage.getItem('fsu2000_apikey') || '';
+  if (!apiKey) {
+    appendIMMsg(sn, sn, '[Enter API key in Settings to enable AI responses]');
+    return;
+  }
+
+  try {
+    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 100,
+        system: sys,
+        messages: [{ role: 'user', content: userMsg }],
+      }),
+    });
+    var data = await resp.json();
+    if (data.content && data.content[0]) {
+      appendIMMsg(sn, sn, data.content[0].text);
+    }
+  } catch(e) {
+    // silently fail
+  }
+}
+
+function imWarn(sn) { alert('Warning sent to ' + sn + '.'); }
+function imBlock(sn) { closeIM(sn); }
+
+// ════════════════════════════════════════
+// MY COMPUTER
+// ════════════════════════════════════════
+function openMyComputer() {
+  var win = document.getElementById('mycomp-window');
+  win.classList.add('open');
+  win.style.zIndex = ++chatZBase;
+}
+function closeMyComputer() {
+  document.getElementById('mycomp-window').classList.remove('open');
+}
+
+// ════════════════════════════════════════
+// PLACEHOLDER LAUNCHERS (to be built)
+// ════════════════════════════════════════
+function openIE() { alert('Internet Explorer 5\nComing soon!'); }
+function openWinamp() { alert('Winamp 2.x\nComing soon!'); }
+function openNapster() { alert('Napster\nComing soon!'); }
+function openNotepad() { alert('Notepad\nComing soon!'); }
+function openCalculator() { alert('Calculator\nComing soon!'); }
+function openRecycleBin() { alert('Recycle Bin\nComing soon!'); }
+
+// ════════════════════════════════════════
+// SHUT DOWN
+// ════════════════════════════════════════
+function doShutDown() {
+  document.getElementById('shutdown-dialog').classList.add('open');
+  document.getElementById('shutdown-dialog').style.zIndex = ++chatZBase;
+}
+function cancelShutDown() {
+  document.getElementById('shutdown-dialog').classList.remove('open');
+}
+function confirmShutDown() {
+  var sel = document.querySelector('input[name="sd"]:checked');
+  cancelShutDown();
+  if (sel && sel.value === 'restart') doRestart();
+  else doShutDownSequence();
+}
+function doShutDownSequence() {
+  showScreen('screen-shutting-down');
+  var bar = document.getElementById('sd-bar');
+  bar.style.width = '0%';
+  setTimeout(function() { bar.style.width = '100%'; }, 100);
+  setTimeout(function() { showScreen('screen-safe-to-off'); }, 3400);
+}
+function doRestart() {
+  showScreen('screen-gwbios');
+  var memEl = document.getElementById('bios-memcount');
+  if (memEl) memEl.textContent = '0';
+  var startEl = document.getElementById('bios-starting');
+  if (startEl) startEl.style.display = 'none';
+  startGateway();
+}
+
+// ════════════════════════════════════════
+// DRAG
+// ════════════════════════════════════════
+function makeDraggable(win, handle) {
+  if (!handle || !win) return;
+  var dragging = false, ox = 0, oy = 0;
+  handle.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.im-win-btn') || e.target.closest('.w98-win-btn') || e.target.closest('.bl-win-btn')) return;
+    dragging = true; ox = e.clientX - win.offsetLeft; oy = e.clientY - win.offsetTop;
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    var canvas = document.getElementById('canvas');
+    var cr = canvas.getBoundingClientRect();
+    var scale = cr.width / 1024;
+    var nx = (e.clientX - cr.left) / scale - ox / scale;
+    var ny = (e.clientY - cr.top)  / scale - oy / scale;
+    win.style.left = Math.max(0, Math.min(nx, 1024 - win.offsetWidth))  + 'px';
+    win.style.top  = Math.max(0, Math.min(ny, 768  - win.offsetHeight)) + 'px';
+  });
+  document.addEventListener('mouseup', function() { dragging = false; });
+}
+
+// ════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+makeDraggable(document.getElementById('buddy-list-window'), document.getElementById('bl-titlebar'));
+makeDraggable(document.getElementById('mycomp-window'), document.getElementById('mycomp-titlebar'));
+document.getElementById('buddy-list-window').addEventListener('mousedown', function(){ document.getElementById('buddy-list-window').style.zIndex = ++chatZBase; });
+document.getElementById('mycomp-window').addEventListener('mousedown', function(){ document.getElementById('mycomp-window').style.zIndex = ++chatZBase; });
+
+// API key prompt — stored in localStorage
+(function() {
+  var key = localStorage.getItem('fsu2000_apikey');
+  if (!key) {
+    var k = prompt('Enter your Anthropic API key to enable AI buddy responses (or cancel to skip):');
+    if (k && k.trim()) localStorage.setItem('fsu2000_apikey', k.trim());
+  }
+})();
+
+window.addEventListener('load', function() {
+  showScreen('screen-poweron');
+});
+</script>
+</body>
+</html>
