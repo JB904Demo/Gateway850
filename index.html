@@ -752,7 +752,303 @@ body {
 /* ════════════════════════════════════════
    ABOUT / DIALOG BOX
 ════════════════════════════════════════ */
-.w98-dialog {
+/* ════════════════════════════════════════
+   WINAMP 2.x — CLASSIC SKIN
+════════════════════════════════════════ */
+
+/* ── Main Player ── */
+#winamp-main {
+  position: absolute; top: 120px; left: 200px;
+  width: 275px;
+  background: #232323;
+  border: 2px solid; border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+  display: none; flex-direction: column;
+  z-index: 500; user-select: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  font-family: 'Courier New', monospace;
+}
+#winamp-main.open { display: flex; }
+
+/* Title bar */
+.wa-titlebar {
+  background: linear-gradient(180deg, #1e4a82 0%, #0a2d5c 100%);
+  height: 14px; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 4px;
+  cursor: grab; flex-shrink: 0;
+}
+.wa-titlebar:active { cursor: grabbing; }
+.wa-title-text {
+  color: #4ac; font-size: 8px; font-family: 'Courier New', monospace;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.wa-tb-btns { display: flex; gap: 2px; }
+.wa-tb-btn {
+  width: 9px; height: 9px; background: #555;
+  border: 1px solid; border-color: #888 #333 #333 #888;
+  font-size: 6px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #aaa;
+}
+.wa-tb-btn:hover { background: #777; }
+.wa-tb-btn:active { border-color: #333 #888 #888 #333; }
+
+/* Menu bar */
+.wa-menubar {
+  background: #232323; padding: 1px 4px;
+  display: flex; gap: 1px; flex-shrink: 0;
+  border-bottom: 1px solid #111;
+}
+.wa-menu-item {
+  color: #4ac; font-size: 7px; padding: 1px 4px;
+  cursor: pointer; font-family: 'Courier New', monospace;
+  border: 1px solid transparent;
+}
+.wa-menu-item:hover { background: #2a5a8a; border-color: #4ac; }
+
+/* Display area */
+.wa-display {
+  background: #000; margin: 3px 4px; padding: 4px 6px;
+  border: 1px solid; border-color: #111 #555 #555 #111;
+  display: flex; flex-direction: column; gap: 3px;
+  flex-shrink: 0;
+}
+
+/* LED display for time */
+.wa-time-display {
+  display: flex; align-items: center; gap: 3px;
+}
+.wa-time-seg {
+  color: #00ff41; font-size: 20px; font-family: 'Courier New', monospace;
+  font-weight: bold; letter-spacing: -2px; line-height: 1;
+  text-shadow: 0 0 6px #00ff41, 0 0 12px #00ff41;
+  min-width: 52px;
+}
+.wa-time-colon {
+  color: #00ff41; font-size: 18px; font-weight: bold;
+  text-shadow: 0 0 6px #00ff41;
+  animation: wa-blink 1s infinite;
+}
+@keyframes wa-blink { 0%,49%{opacity:1} 50%,100%{opacity:0.3} }
+.wa-bitrate {
+  color: #00aa33; font-size: 7px; font-family: 'Courier New', monospace;
+  margin-left: auto; text-align: right; line-height: 1.4;
+}
+
+/* Song title scroll */
+.wa-track-scroll-wrap {
+  background: #000; overflow: hidden; height: 10px;
+  border: 1px solid #111; margin: 0 4px; flex-shrink: 0;
+}
+.wa-track-scroll {
+  color: #00ff41; font-size: 8px; font-family: 'Courier New', monospace;
+  white-space: nowrap; display: inline-block;
+  text-shadow: 0 0 4px #00ff41;
+  animation: wa-scroll 18s linear infinite;
+}
+@keyframes wa-scroll { 0%{transform:translateX(275px)} 100%{transform:translateX(-100%)} }
+
+/* Visualizer */
+.wa-vis-wrap {
+  background: #000; margin: 0 4px; height: 28px;
+  border: 1px solid #111; overflow: hidden; flex-shrink: 0;
+  position: relative;
+}
+#wa-vis-canvas { width: 100%; height: 100%; display: block; }
+
+/* Progress bar */
+.wa-progress-wrap {
+  background: #1a1a1a; margin: 3px 4px; height: 8px;
+  border: 1px solid; border-color: #111 #555 #555 #111;
+  cursor: pointer; position: relative; flex-shrink: 0;
+}
+.wa-progress-fill {
+  height: 100%; background: #4ac;
+  background: linear-gradient(180deg, #5bd 0%, #2a8 100%);
+  width: 0%;
+}
+.wa-progress-thumb {
+  position: absolute; top: -1px; width: 5px; height: 10px;
+  background: #aaa; border: 1px solid #ccc;
+  transform: translateX(-50%); left: 0%;
+}
+
+/* Volume / Balance sliders */
+.wa-sliders-row {
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 4px; flex-shrink: 0;
+}
+.wa-slider-label {
+  color: #4ac; font-size: 7px; font-family: 'Courier New', monospace;
+  width: 24px; flex-shrink: 0;
+}
+.wa-slider-track {
+  flex: 1; height: 4px; background: #111;
+  border: 1px solid; border-color: #111 #555 #555 #111;
+  position: relative; cursor: pointer;
+}
+.wa-slider-fill { height: 100%; background: #4ac; }
+.wa-slider-thumb {
+  position: absolute; top: -3px; width: 8px; height: 9px;
+  background: #888; border: 1px solid; border-color: #bbb #444 #444 #bbb;
+  transform: translateX(-50%);
+}
+
+/* Transport controls */
+.wa-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 6px; background: #232323; flex-shrink: 0;
+}
+.wa-btn {
+  background: #333; border: 1px solid; border-color: #555 #222 #222 #555;
+  color: #aaa; font-size: 10px; cursor: pointer; padding: 3px 6px;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 16px;
+}
+.wa-btn:hover { background: #444; color: #fff; }
+.wa-btn:active { border-color: #222 #555 #555 #222; background: #282828; }
+.wa-btn.active { color: #00ff41; border-color: #222 #555 #555 #222; background: #1a1a1a; }
+.wa-btn-play { color: #00ff41; }
+.wa-btn-stop { color: #ff4444; }
+.wa-eject-btn {
+  background: #333; border: 1px solid; border-color: #555 #222 #222 #555;
+  color: #aaa; font-size: 9px; cursor: pointer; padding: 3px 5px;
+  height: 16px; display: flex; align-items: center;
+}
+
+/* Toggle buttons row */
+.wa-toggles {
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 6px 4px; flex-shrink: 0;
+}
+.wa-toggle {
+  font-size: 7px; font-family: 'Courier New', monospace;
+  background: #1a1a1a; border: 1px solid; border-color: #111 #444 #444 #111;
+  color: #555; padding: 1px 4px; cursor: pointer;
+}
+.wa-toggle.on { color: #00ff41; border-color: #00ff41; text-shadow: 0 0 4px #00ff41; }
+.wa-vol-num { color: #4ac; font-size: 8px; font-family: 'Courier New', monospace; margin-left: auto; }
+
+/* ── Equalizer ── */
+#winamp-eq {
+  position: absolute; top: 322px; left: 200px;
+  width: 275px;
+  background: #232323;
+  border: 2px solid; border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+  display: none; flex-direction: column;
+  z-index: 499; user-select: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+#winamp-eq.open { display: flex; }
+.wa-eq-titlebar {
+  background: linear-gradient(180deg, #1e4a82 0%, #0a2d5c 100%);
+  height: 14px; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 4px;
+  cursor: grab; flex-shrink: 0;
+}
+.wa-eq-titlebar:active { cursor: grabbing; }
+.wa-eq-body {
+  background: #000; margin: 3px 4px;
+  border: 1px solid; border-color: #111 #555 #555 #111;
+  padding: 4px; display: flex; flex-direction: column; gap: 4px;
+}
+.wa-eq-header {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
+}
+.wa-eq-logo {
+  color: #00ff41; font-size: 9px; font-family: 'Courier New', monospace;
+  font-weight: bold; text-shadow: 0 0 4px #00ff41; letter-spacing: 1px;
+}
+.wa-eq-toggle {
+  font-size: 7px; font-family: 'Courier New', monospace;
+  background: #1a1a1a; border: 1px solid; border-color: #111 #444 #444 #111;
+  color: #555; padding: 1px 4px; cursor: pointer; margin-left: auto;
+}
+.wa-eq-toggle.on { color: #00ff41; border-color: #00ff41; }
+.wa-eq-sliders {
+  display: flex; align-items: flex-end; gap: 4px; height: 60px;
+}
+.wa-eq-band {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; flex: 1;
+}
+.wa-eq-slider-wrap {
+  flex: 1; width: 100%; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  cursor: ns-resize; height: 52px;
+}
+.wa-eq-track {
+  width: 3px; height: 100%; background: #111;
+  border: 1px solid; border-color: #111 #444 #444 #111;
+  position: relative;
+}
+.wa-eq-thumb {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 10px; height: 5px; background: #888;
+  border: 1px solid; border-color: #bbb #444 #444 #bbb;
+  cursor: ns-resize;
+}
+.wa-eq-label {
+  color: #4ac; font-size: 6px; font-family: 'Courier New', monospace;
+  text-align: center; white-space: nowrap;
+}
+.wa-eq-preamp {
+  display: flex; flex-direction: column; align-items: center;
+  border-right: 1px solid #333; padding-right: 4px; margin-right: 2px;
+}
+
+/* ── Playlist Editor ── */
+#winamp-pl {
+  position: absolute; top: 442px; left: 200px;
+  width: 275px; height: 220px;
+  background: #000;
+  border: 2px solid; border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+  display: none; flex-direction: column;
+  z-index: 498; user-select: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+#winamp-pl.open { display: flex; }
+.wa-pl-titlebar {
+  background: linear-gradient(180deg, #1e4a82 0%, #0a2d5c 100%);
+  height: 14px; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 4px;
+  cursor: grab; flex-shrink: 0;
+}
+.wa-pl-titlebar:active { cursor: grabbing; }
+.wa-pl-title { color: #4ac; font-size: 7px; font-family: 'Courier New', monospace; letter-spacing: 1px; }
+.wa-pl-list {
+  flex: 1; overflow-y: auto; padding: 2px 0;
+  scrollbar-width: thin; scrollbar-color: #4ac #111;
+}
+.wa-pl-list::-webkit-scrollbar { width: 6px; }
+.wa-pl-list::-webkit-scrollbar-track { background: #111; }
+.wa-pl-list::-webkit-scrollbar-thumb { background: #4ac; }
+.wa-pl-item {
+  display: flex; align-items: center; gap: 4px;
+  padding: 1px 6px; font-size: 9px;
+  font-family: 'Courier New', monospace; cursor: pointer;
+  color: #4ac; border-bottom: 1px solid #0a0a0a;
+}
+.wa-pl-item:hover { background: #0a2040; }
+.wa-pl-item.active { background: #0a3060; color: #00ff41; }
+.wa-pl-item.active .wa-pl-num { color: #00ff41; }
+.wa-pl-num { color: #2a6a4a; width: 20px; flex-shrink: 0; text-align: right; }
+.wa-pl-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wa-pl-dur { color: #2a6a4a; flex-shrink: 0; font-size: 8px; }
+.wa-pl-footer {
+  background: #111; border-top: 1px solid #333;
+  padding: 2px 6px; display: flex; gap: 4px;
+  flex-shrink: 0; align-items: center;
+}
+.wa-pl-btn {
+  background: #222; border: 1px solid; border-color: #444 #111 #111 #444;
+  color: #4ac; font-size: 7px; font-family: 'Courier New', monospace;
+  padding: 1px 5px; cursor: pointer;
+}
+.wa-pl-btn:hover { background: #333; }
+.wa-pl-total {
+  color: #2a6a4a; font-size: 7px; font-family: 'Courier New', monospace;
+  margin-left: auto;
+}
+
   position: absolute;
   background: #c0c0c0;
   border: 2px solid; border-color: #fff #808080 #808080 #fff;
@@ -1365,6 +1661,127 @@ body {
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════
+       WINAMP 2.x — MAIN PLAYER
+  ══════════════════════════════════════ -->
+  <div id="winamp-main">
+    <div class="wa-titlebar" id="wa-main-titlebar">
+      <span class="wa-title-text">WINAMP</span>
+      <div class="wa-tb-btns">
+        <div class="wa-tb-btn" onclick="waMinimize()" title="Minimize">_</div>
+        <div class="wa-tb-btn" onclick="waShade()" title="Shade">▪</div>
+        <div class="wa-tb-btn" onclick="closeWinamp()" title="Close">×</div>
+      </div>
+    </div>
+    <div class="wa-menubar">
+      <div class="wa-menu-item">FILE</div>
+      <div class="wa-menu-item">PLAY</div>
+      <div class="wa-menu-item">OPTIONS</div>
+      <div class="wa-menu-item" onclick="toggleWaEQ()">EQ</div>
+      <div class="wa-menu-item" onclick="toggleWaPL()">PL</div>
+      <div class="wa-menu-item">HELP</div>
+    </div>
+    <!-- LED Display -->
+    <div class="wa-display">
+      <div class="wa-time-display">
+        <div class="wa-time-seg" id="wa-time">0:00</div>
+        <div style="flex:1;"></div>
+        <div class="wa-bitrate" id="wa-bitrate">128kbps<br>44kHz</div>
+      </div>
+    </div>
+    <!-- Scrolling title -->
+    <div class="wa-track-scroll-wrap">
+      <span class="wa-track-scroll" id="wa-track-scroll">Winamp 2.95 — &lt; click play &gt;</span>
+    </div>
+    <!-- Visualizer canvas -->
+    <div class="wa-vis-wrap">
+      <canvas id="wa-vis-canvas" width="263" height="28"></canvas>
+    </div>
+    <!-- Progress bar -->
+    <div class="wa-progress-wrap" id="wa-progress-wrap" onclick="waSeek(event)">
+      <div class="wa-progress-fill" id="wa-progress-fill"></div>
+      <div class="wa-progress-thumb" id="wa-progress-thumb"></div>
+    </div>
+    <!-- Volume / Balance -->
+    <div class="wa-sliders-row">
+      <span class="wa-slider-label">VOL</span>
+      <div class="wa-slider-track" id="wa-vol-track" onclick="waSetVol(event)">
+        <div class="wa-slider-fill" id="wa-vol-fill" style="width:80%;"></div>
+        <div class="wa-slider-thumb" id="wa-vol-thumb" style="left:80%;"></div>
+      </div>
+      <span class="wa-slider-label" style="text-align:right;">BAL</span>
+      <div class="wa-slider-track" id="wa-bal-track" onclick="waSetBal(event)">
+        <div class="wa-slider-fill" id="wa-bal-fill" style="width:50%;"></div>
+        <div class="wa-slider-thumb" id="wa-bal-thumb" style="left:50%;"></div>
+      </div>
+    </div>
+    <!-- Transport buttons -->
+    <div class="wa-controls">
+      <div class="wa-btn" onclick="waPrev()" title="Previous">⏮</div>
+      <div class="wa-btn" onclick="waRewind()" title="Rewind">◀◀</div>
+      <div class="wa-btn wa-btn-play" id="wa-play-btn" onclick="waPlay()" title="Play">▶</div>
+      <div class="wa-btn wa-btn-stop" onclick="waStop()" title="Stop">■</div>
+      <div class="wa-btn" onclick="waFastFwd()" title="Fast Forward">▶▶</div>
+      <div class="wa-btn" onclick="waNext()" title="Next">⏭</div>
+      <div class="wa-eject-btn" onclick="toggleWaPL()" title="Open playlist">▲</div>
+    </div>
+    <!-- Toggle row -->
+    <div class="wa-toggles">
+      <div class="wa-toggle on" id="wa-shuf-btn" onclick="waToggleShuffle()">SHF</div>
+      <div class="wa-toggle" id="wa-rep-btn" onclick="waToggleRepeat()">REP</div>
+      <div class="wa-toggle on" id="wa-eq-btn" onclick="toggleWaEQ()">EQ</div>
+      <div class="wa-toggle on" id="wa-pl-btn2" onclick="toggleWaPL()">PL</div>
+      <div class="wa-vol-num" id="wa-vol-num">80%</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       WINAMP — EQUALIZER
+  ══════════════════════════════════════ -->
+  <div id="winamp-eq">
+    <div class="wa-eq-titlebar" id="wa-eq-titlebar">
+      <span class="wa-title-text">WINAMP EQUALIZER</span>
+      <div class="wa-tb-btns">
+        <div class="wa-tb-btn" onclick="toggleWaEQ()">×</div>
+      </div>
+    </div>
+    <div class="wa-eq-body">
+      <div class="wa-eq-header">
+        <span class="wa-eq-logo">EQ</span>
+        <div class="wa-eq-toggle on" id="wa-eq-enabled" onclick="waToggleEQ()">ON</div>
+        <div class="wa-eq-toggle" id="wa-eq-auto" onclick="">AUTO</div>
+        <div class="wa-eq-toggle" id="wa-eq-preset" onclick="">PRESET</div>
+      </div>
+      <div class="wa-eq-sliders" id="wa-eq-sliders">
+        <!-- Preamp + 10 bands, generated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       WINAMP — PLAYLIST EDITOR
+  ══════════════════════════════════════ -->
+  <div id="winamp-pl">
+    <div class="wa-pl-titlebar" id="wa-pl-titlebar">
+      <span class="wa-pl-title">WINAMP PLAYLIST EDITOR</span>
+      <div class="wa-tb-btns">
+        <div class="wa-tb-btn" onclick="toggleWaPL()">×</div>
+      </div>
+    </div>
+    <div class="wa-pl-list" id="wa-pl-list">
+      <!-- Populated by JS -->
+    </div>
+    <div class="wa-pl-footer">
+      <div class="wa-pl-btn" onclick="waPrev()">PREV</div>
+      <div class="wa-pl-btn" onclick="waPlay()">PLAY</div>
+      <div class="wa-pl-btn" onclick="waStop()">STOP</div>
+      <div class="wa-pl-btn" onclick="waNext()">NEXT</div>
+      <div class="wa-pl-btn" onclick="">ADD</div>
+      <div class="wa-pl-btn" onclick="">REM</div>
+      <div class="wa-pl-total" id="wa-pl-total">0 tracks</div>
+    </div>
+  </div>
+
 </div><!-- /#canvas -->
 
 <script>
@@ -1865,6 +2282,430 @@ function openNapster() { alert('Napster\nComing soon!'); }
 function openNotepad() { alert('Notepad\nComing soon!'); }
 function openCalculator() { alert('Calculator\nComing soon!'); }
 function openRecycleBin() { alert('Recycle Bin\nComing soon!'); }
+
+// ════════════════════════════════════════
+// WINAMP 2.x
+// ════════════════════════════════════════
+
+// ── Playlist ──
+var WA_PLAYLIST = [
+  { artist: 'Dashboard Confessional', title: 'Screaming Infidelities',      dur: '3:51' },
+  { artist: 'Dashboard Confessional', title: 'The Swiss Army Romance',       dur: '3:32' },
+  { artist: 'Dashboard Confessional', title: 'Ender Will Save Us All',       dur: '3:14' },
+  { artist: 'Dashboard Confessional', title: 'The Sharp Hint of New Tears',  dur: '3:28' },
+  { artist: 'New Found Glory',        title: 'Hit or Miss',                  dur: '2:58' },
+  { artist: 'New Found Glory',        title: 'Dressed to Kill',              dur: '2:41' },
+  { artist: 'New Found Glory',        title: 'Better Off Dead',              dur: '2:52' },
+  { artist: 'New Found Glory',        title: 'Never Give Up',                dur: '3:07' },
+  { artist: 'Less Than Jake',         title: 'All My Best Friends Are Metalheads', dur: '2:34' },
+  { artist: 'Less Than Jake',         title: 'Gainesville Rock City',        dur: '2:18' },
+  { artist: 'Less Than Jake',         title: 'The Science of Selling Yourself Short', dur: '2:47' },
+  { artist: 'Less Than Jake',         title: 'History of a Boring Town',     dur: '2:22' },
+  { artist: 'Yellowcard',             title: 'Way Away',                     dur: '3:24' },
+  { artist: 'Yellowcard',             title: 'One Year, Six Months',         dur: '3:31' },
+  { artist: 'Yellowcard',             title: 'Breathing',                    dur: '3:18' },
+  { artist: 'Saves the Day',          title: 'At Your Funeral',              dur: '2:55' },
+  { artist: 'Saves the Day',          title: 'Shoulder to the Wheel',        dur: '3:02' },
+  { artist: 'Jimmy Eat World',        title: 'The Middle',                   dur: '2:46' },
+  { artist: 'Jimmy Eat World',        title: 'Sweetness',                    dur: '3:40' },
+  { artist: 'Blink-182',             title: 'What\'s My Age Again?',        dur: '2:28' },
+  { artist: 'Blink-182',             title: 'All the Small Things',          dur: '2:49' },
+  { artist: 'Sum 41',                 title: 'Fat Lip',                      dur: '2:56' },
+  { artist: 'Alkaline Trio',          title: 'Radio',                        dur: '2:39' },
+  { artist: 'Alkaline Trio',          title: 'Stupid Kid',                   dur: '2:51' },
+  { artist: 'Taking Back Sunday',     title: 'Cute Without the \'E\'',      dur: '3:55' },
+  { artist: 'MxPx',                   title: 'Chick Magnet',                 dur: '2:10' },
+  { artist: 'Mest',                   title: 'Jaded (These Years)',          dur: '3:08' },
+  { artist: 'Homegrown',              title: 'Sarah',                        dur: '3:21' },
+  { artist: 'Fenix TX',               title: 'Threesome',                    dur: '2:44' },
+  { artist: 'The Starting Line',      title: 'Best of Me',                   dur: '3:16' },
+];
+
+// ── State ──
+var waPlaying = false;
+var waPaused = false;
+var waCurrentTrack = 0;
+var waTrackPos = 0;      // seconds elapsed
+var waTrackDur = 0;      // total seconds
+var waShuffle = true;
+var waRepeat = false;
+var waEQEnabled = true;
+var waVolume = 80;
+var waInterval = null;
+var waVisInterval = null;
+var waShuffleOrder = [];
+
+// ── EQ band values (0-100, 50=center) ──
+var waEQBands = [55, 58, 55, 50, 47, 48, 52, 54, 56, 53];
+var waEQLabels = ['60','170','310','600','1K','3K','6K','12K','14K','16K'];
+
+function openWinamp() {
+  var main = document.getElementById('winamp-main');
+  var eq   = document.getElementById('winamp-eq');
+  var pl   = document.getElementById('winamp-pl');
+  main.classList.add('open');
+  eq.classList.add('open');
+  pl.classList.add('open');
+  main.style.zIndex = ++chatZBase;
+  eq.style.zIndex   = chatZBase - 1;
+  pl.style.zIndex   = chatZBase - 2;
+  waRenderPlaylist();
+  waRenderEQ();
+  waUpdateDisplay();
+  waStartVisualizer();
+  // Position EQ and PL snapped below main
+  positionWaWindows();
+}
+
+function positionWaWindows() {
+  var main = document.getElementById('winamp-main');
+  var eq   = document.getElementById('winamp-eq');
+  var pl   = document.getElementById('winamp-pl');
+  var mt = parseInt(main.style.top) || 120;
+  var ml = parseInt(main.style.left) || 200;
+  var mh = main.offsetHeight || 202;
+  var eqh = eq.offsetHeight || 116;
+  eq.style.top  = (mt + mh) + 'px';
+  eq.style.left = ml + 'px';
+  pl.style.top  = (mt + mh + eqh) + 'px';
+  pl.style.left = ml + 'px';
+}
+
+function closeWinamp() {
+  waStop();
+  ['winamp-main','winamp-eq','winamp-pl'].forEach(function(id){
+    document.getElementById(id).classList.remove('open');
+  });
+}
+
+function waMinimize() {
+  // Just hide visually — real Winamp minimized to taskbar
+  document.getElementById('winamp-main').classList.remove('open');
+}
+
+function waShade() {
+  // Toggle shade mode (just roll up the body, keep titlebar)
+  var main = document.getElementById('winamp-main');
+  main.style.overflow = main.style.overflow === 'hidden' ? '' : 'hidden';
+  main.style.height = main.style.height ? '' : '14px';
+}
+
+function toggleWaEQ() {
+  var eq = document.getElementById('winamp-eq');
+  eq.classList.toggle('open');
+}
+
+function toggleWaPL() {
+  var pl = document.getElementById('winamp-pl');
+  pl.classList.toggle('open');
+}
+
+// ── Playback simulation ──
+function waDurToSecs(durStr) {
+  var parts = durStr.split(':');
+  return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+
+function waPlay() {
+  if (waPlaying) { // pause
+    waPaused = !waPaused;
+    if (waPaused) {
+      clearInterval(waInterval);
+      document.getElementById('wa-play-btn').textContent = '▶';
+    } else {
+      waStartTick();
+      document.getElementById('wa-play-btn').textContent = '⏸';
+    }
+    return;
+  }
+  waPlaying = true;
+  waPaused = false;
+  if (waShuffle && waShuffleOrder.length === 0) waGenShuffle();
+  var track = WA_PLAYLIST[waCurrentTrack];
+  waTrackDur = waDurToSecs(track.dur);
+  if (waTrackPos === 0 || waTrackPos >= waTrackDur) waTrackPos = 0;
+  document.getElementById('wa-play-btn').textContent = '⏸';
+  waUpdateScrollTitle(track);
+  waStartTick();
+  waRenderPlaylist();
+}
+
+function waStop() {
+  waPlaying = false; waPaused = false;
+  clearInterval(waInterval);
+  waTrackPos = 0;
+  document.getElementById('wa-play-btn').textContent = '▶';
+  document.getElementById('wa-time').textContent = '0:00';
+  document.getElementById('wa-progress-fill').style.width = '0%';
+  document.getElementById('wa-progress-thumb').style.left = '0%';
+  document.getElementById('wa-track-scroll').textContent = 'Winamp 2.95 — stopped';
+}
+
+function waNext() {
+  var prev = waCurrentTrack;
+  if (waShuffle) {
+    waCurrentTrack = waShuffleNext();
+  } else {
+    waCurrentTrack = (waCurrentTrack + 1) % WA_PLAYLIST.length;
+  }
+  waTrackPos = 0;
+  if (waPlaying) { waPlaying = false; waPlay(); }
+  else { waUpdateDisplay(); waRenderPlaylist(); }
+}
+
+function waPrev() {
+  if (waTrackPos > 3) { waTrackPos = 0; if (waPlaying) { clearInterval(waInterval); waStartTick(); } return; }
+  waCurrentTrack = (waCurrentTrack - 1 + WA_PLAYLIST.length) % WA_PLAYLIST.length;
+  waTrackPos = 0;
+  if (waPlaying) { waPlaying = false; waPlay(); }
+  else { waUpdateDisplay(); waRenderPlaylist(); }
+}
+
+function waRewind() { waTrackPos = Math.max(0, waTrackPos - 5); }
+function waFastFwd() { waTrackPos = Math.min(waTrackDur - 1, waTrackPos + 5); }
+
+function waStartTick() {
+  clearInterval(waInterval);
+  waInterval = setInterval(function() {
+    waTrackPos++;
+    if (waTrackPos >= waTrackDur) {
+      if (waRepeat) { waTrackPos = 0; }
+      else { waNext(); return; }
+    }
+    waUpdateTimeDisplay();
+    waUpdateProgress();
+  }, 1000);
+}
+
+function waUpdateTimeDisplay() {
+  var m = Math.floor(waTrackPos / 60);
+  var s = waTrackPos % 60;
+  document.getElementById('wa-time').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function waUpdateProgress() {
+  if (!waTrackDur) return;
+  var pct = (waTrackPos / waTrackDur * 100).toFixed(1);
+  document.getElementById('wa-progress-fill').style.width = pct + '%';
+  document.getElementById('wa-progress-thumb').style.left = pct + '%';
+}
+
+function waUpdateDisplay() {
+  var track = WA_PLAYLIST[waCurrentTrack];
+  waUpdateScrollTitle(track);
+  waTrackDur = waDurToSecs(track.dur);
+  waUpdateTimeDisplay();
+  waUpdateProgress();
+}
+
+function waUpdateScrollTitle(track) {
+  var txt = (waCurrentTrack + 1) + '. ' + track.artist + ' - ' + track.title + '   >>>   ';
+  var el = document.getElementById('wa-track-scroll');
+  el.textContent = txt;
+  // Reset animation
+  el.style.animation = 'none';
+  el.offsetHeight; // force reflow
+  el.style.animation = '';
+}
+
+function waSeek(e) {
+  var wrap = document.getElementById('wa-progress-wrap');
+  var rect = wrap.getBoundingClientRect();
+  var canvas = document.getElementById('canvas');
+  var cr = canvas.getBoundingClientRect();
+  var scale = cr.width / 1024;
+  var pct = (e.clientX - rect.left) / (rect.width);
+  pct = Math.max(0, Math.min(1, pct));
+  waTrackPos = Math.floor(pct * waTrackDur);
+  waUpdateTimeDisplay();
+  waUpdateProgress();
+}
+
+// ── Volume / Balance ──
+function waSetVol(e) {
+  var track = document.getElementById('wa-vol-track');
+  var rect = track.getBoundingClientRect();
+  var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  waVolume = Math.round(pct * 100);
+  document.getElementById('wa-vol-fill').style.width = waVolume + '%';
+  document.getElementById('wa-vol-thumb').style.left = waVolume + '%';
+  document.getElementById('wa-vol-num').textContent = waVolume + '%';
+}
+
+function waSetBal(e) {
+  var track = document.getElementById('wa-bal-track');
+  var rect = track.getBoundingClientRect();
+  var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  document.getElementById('wa-bal-fill').style.width = (pct * 100) + '%';
+  document.getElementById('wa-bal-thumb').style.left = (pct * 100) + '%';
+}
+
+// ── Shuffle ──
+function waGenShuffle() {
+  waShuffleOrder = WA_PLAYLIST.map(function(_,i){ return i; });
+  for (var i = waShuffleOrder.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = waShuffleOrder[i]; waShuffleOrder[i] = waShuffleOrder[j]; waShuffleOrder[j] = t;
+  }
+}
+function waShuffleNext() {
+  var idx = waShuffleOrder.indexOf(waCurrentTrack);
+  return waShuffleOrder[(idx + 1) % waShuffleOrder.length];
+}
+
+function waToggleShuffle() {
+  waShuffle = !waShuffle;
+  document.getElementById('wa-shuf-btn').classList.toggle('on', waShuffle);
+  if (waShuffle) waGenShuffle();
+}
+function waToggleRepeat() {
+  waRepeat = !waRepeat;
+  document.getElementById('wa-rep-btn').classList.toggle('on', waRepeat);
+}
+function waToggleEQ() {
+  waEQEnabled = !waEQEnabled;
+  document.getElementById('wa-eq-enabled').classList.toggle('on', waEQEnabled);
+  document.getElementById('wa-eq-enabled').textContent = waEQEnabled ? 'ON' : 'OFF';
+}
+
+// ── Playlist render ──
+function waRenderPlaylist() {
+  var list = document.getElementById('wa-pl-list');
+  list.innerHTML = '';
+  WA_PLAYLIST.forEach(function(t, i) {
+    var item = document.createElement('div');
+    item.className = 'wa-pl-item' + (i === waCurrentTrack ? ' active' : '');
+    item.innerHTML =
+      '<span class="wa-pl-num">' + (i + 1) + '.</span>'
+      + '<span class="wa-pl-name">' + esc(t.artist) + ' - ' + esc(t.title) + '</span>'
+      + '<span class="wa-pl-dur">' + t.dur + '</span>';
+    item.addEventListener('dblclick', function() {
+      waCurrentTrack = i;
+      waTrackPos = 0;
+      if (waPlaying) { waPlaying = false; waPlay(); }
+      else { waUpdateDisplay(); waRenderPlaylist(); }
+    });
+    list.appendChild(item);
+  });
+  // Scroll active into view
+  var active = list.querySelector('.active');
+  if (active) active.scrollIntoView({ block: 'nearest' });
+
+  // Total
+  var totalSecs = WA_PLAYLIST.reduce(function(a, t) {
+    return a + waDurToSecs(t.dur);
+  }, 0);
+  var tm = Math.floor(totalSecs / 60), ts = totalSecs % 60;
+  document.getElementById('wa-pl-total').textContent =
+    WA_PLAYLIST.length + ' tracks (' + tm + 'm ' + ts + 's)';
+}
+
+// ── EQ render ──
+function waRenderEQ() {
+  var wrap = document.getElementById('wa-eq-sliders');
+  wrap.innerHTML = '';
+
+  // Preamp
+  var pre = document.createElement('div');
+  pre.className = 'wa-eq-band wa-eq-preamp';
+  pre.innerHTML =
+    '<div class="wa-eq-label">PREAMP</div>'
+    + '<div class="wa-eq-slider-wrap"><div class="wa-eq-track">'
+    + '<div class="wa-eq-thumb" style="top:' + (52 * (1 - 60/100)) + 'px;"></div>'
+    + '</div></div>';
+  wrap.appendChild(pre);
+
+  // 10 bands
+  waEQLabels.forEach(function(label, i) {
+    var band = document.createElement('div');
+    band.className = 'wa-eq-band';
+    var topPct = 52 * (1 - waEQBands[i] / 100);
+    band.innerHTML =
+      '<div class="wa-eq-slider-wrap"><div class="wa-eq-track">'
+      + '<div class="wa-eq-thumb" id="wa-eq-b-' + i + '" style="top:' + topPct + 'px;"></div>'
+      + '</div></div>'
+      + '<div class="wa-eq-label">' + label + '</div>';
+    // Click to adjust
+    (function(bi) {
+      band.querySelector('.wa-eq-slider-wrap').addEventListener('click', function(e) {
+        var rect = this.getBoundingClientRect();
+        var pct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+        waEQBands[bi] = Math.round((1 - pct) * 100);
+        document.getElementById('wa-eq-b-' + bi).style.top = (52 * pct) + 'px';
+      });
+    })(i);
+    wrap.appendChild(band);
+  });
+}
+
+// ── Visualizer ──
+var waVisAnimFrame = null;
+var waVisBars = new Array(32).fill(0);
+var waVisPeaks = new Array(32).fill(0);
+
+function waStartVisualizer() {
+  if (waVisAnimFrame) cancelAnimationFrame(waVisAnimFrame);
+  waDrawVis();
+}
+
+function waDrawVis() {
+  var canvas = document.getElementById('wa-vis-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  var numBars = 32;
+  var barW = Math.floor(W / numBars) - 1;
+
+  for (var i = 0; i < numBars; i++) {
+    // Animate bars
+    if (waPlaying && !waPaused) {
+      var target = Math.random() * 0.7 + (Math.sin(Date.now() * 0.003 + i * 0.4) * 0.3 + 0.3);
+      // Bass frequencies higher
+      if (i < 4) target *= 1.3;
+      if (i > 24) target *= 0.5;
+      target = Math.max(0, Math.min(1, target));
+      waVisBars[i] = waVisBars[i] * 0.65 + target * 0.35;
+    } else {
+      waVisBars[i] *= 0.88; // decay when stopped
+    }
+
+    var h = Math.floor(waVisBars[i] * H);
+    var x = i * (barW + 1);
+
+    // Gradient color per height
+    var grad = ctx.createLinearGradient(0, H - h, 0, H);
+    grad.addColorStop(0, '#00ff41');
+    grad.addColorStop(0.6, '#00cc33');
+    grad.addColorStop(1, '#009922');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x, H - h, barW, h);
+
+    // Peak dot
+    if (waPlaying && !waPaused) {
+      if (waVisBars[i] > waVisPeaks[i]) waVisPeaks[i] = waVisBars[i];
+      else waVisPeaks[i] = Math.max(0, waVisPeaks[i] - 0.015);
+    } else {
+      waVisPeaks[i] = Math.max(0, waVisPeaks[i] - 0.01);
+    }
+    var py = H - Math.floor(waVisPeaks[i] * H) - 1;
+    ctx.fillStyle = '#00ff99';
+    ctx.fillRect(x, py, barW, 1);
+  }
+
+  waVisAnimFrame = requestAnimationFrame(waDrawVis);
+}
+
+// ── Drag setup ──
+makeDraggable(document.getElementById('winamp-main'), document.getElementById('wa-main-titlebar'));
+makeDraggable(document.getElementById('winamp-eq'),   document.getElementById('wa-eq-titlebar'));
+makeDraggable(document.getElementById('winamp-pl'),   document.getElementById('wa-pl-titlebar'));
+
+document.getElementById('winamp-main').addEventListener('mousedown', function(){ this.style.zIndex = ++chatZBase; });
+document.getElementById('winamp-eq').addEventListener('mousedown',   function(){ this.style.zIndex = ++chatZBase; });
+document.getElementById('winamp-pl').addEventListener('mousedown',   function(){ this.style.zIndex = ++chatZBase; });
 
 // ════════════════════════════════════════
 // SHUT DOWN
