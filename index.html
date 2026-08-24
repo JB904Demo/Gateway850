@@ -1347,9 +1347,9 @@ body {
           <span class="sm-icon">❓</span>
           <div><span class="sm-label">Help</span></div>
         </div>
-        <div class="sm-item">
+        <div class="sm-item" onclick="showApiKeyDialog();toggleStartMenu()">
           <span class="sm-icon">⚙️</span>
-          <div><span class="sm-label">Settings</span><span class="sm-sub">Control Panel, Taskbar...</span></div>
+          <div><span class="sm-label">Settings</span><span class="sm-sub">Control Panel, API Key...</span></div>
         </div>
         <div class="sm-divider"></div>
         <div class="sm-item" onclick="doShutDown();toggleStartMenu()">
@@ -1781,6 +1781,43 @@ body {
       <div class="wa-pl-total" id="wa-pl-total">0 tracks</div>
     </div>
   </div>
+  <!-- API Key Dialog -->
+  <div class="w98-dialog" id="apikey-dialog" style="top:180px;left:262px;width:500px;">
+    <div class="w98-titlebar">
+      <div class="w98-titlebar-left">
+        <span class="w98-title-icon">🔑</span> Anthropic API Key — Required for AI Buddy Responses
+      </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'Tahoma',Arial;font-size:12px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">
+        <span style="font-size:32px;flex-shrink:0;">🤖</span>
+        <div>
+          <div style="font-weight:bold;margin-bottom:6px;">Enter your Anthropic API key to enable AI-powered buddy responses.</div>
+          <div style="color:#444;font-size:11px;line-height:1.6;">
+            Your key is stored locally in your browser and never sent anywhere except directly to Anthropic's API.
+            You can skip this and enter it later via Start → Settings → API Key.
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <label style="display:block;margin-bottom:4px;font-weight:bold;">API Key:</label>
+        <input type="password" id="apikey-input"
+          style="width:100%;height:26px;border:2px solid;border-color:#808080 #fff #fff #808080;font-size:12px;padding:0 6px;font-family:'Tahoma',Arial;background:#fff;box-sizing:border-box;"
+          placeholder="sk-ant-..."
+          onkeydown="if(event.key==='Enter')saveApiKey()">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+        <input type="checkbox" id="apikey-show" onchange="toggleApiKeyVisible()">
+        <label for="apikey-show" style="font-size:11px;cursor:pointer;">Show key</label>
+      </div>
+      <div id="apikey-error" style="color:#cc0000;font-size:11px;min-height:16px;margin-bottom:8px;"></div>
+      <div class="w98-login-divider"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="w98-login-btn" onclick="saveApiKey()">OK</button>
+        <button class="w98-login-btn" onclick="skipApiKey()">Skip</button>
+      </div>
+    </div>
+  </div>
 
 </div><!-- /#canvas -->
 
@@ -1812,6 +1849,10 @@ function showScreen(id) {
   var el = document.getElementById(id);
   if (!el) return;
   el.style.display = flexScreens[id] ? 'flex' : 'block';
+  // Show API key dialog first time desktop loads
+  if (id === 'screen-desktop' && !localStorage.getItem('fsu2000_apikey')) {
+    setTimeout(showApiKeyDialog, 600);
+  }
 }
 
 // ════════════════════════════════════════
@@ -2778,17 +2819,44 @@ makeDraggable(document.getElementById('mycomp-window'), document.getElementById(
 document.getElementById('buddy-list-window').addEventListener('mousedown', function(){ document.getElementById('buddy-list-window').style.zIndex = ++chatZBase; });
 document.getElementById('mycomp-window').addEventListener('mousedown', function(){ document.getElementById('mycomp-window').style.zIndex = ++chatZBase; });
 
-// API key prompt — stored in localStorage
-(function() {
-  var key = localStorage.getItem('fsu2000_apikey');
-  if (!key) {
-    var k = prompt('Enter your Anthropic API key to enable AI buddy responses (or cancel to skip):');
-    if (k && k.trim()) localStorage.setItem('fsu2000_apikey', k.trim());
+// API key dialog
+function showApiKeyDialog() {
+  var dlg = document.getElementById('apikey-dialog');
+  dlg.classList.add('open');
+  dlg.style.zIndex = ++chatZBase;
+  var existing = localStorage.getItem('fsu2000_apikey') || '';
+  document.getElementById('apikey-input').value = existing;
+  document.getElementById('apikey-error').textContent = '';
+  setTimeout(function(){ document.getElementById('apikey-input').focus(); }, 100);
+}
+
+function saveApiKey() {
+  var val = document.getElementById('apikey-input').value.trim();
+  if (!val) {
+    document.getElementById('apikey-error').textContent = 'Please enter a key or click Skip.';
+    return;
   }
-})();
+  if (!val.startsWith('sk-ant-')) {
+    document.getElementById('apikey-error').textContent = 'Key should start with sk-ant- — double check and try again.';
+    return;
+  }
+  localStorage.setItem('fsu2000_apikey', val);
+  document.getElementById('apikey-dialog').classList.remove('open');
+}
+
+function skipApiKey() {
+  document.getElementById('apikey-dialog').classList.remove('open');
+}
+
+function toggleApiKeyVisible() {
+  var input = document.getElementById('apikey-input');
+  input.type = document.getElementById('apikey-show').checked ? 'text' : 'password';
+}
 
 window.addEventListener('load', function() {
   showScreen('screen-poweron');
+  // Show API key dialog after desktop loads if no key stored
+  // Triggered from showScreen('screen-desktop') call
 });
 </script>
 </body>
