@@ -1935,9 +1935,12 @@ function showScreen(id) {
   var el = document.getElementById(id);
   if (!el) return;
   el.style.display = flexScreens[id] ? 'flex' : 'block';
-  // Show API key dialog first time desktop loads
-  if (id === 'screen-desktop' && !localStorage.getItem('fsu2000_apikey')) {
-    setTimeout(showApiKeyDialog, 600);
+  // Show API key dialog first time desktop loads if no valid key stored
+  if (id === 'screen-desktop') {
+    var key = localStorage.getItem('fsu2000_apikey');
+    if (!key || key.trim() === '') {
+      setTimeout(showApiKeyDialog, 800);
+    }
   }
 }
 
@@ -2937,12 +2940,23 @@ document.getElementById('mycomp-window').addEventListener('mousedown', function(
 // API key dialog
 function showApiKeyDialog() {
   var dlg = document.getElementById('apikey-dialog');
+  if (!dlg) return;
   dlg.classList.add('open');
-  dlg.style.zIndex = ++chatZBase;
+  dlg.style.zIndex = 9999;
+  dlg.style.position = 'absolute';
   var existing = localStorage.getItem('fsu2000_apikey') || '';
-  document.getElementById('apikey-input').value = existing;
+  var input = document.getElementById('apikey-input');
+  if (input) {
+    input.value = existing;
+    input.type = 'password';
+  }
+  var cb = document.getElementById('apikey-show');
+  if (cb) cb.checked = false;
   document.getElementById('apikey-error').textContent = '';
-  setTimeout(function(){ document.getElementById('apikey-input').focus(); }, 100);
+  setTimeout(function(){
+    var inp = document.getElementById('apikey-input');
+    if (inp) inp.focus();
+  }, 150);
 }
 
 function saveApiKey() {
@@ -2960,6 +2974,9 @@ function saveApiKey() {
 }
 
 function skipApiKey() {
+  // Remove any blank entry so we prompt again next session
+  var val = localStorage.getItem('fsu2000_apikey');
+  if (!val || val.trim() === '') localStorage.removeItem('fsu2000_apikey');
   document.getElementById('apikey-dialog').classList.remove('open');
 }
 
