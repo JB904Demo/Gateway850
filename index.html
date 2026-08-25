@@ -1056,6 +1056,91 @@ body {
   z-index: 5000; display: none;
 }
 .w98-dialog.open { display: flex; flex-direction: column; }
+
+/* ── Winamp Skin: Dark (Darkmod style) ── */
+#winamp-main.skin-dark,
+#winamp-eq.skin-dark,
+#winamp-pl.skin-dark {
+  background: #1c1f14;
+  border-color: #4a4f32 #0a0b07 #0a0b07 #4a4f32;
+}
+.skin-dark .wa-titlebar,
+.skin-dark .wa-eq-titlebar,
+.skin-dark .wa-pl-titlebar {
+  background: linear-gradient(180deg, #2a2f1a 0%, #1a1e10 100%);
+}
+.skin-dark .wa-title-text,
+.skin-dark .wa-pl-title { color: #c8b44a; letter-spacing: 2px; }
+.skin-dark .wa-tb-btn {
+  background: #2a2f1a; border-color: #4a4f32 #0a0b07 #0a0b07 #4a4f32; color: #c8b44a;
+}
+.skin-dark .wa-tb-btn:hover { background: #3a3f22; }
+.skin-dark .wa-menubar { background: #1c1f14; border-bottom: 1px solid #0a0b07; }
+.skin-dark .wa-menu-item { color: #c8b44a; }
+.skin-dark .wa-menu-item:hover { background: #2a3a14; }
+.skin-dark .wa-display { background: #0f1208; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; }
+.skin-dark .wa-time-seg { color: #d4b800; text-shadow: 0 0 8px #d4b800, 0 0 16px #a08800; }
+.skin-dark .wa-time-colon { color: #d4b800; text-shadow: 0 0 6px #d4b800; }
+.skin-dark .wa-bitrate { color: #8a9a40; }
+.skin-dark .wa-track-scroll-wrap { background: #0f1208; border-color: #0a0b07; }
+.skin-dark .wa-track-scroll { color: #c8b44a; text-shadow: 0 0 4px #a09030; }
+.skin-dark .wa-vis-wrap { background: #0f1208; border-color: #0a0b07; }
+.skin-dark .wa-progress-wrap { background: #0f1208; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; }
+.skin-dark .wa-progress-fill { background: linear-gradient(180deg, #c8b44a 0%, #8a7a20 100%); }
+.skin-dark .wa-progress-thumb { background: #c8b44a; border-color: #e0cc60 #808020 #808020 #e0cc60; }
+.skin-dark .wa-slider-label { color: #c8b44a; }
+.skin-dark .wa-slider-track { background: #0f1208; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; }
+.skin-dark .wa-slider-fill { background: #c8b44a; }
+.skin-dark .wa-slider-thumb { background: #c8b44a; border-color: #e0cc60 #707020 #707020 #e0cc60; }
+.skin-dark .wa-controls { background: #1c1f14; }
+.skin-dark .wa-btn {
+  background: #2a2f1a; border-color: #4a4f32 #0a0b07 #0a0b07 #4a4f32; color: #c8b44a;
+}
+.skin-dark .wa-btn:hover { background: #3a3f22; color: #e0d060; }
+.skin-dark .wa-btn:active { border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; }
+.skin-dark .wa-btn-play { color: #c8b44a; }
+.skin-dark .wa-btn-stop { color: #cc6622; }
+.skin-dark .wa-eject-btn {
+  background: #2a2f1a; border-color: #4a4f32 #0a0b07 #0a0b07 #4a4f32; color: #c8b44a;
+}
+.skin-dark .wa-toggles { background: #1c1f14; }
+.skin-dark .wa-toggle {
+  background: #0f1208; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; color: #3a3f22;
+}
+.skin-dark .wa-toggle.on { color: #c8b44a; border-color: #c8b44a; text-shadow: 0 0 4px #a09030; }
+.skin-dark .wa-vol-num { color: #c8b44a; }
+.skin-dark .wa-eq-body { background: #0f1208; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; }
+.skin-dark .wa-eq-logo { color: #c8b44a; text-shadow: 0 0 4px #c8b44a; }
+.skin-dark .wa-eq-toggle {
+  background: #1c1f14; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; color: #3a3f22;
+}
+.skin-dark .wa-eq-toggle.on { color: #c8b44a; border-color: #c8b44a; }
+.skin-dark .wa-eq-track { background: #0a0b07; border-color: #0a0b07 #4a4f32 #4a4f32 #0a0b07; }
+.skin-dark .wa-eq-thumb { background: #c8b44a; border-color: #e0cc60 #707020 #707020 #e0cc60; }
+.skin-dark .wa-eq-label { color: #8a9a40; }
+.skin-dark .wa-eq-preamp { border-right-color: #2a2f1a; }
+.skin-dark .wa-pl-list { background: #0f1208; }
+.skin-dark .wa-pl-list::-webkit-scrollbar-track { background: #0f1208; }
+.skin-dark .wa-pl-list::-webkit-scrollbar-thumb { background: #c8b44a; }
+.skin-dark .wa-pl-item { color: #c8b44a; border-bottom-color: #1a1e10; background: #0f1208; }
+.skin-dark .wa-pl-item:hover { background: #1a2010; }
+.skin-dark .wa-pl-item.active { background: #1a2a08; color: #e0d060; }
+.skin-dark .wa-pl-num { color: #4a5a20; }
+.skin-dark .wa-pl-item.active .wa-pl-num { color: #c8b44a; }
+.skin-dark .wa-pl-dur { color: #4a5a20; }
+.skin-dark .wa-pl-footer { background: #1c1f14; border-top-color: #2a2f1a; }
+.skin-dark .wa-pl-btn {
+  background: #2a2f1a; border-color: #4a4f32 #0a0b07 #0a0b07 #4a4f32; color: #c8b44a;
+}
+.skin-dark .wa-pl-btn:hover { background: #3a3f22; }
+.skin-dark .wa-pl-total { color: #4a5a20; }
+/* Skin switcher button */
+.wa-skin-btn {
+  font-size: 7px; font-family: 'Courier New', monospace;
+  background: #1a1a1a; border: 1px solid; border-color: #111 #444 #444 #111;
+  color: #888; padding: 1px 5px; cursor: pointer;
+}
+.wa-skin-btn:hover { color: #fff; border-color: #666; }
 </style>
 </head>
 <body>
@@ -1731,6 +1816,7 @@ body {
       <div class="wa-toggle" id="wa-rep-btn" onclick="waToggleRepeat()">REP</div>
       <div class="wa-toggle on" id="wa-eq-btn" onclick="toggleWaEQ()">EQ</div>
       <div class="wa-toggle on" id="wa-pl-btn2" onclick="toggleWaPL()">PL</div>
+      <div class="wa-skin-btn" id="wa-skin-btn" onclick="waToggleSkin()" title="Switch skin">SKIN</div>
       <div class="wa-vol-num" id="wa-vol-num">80%</div>
     </div>
   </div>
@@ -2394,6 +2480,11 @@ function openWinamp() {
   waRenderEQ();
   waUpdateDisplay();
   waStartVisualizer();
+  // Restore saved skin
+  if (localStorage.getItem('fsu2000_waskin') === 'dark') {
+    waSkinDark = false; // toggle will flip it
+    waToggleSkin();
+  }
   // Position EQ and PL snapped below main
   positionWaWindows();
 }
@@ -2679,7 +2770,25 @@ function waRenderEQ() {
   });
 }
 
-// ── Visualizer ──
+// ── Skin switcher ──
+var waSkinDark = false;
+function waToggleSkin() {
+  waSkinDark = !waSkinDark;
+  ['winamp-main','winamp-eq','winamp-pl'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (waSkinDark) el.classList.add('skin-dark');
+    else el.classList.remove('skin-dark');
+  });
+  // Update skin button label
+  var btn = document.getElementById('wa-skin-btn');
+  btn.textContent = waSkinDark ? 'CLR' : 'SKIN';
+  btn.style.color = waSkinDark ? '#c8b44a' : '#888';
+  btn.style.borderColor = waSkinDark ? '#c8b44a #4a4f32 #4a4f32 #c8b44a' : '';
+  // Persist preference
+  localStorage.setItem('fsu2000_waskin', waSkinDark ? 'dark' : 'classic');
+}
+
+// ── Visualizer (skin-aware colors) ──
 var waVisAnimFrame = null;
 var waVisBars = new Array(32).fill(0);
 var waVisPeaks = new Array(32).fill(0);
@@ -2716,15 +2825,21 @@ function waDrawVis() {
     var h = Math.floor(waVisBars[i] * H);
     var x = i * (barW + 1);
 
-    // Gradient color per height
+    // Gradient color per height — skin aware
     var grad = ctx.createLinearGradient(0, H - h, 0, H);
-    grad.addColorStop(0, '#00ff41');
-    grad.addColorStop(0.6, '#00cc33');
-    grad.addColorStop(1, '#009922');
+    if (waSkinDark) {
+      grad.addColorStop(0, '#e0d060');
+      grad.addColorStop(0.5, '#c8b44a');
+      grad.addColorStop(1, '#8a7a20');
+    } else {
+      grad.addColorStop(0, '#00ff41');
+      grad.addColorStop(0.6, '#00cc33');
+      grad.addColorStop(1, '#009922');
+    }
     ctx.fillStyle = grad;
     ctx.fillRect(x, H - h, barW, h);
 
-    // Peak dot
+    // Peak dot — skin aware
     if (waPlaying && !waPaused) {
       if (waVisBars[i] > waVisPeaks[i]) waVisPeaks[i] = waVisBars[i];
       else waVisPeaks[i] = Math.max(0, waVisPeaks[i] - 0.015);
@@ -2732,7 +2847,7 @@ function waDrawVis() {
       waVisPeaks[i] = Math.max(0, waVisPeaks[i] - 0.01);
     }
     var py = H - Math.floor(waVisPeaks[i] * H) - 1;
-    ctx.fillStyle = '#00ff99';
+    ctx.fillStyle = waSkinDark ? '#e0cc60' : '#00ff99';
     ctx.fillRect(x, py, barW, 1);
   }
 
