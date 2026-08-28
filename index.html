@@ -753,6 +753,15 @@ body {
 /* ════════════════════════════════════════
    ABOUT / DIALOG BOX
 ════════════════════════════════════════ */
+.w98-dialog {
+  position: absolute;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 0 #000;
+  z-index: 5000; display: none;
+}
+.w98-dialog.open { display: flex; flex-direction: column; }
+
 /* ════════════════════════════════════════
    WINAMP 2.x — CLASSIC SKIN
 ════════════════════════════════════════ */
@@ -3545,20 +3554,13 @@ function showApiKeyDialog() {
   if (!dlg) return;
   dlg.classList.add('open');
   dlg.style.zIndex = 9999;
-  dlg.style.position = 'absolute';
   var existing = localStorage.getItem('fsu2000_apikey') || '';
   var input = document.getElementById('apikey-input');
-  if (input) {
-    input.value = existing;
-    input.type = 'password';
-  }
+  if (input) { input.value = existing; input.type = 'password'; }
   var cb = document.getElementById('apikey-show');
   if (cb) cb.checked = false;
   document.getElementById('apikey-error').textContent = '';
-  setTimeout(function(){
-    var inp = document.getElementById('apikey-input');
-    if (inp) inp.focus();
-  }, 150);
+  setTimeout(function(){ var inp = document.getElementById('apikey-input'); if (inp) inp.focus(); }, 150);
 }
 
 function saveApiKey() {
