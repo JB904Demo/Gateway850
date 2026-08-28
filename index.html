@@ -2755,7 +2755,7 @@ async function getBuddyReply(sn, userMsg) {
   var sys = systemPrompts[sn] || 'You are an AOL IM buddy in Fall 2000. Keep responses short and period-appropriate.';
 
   // Get API key from localStorage
-  var apiKey = localStorage.getItem('fsu2000_apikey') || '';
+  var apiKey = (localStorage.getItem('fsu2000_apikey') || '').replace(/[\s\u200B\u00A0]/g, '');
   if (!apiKey) {
     appendIMMsg(sn, sn, '[Enter API key in Settings to enable AI responses]');
     return;
@@ -3724,17 +3724,18 @@ function showApiKeyDialog() {
 }
 
 function saveApiKey() {
-  var val = document.getElementById('apikey-input').value.trim();
+  var val = document.getElementById('apikey-input').value;
+  // Strip all whitespace including invisible characters that can appear on paste
+  val = val.replace(/[\s\u200B\u00A0]/g, '');
   if (!val) {
-    document.getElementById('apikey-error').textContent = 'Please enter a key or click Skip.';
-    return;
-  }
-  if (!val.startsWith('sk-ant-')) {
-    document.getElementById('apikey-error').textContent = 'Key should start with sk-ant- — double check and try again.';
+    document.getElementById('apikey-error').textContent = 'Please paste your API key or click Skip.';
     return;
   }
   localStorage.setItem('fsu2000_apikey', val);
+  document.getElementById('apikey-error').textContent = '';
   document.getElementById('apikey-dialog').classList.remove('open');
+  // Confirm saved
+  alert('API key saved! Your AI buddies are now active.');
 }
 
 function skipApiKey() {
