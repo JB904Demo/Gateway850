@@ -759,130 +759,144 @@ body {
 
 /* ── Main Player ── */
 #winamp-main {
-  position: absolute; top: 120px; left: 200px;
-  width: 275px;
-  background: #1a2a1a;
-  border: 2px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a;
-  display: none; flex-direction: column;
-  z-index: 500; user-select: none;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-  font-family: "Courier New", monospace;
+  position: absolute; top: 120px; left: 200px; width: 275px;
+  background: #232323;
+  border: 2px solid; border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+  display: none; flex-direction: column; z-index: 500; user-select: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-family: "Courier New", monospace;
 }
 #winamp-main.open { display: flex; }
 .wa-titlebar {
-  background: #1a2a1a;
+  background: #1f3a5f;
   height: 14px; display: flex; align-items: center;
   justify-content: space-between; padding: 0 4px;
   cursor: grab; flex-shrink: 0; border-bottom: 1px solid #0a0a0a;
 }
 .wa-titlebar:active { cursor: grabbing; }
 .wa-title-text {
-  color: #6a9a4a; font-size: 8px; font-family: "Courier New", monospace;
-  letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 4px #4a7a2a;
+  color: #7ec8e3; font-size: 8px; font-family: "Courier New", monospace;
+  letter-spacing: 2px; text-transform: uppercase;
 }
 .wa-tb-btns { display: flex; gap: 2px; }
 .wa-tb-btn {
-  width: 9px; height: 9px; background: #2a3a2a;
-  border: 1px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a;
+  width: 9px; height: 9px; background: #555;
+  border: 1px solid; border-color: #888 #333 #333 #888;
   font-size: 6px; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: #6a9a4a;
+  cursor: pointer; color: #ccc;
 }
-.wa-tb-btn:hover { background: #3a4a3a; }
-.wa-tb-btn:active { border-color: #0a1a0a #4a6a4a #4a6a4a #0a1a0a; }
+.wa-tb-btn:hover { background: #777; }
+.wa-tb-btn:active { border-color: #333 #888 #888 #333; }
 .wa-menubar {
-  background: #1a2a1a; padding: 1px 4px;
-  display: flex; gap: 1px; flex-shrink: 0; border-bottom: 1px solid #0a0a0a;
+  background: #232323; padding: 1px 4px;
+  display: flex; gap: 1px; flex-shrink: 0; border-bottom: 1px solid #111;
 }
 .wa-menu-item {
-  color: #6a9a4a; font-size: 7px; padding: 1px 4px;
-  cursor: pointer; font-family: "Courier New", monospace;
-  border: 1px solid transparent; text-shadow: 0 0 3px #4a7a2a;
+  color: #7ec8e3; font-size: 7px; padding: 1px 4px;
+  cursor: pointer; font-family: "Courier New", monospace; border: 1px solid transparent;
 }
-.wa-menu-item:hover { background: #2a4a2a; border-color: #6a9a4a; }
+.wa-menu-item:hover { background: #1f3a5f; border-color: #7ec8e3; }
 .wa-display {
-  background: #0a1a0a; margin: 3px 4px; padding: 4px 6px;
-  border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05;
+  background: #000; margin: 3px 4px; padding: 4px 6px;
+  border: 1px solid; border-color: #111 #555 #555 #111;
   display: flex; flex-direction: column; gap: 3px; flex-shrink: 0;
 }
 .wa-time-display { display: flex; align-items: center; gap: 3px; }
 .wa-time-seg {
-  color: #c8b400; font-size: 24px; font-family: "Courier New", monospace;
+  color: #00ff41; font-size: 24px; font-family: "Courier New", monospace;
   font-weight: bold; letter-spacing: -1px; line-height: 1;
-  text-shadow: 0 0 8px #c8b400, 0 0 16px #a09000; min-width: 52px;
+  text-shadow: 0 0 8px #00ff41, 0 0 16px #00cc33; min-width: 52px;
 }
 .wa-time-colon {
-  color: #c8b400; font-size: 20px; font-weight: bold;
-  text-shadow: 0 0 6px #c8b400; animation: wa-blink 1s infinite;
+  color: #00ff41; font-size: 20px; font-weight: bold;
+  text-shadow: 0 0 6px #00ff41; animation: wa-blink 1s infinite;
 }
 @keyframes wa-blink { 0%,49%{opacity:1} 50%,100%{opacity:0.25} }
-.wa-bitrate { color: #6a8a2a; font-size: 7px; font-family: "Courier New", monospace; margin-left: auto; text-align: right; line-height: 1.6; }
-.wa-track-scroll-wrap { background: #0a1a0a; overflow: hidden; height: 10px; border: 1px solid #050f05; margin: 0 4px; flex-shrink: 0; }
+.wa-bitrate { color: #00aa33; font-size: 7px; font-family: "Courier New", monospace; margin-left: auto; text-align: right; line-height: 1.6; }
+.wa-track-scroll-wrap { background: #000; overflow: hidden; height: 10px; border: 1px solid #111; margin: 0 4px; flex-shrink: 0; }
 .wa-track-scroll {
-  color: #c8b400; font-size: 8px; font-family: "Courier New", monospace;
-  white-space: nowrap; display: inline-block; text-shadow: 0 0 4px #a09000;
+  color: #00ff41; font-size: 8px; font-family: "Courier New", monospace;
+  white-space: nowrap; display: inline-block; text-shadow: 0 0 4px #00cc33;
   animation: wa-scroll 18s linear infinite;
 }
 @keyframes wa-scroll { 0%{transform:translateX(275px)} 100%{transform:translateX(-100%)} }
-.wa-vis-wrap { background: #0a1a0a; margin: 0 4px; height: 28px; border: 1px solid #050f05; overflow: hidden; flex-shrink: 0; position: relative; }
+.wa-vis-wrap { background: #000; margin: 0 4px; height: 28px; border: 1px solid #111; overflow: hidden; flex-shrink: 0; position: relative; }
 #wa-vis-canvas { width: 100%; height: 100%; display: block; }
-.wa-progress-wrap { background: #0a1a0a; margin: 3px 4px; height: 8px; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; cursor: pointer; position: relative; flex-shrink: 0; }
-.wa-progress-fill { height: 100%; background: linear-gradient(180deg, #c8b400 0%, #8a7a00 100%); width: 0%; }
-.wa-progress-thumb { position: absolute; top: -1px; width: 5px; height: 10px; background: #c8b400; border: 1px solid #e0cc00; transform: translateX(-50%); left: 0%; }
-.wa-sliders-row { display: flex; align-items: center; gap: 4px; padding: 2px 4px; flex-shrink: 0; }
-.wa-slider-label { color: #6a9a4a; font-size: 7px; font-family: "Courier New", monospace; width: 24px; flex-shrink: 0; }
-.wa-slider-track { flex: 1; height: 4px; background: #0a1a0a; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; position: relative; cursor: pointer; }
-.wa-slider-fill { height: 100%; background: #c8b400; }
-.wa-slider-thumb { position: absolute; top: -3px; width: 8px; height: 9px; background: #c8b400; border: 1px solid; border-color: #e0cc00 #807000 #807000 #e0cc00; transform: translateX(-50%); }
-.wa-controls { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; background: #1a2a1a; flex-shrink: 0; border-top: 1px solid #0a0a0a; }
-.wa-btn { background: #2a3a2a; border: 1px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a; color: #8ab06a; font-size: 10px; cursor: pointer; padding: 3px 6px; display: flex; align-items: center; justify-content: center; min-width: 20px; height: 16px; }
-.wa-btn:hover { background: #3a4a3a; color: #aad08a; }
-.wa-btn:active { border-color: #0a1a0a #4a6a4a #4a6a4a #0a1a0a; background: #1a2a1a; }
-.wa-btn.active { color: #c8b400; border-color: #0a1a0a #4a6a4a #4a6a4a #0a1a0a; background: #1a1a0a; }
-.wa-btn-play { color: #8ab06a; }
-.wa-btn-stop { color: #cc4422; }
-.wa-eject-btn { background: #2a3a2a; border: 1px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a; color: #8ab06a; font-size: 9px; cursor: pointer; padding: 3px 5px; height: 16px; display: flex; align-items: center; }
-.wa-toggles { display: flex; align-items: center; gap: 4px; padding: 2px 6px 4px; flex-shrink: 0; background: #1a2a1a; }
-.wa-toggle { font-size: 7px; font-family: "Courier New", monospace; background: #0a1a0a; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; color: #2a4a2a; padding: 1px 4px; cursor: pointer; }
-.wa-toggle.on { color: #c8b400; border-color: #c8b400; text-shadow: 0 0 4px #a09000; }
-.wa-vol-num { color: #6a9a4a; font-size: 8px; font-family: "Courier New", monospace; margin-left: auto; }
-#winamp-eq { position: absolute; top: 322px; left: 200px; width: 275px; background: #1a2a1a; border: 2px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a; display: none; flex-direction: column; z-index: 499; user-select: none; box-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+.wa-progress-wrap { background: #1a1a1a; margin: 3px 4px; height: 8px; border: 1px solid; border-color: #111 #555 #555 #111; cursor: pointer; position: relative; flex-shrink: 0; }
+.wa-progress-fill { height: 100%; background: linear-gradient(180deg, #5ad 0%, #2a8 100%); width: 0%; }
+.wa-progress-thumb { position: absolute; top: -1px; width: 5px; height: 10px; background: #aaa; border: 1px solid #ccc; transform: translateX(-50%); left: 0%; }
+.wa-sliders-row { display: flex; align-items: center; gap: 4px; padding: 2px 4px; flex-shrink: 0; background: #232323; }
+.wa-slider-label { color: #7ec8e3; font-size: 7px; font-family: "Courier New", monospace; width: 24px; flex-shrink: 0; }
+.wa-slider-track { flex: 1; height: 4px; background: #111; border: 1px solid; border-color: #111 #555 #555 #111; position: relative; cursor: pointer; }
+.wa-slider-fill { height: 100%; background: #5ad; }
+.wa-slider-thumb { position: absolute; top: -3px; width: 8px; height: 9px; background: #999; border: 1px solid; border-color: #ccc #555 #555 #ccc; transform: translateX(-50%); }
+.wa-controls { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; background: #232323; flex-shrink: 0; border-top: 1px solid #111; }
+.wa-btn {
+  background: #444; border: 1px solid; border-color: #666 #222 #222 #666;
+  color: #bbb; font-size: 10px; cursor: pointer; padding: 3px 6px;
+  display: flex; align-items: center; justify-content: center; min-width: 20px; height: 16px;
+}
+.wa-btn:hover { background: #555; color: #fff; }
+.wa-btn:active { border-color: #222 #666 #666 #222; background: #333; }
+.wa-btn.active { color: #00ff41; }
+.wa-btn-play { color: #00ff41; }
+.wa-btn-stop { color: #ff4444; }
+.wa-eject-btn { background: #444; border: 1px solid; border-color: #666 #222 #222 #666; color: #bbb; font-size: 9px; cursor: pointer; padding: 3px 5px; height: 16px; display: flex; align-items: center; }
+.wa-toggles { display: flex; align-items: center; gap: 4px; padding: 2px 6px 4px; flex-shrink: 0; background: #232323; }
+.wa-toggle {
+  font-size: 7px; font-family: "Courier New", monospace;
+  background: #1a1a1a; border: 1px solid; border-color: #111 #444 #444 #111;
+  color: #555; padding: 1px 4px; cursor: pointer;
+}
+.wa-toggle.on { color: #00ff41; border-color: #00aa22; text-shadow: 0 0 4px #00ff41; }
+.wa-vol-num { color: #7ec8e3; font-size: 8px; font-family: "Courier New", monospace; margin-left: auto; }
+#winamp-eq {
+  position: absolute; top: 322px; left: 200px; width: 275px;
+  background: #232323; border: 2px solid; border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+  display: none; flex-direction: column; z-index: 499; user-select: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
 #winamp-eq.open { display: flex; }
-.wa-eq-titlebar { background: #1a2a1a; height: 14px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; cursor: grab; flex-shrink: 0; border-bottom: 1px solid #0a0a0a; }
+.wa-eq-titlebar { background: #1f3a5f; height: 14px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; cursor: grab; flex-shrink: 0; border-bottom: 1px solid #0a0a0a; }
 .wa-eq-titlebar:active { cursor: grabbing; }
-.wa-eq-body { background: #0a1a0a; margin: 3px 4px; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; padding: 4px; display: flex; flex-direction: column; gap: 4px; }
+.wa-eq-body { background: #000; margin: 3px 4px; border: 1px solid; border-color: #111 #555 #555 #111; padding: 4px; display: flex; flex-direction: column; gap: 4px; }
 .wa-eq-header { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
-.wa-eq-logo { color: #c8b400; font-size: 9px; font-family: "Courier New", monospace; font-weight: bold; text-shadow: 0 0 4px #a09000; letter-spacing: 1px; }
-.wa-eq-toggle { font-size: 7px; font-family: "Courier New", monospace; background: #0a1a0a; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; color: #2a4a2a; padding: 1px 4px; cursor: pointer; margin-left: auto; }
-.wa-eq-toggle.on { color: #c8b400; border-color: #c8b400; }
+.wa-eq-logo { color: #00ff41; font-size: 9px; font-family: "Courier New", monospace; font-weight: bold; text-shadow: 0 0 4px #00ff41; letter-spacing: 1px; }
+.wa-eq-toggle { font-size: 7px; font-family: "Courier New", monospace; background: #1a1a1a; border: 1px solid; border-color: #111 #444 #444 #111; color: #555; padding: 1px 4px; cursor: pointer; margin-left: auto; }
+.wa-eq-toggle.on { color: #00ff41; border-color: #00aa22; }
 .wa-eq-sliders { display: flex; align-items: flex-end; gap: 4px; height: 60px; }
 .wa-eq-band { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; }
 .wa-eq-slider-wrap { flex: 1; width: 100%; position: relative; display: flex; align-items: center; justify-content: center; cursor: ns-resize; height: 52px; }
-.wa-eq-track { width: 3px; height: 100%; background: #050f05; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; position: relative; }
-.wa-eq-thumb { position: absolute; left: 50%; transform: translateX(-50%); width: 10px; height: 5px; background: #c8b400; border: 1px solid; border-color: #e0cc00 #807000 #807000 #e0cc00; cursor: ns-resize; }
-.wa-eq-label { color: #6a8a4a; font-size: 6px; font-family: "Courier New", monospace; text-align: center; white-space: nowrap; }
-.wa-eq-preamp { display: flex; flex-direction: column; align-items: center; border-right: 1px solid #2a4a2a; padding-right: 4px; margin-right: 2px; }
-#winamp-pl { position: absolute; top: 442px; left: 200px; width: 275px; height: 220px; background: #0a1a0a; border: 2px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a; display: none; flex-direction: column; z-index: 498; user-select: none; box-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+.wa-eq-track { width: 3px; height: 100%; background: #111; border: 1px solid; border-color: #111 #444 #444 #111; position: relative; }
+.wa-eq-thumb { position: absolute; left: 50%; transform: translateX(-50%); width: 10px; height: 5px; background: #888; border: 1px solid; border-color: #bbb #444 #444 #bbb; cursor: ns-resize; }
+.wa-eq-label { color: #5ad; font-size: 6px; font-family: "Courier New", monospace; text-align: center; white-space: nowrap; }
+.wa-eq-preamp { display: flex; flex-direction: column; align-items: center; border-right: 1px solid #333; padding-right: 4px; margin-right: 2px; }
+#winamp-pl {
+  position: absolute; top: 442px; left: 200px; width: 275px; height: 220px;
+  background: #000; border: 2px solid; border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+  display: none; flex-direction: column; z-index: 498; user-select: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
 #winamp-pl.open { display: flex; }
-.wa-pl-titlebar { background: #1a2a1a; height: 14px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; cursor: grab; flex-shrink: 0; border-bottom: 1px solid #0a0a0a; }
+.wa-pl-titlebar { background: #1f3a5f; height: 14px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; cursor: grab; flex-shrink: 0; border-bottom: 1px solid #0a0a0a; }
 .wa-pl-titlebar:active { cursor: grabbing; }
-.wa-pl-title { color: #6a9a4a; font-size: 7px; font-family: "Courier New", monospace; letter-spacing: 1px; text-shadow: 0 0 3px #4a7a2a; }
-.wa-pl-list { flex: 1; overflow-y: auto; padding: 2px 0; background: #0a1a0a; scrollbar-width: thin; scrollbar-color: #c8b400 #0a1a0a; }
+.wa-pl-title { color: #7ec8e3; font-size: 7px; font-family: "Courier New", monospace; letter-spacing: 1px; }
+.wa-pl-list { flex: 1; overflow-y: auto; padding: 2px 0; background: #000; scrollbar-width: thin; scrollbar-color: #5ad #111; }
 .wa-pl-list::-webkit-scrollbar { width: 6px; }
-.wa-pl-list::-webkit-scrollbar-track { background: #0a1a0a; }
-.wa-pl-list::-webkit-scrollbar-thumb { background: #c8b400; }
-.wa-pl-item { display: flex; align-items: center; gap: 4px; padding: 1px 6px; font-size: 9px; font-family: "Courier New", monospace; cursor: pointer; color: #6ab06a; border-bottom: 1px solid #0f1f0f; background: #0a1a0a; }
-.wa-pl-item:hover { background: #0a2a0a; color: #aad08a; }
-.wa-pl-item.active { background: #0a2a0a; color: #c8b400; }
-.wa-pl-item.active .wa-pl-num { color: #c8b400; }
-.wa-pl-num { color: #2a6a2a; width: 20px; flex-shrink: 0; text-align: right; }
+.wa-pl-list::-webkit-scrollbar-track { background: #111; }
+.wa-pl-list::-webkit-scrollbar-thumb { background: #5ad; }
+.wa-pl-item { display: flex; align-items: center; gap: 4px; padding: 1px 6px; font-size: 9px; font-family: "Courier New", monospace; cursor: pointer; color: #00cc44; border-bottom: 1px solid #0a0a0a; background: #000; }
+.wa-pl-item:hover { background: #0a1a2a; color: #00ff66; }
+.wa-pl-item.active { background: #0a2a0a; color: #00ff41; }
+.wa-pl-item.active .wa-pl-num { color: #00ff41; }
+.wa-pl-num { color: #007722; width: 20px; flex-shrink: 0; text-align: right; }
 .wa-pl-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.wa-pl-dur { color: #2a6a2a; flex-shrink: 0; font-size: 8px; }
-.wa-pl-footer { background: #1a2a1a; border-top: 1px solid #0a0a0a; padding: 2px 6px; display: flex; gap: 4px; flex-shrink: 0; align-items: center; }
-.wa-pl-btn { background: #2a3a2a; border: 1px solid; border-color: #4a6a4a #0a1a0a #0a1a0a #4a6a4a; color: #6a9a4a; font-size: 7px; font-family: "Courier New", monospace; padding: 1px 5px; cursor: pointer; }
-.wa-pl-btn:hover { background: #3a4a3a; color: #aad08a; }
-.wa-pl-total { color: #2a6a2a; font-size: 7px; font-family: "Courier New", monospace; margin-left: auto; }
-.wa-skin-btn { font-size: 7px; font-family: "Courier New", monospace; background: #0a1a0a; border: 1px solid; border-color: #050f05 #2a4a2a #2a4a2a #050f05; color: #4a7a4a; padding: 1px 5px; cursor: pointer; }
-.wa-skin-btn:hover { color: #c8b400; border-color: #6a9a4a; }
+.wa-pl-dur { color: #007722; flex-shrink: 0; font-size: 8px; }
+.wa-pl-footer { background: #232323; border-top: 1px solid #333; padding: 2px 6px; display: flex; gap: 4px; flex-shrink: 0; align-items: center; }
+.wa-pl-btn { background: #444; border: 1px solid; border-color: #666 #222 #222 #666; color: #bbb; font-size: 7px; font-family: "Courier New", monospace; padding: 1px 5px; cursor: pointer; }
+.wa-pl-btn:hover { background: #555; color: #fff; }
+.wa-pl-total { color: #007722; font-size: 7px; font-family: "Courier New", monospace; margin-left: auto; }
+.wa-skin-btn { font-size: 7px; font-family: "Courier New", monospace; background: #1a1a1a; border: 1px solid; border-color: #111 #444 #444 #111; color: #888; padding: 1px 5px; cursor: pointer; }
+.wa-skin-btn:hover { color: #fff; border-color: #666; }
 
 /* ── Winamp Skin: Dark (Darkmod style) ── */
 #winamp-main.skin-dark,
@@ -3423,9 +3437,9 @@ function waDrawVis() {
       grad.addColorStop(0.5, '#c8b44a');
       grad.addColorStop(1, '#8a7a20');
     } else {
-      grad.addColorStop(0, '#c8b400');
-      grad.addColorStop(0.5, '#a09000');
-      grad.addColorStop(1, '#6a6000');
+      grad.addColorStop(0, '#00ff41');
+      grad.addColorStop(0.6, '#00cc33');
+      grad.addColorStop(1, '#009922');
     }
     ctx.fillStyle = grad;
     ctx.fillRect(x, H - h, barW, h);
@@ -3438,7 +3452,7 @@ function waDrawVis() {
       waVisPeaks[i] = Math.max(0, waVisPeaks[i] - 0.01);
     }
     var py = H - Math.floor(waVisPeaks[i] * H) - 1;
-    ctx.fillStyle = waSkinDark ? '#e0cc60' : '#e0d040';
+    ctx.fillStyle = waSkinDark ? '#e0cc60' : '#00ff99';
     ctx.fillRect(x, py, barW, 1);
   }
 
