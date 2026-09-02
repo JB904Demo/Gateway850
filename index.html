@@ -1348,7 +1348,7 @@ body {
 
 /* Editor area */
 .fp-editor-area {
-  flex: 1; overflow: hidden; display: flex; flex-direction: column;
+  flex: 1; overflow: hidden; display: flex; flex-direction: row;
 }
 /* Normal (WYSIWYG) view */
 #fp-normal-view {
@@ -1359,8 +1359,39 @@ body {
 #fp-editor {
   min-height: 100%; padding: 20px 30px;
   outline: none; font-family: 'Times New Roman', serif;
-  font-size: 16px; color: #000; background: #fff;
+  font-size: 16px; background: #fff;
   line-height: 1.5;
+  /* No color: here — lets execCommand foreColor work properly */
+}
+
+/* Views sidebar */
+.fp-views-sidebar {
+  width: 80px; flex-shrink: 0;
+  background: #c0c0c0;
+  border-right: 2px solid; border-color: #808080 #808080 #808080 #fff;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 4px 0; gap: 2px; overflow-y: auto;
+}
+.fp-views-header {
+  font-size: 11px; font-family: 'Tahoma', Arial; font-weight: bold;
+  color: #000; padding: 3px 0 5px; width: 100%;
+  text-align: center; border-bottom: 1px solid #808080;
+  margin-bottom: 2px;
+}
+.fp-view-item {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 4px 2px; width: 72px; cursor: pointer;
+  border: 1px solid transparent; gap: 2px;
+}
+.fp-view-item:hover { background: #d0d0d0; border-color: #808080; }
+.fp-view-item.active {
+  background: #fff;
+  border: 1px solid; border-color: #808080 #fff #fff #808080;
+}
+.fp-view-icon { font-size: 24px; line-height: 1; }
+.fp-view-label {
+  font-size: 10px; font-family: 'Tahoma', Arial;
+  text-align: center; color: #000; line-height: 1.2;
 }
 /* HTML source view */
 #fp-html-view {
@@ -2547,8 +2578,46 @@ body {
 
     <!-- Editor area -->
     <div class="fp-editor-area">
+      <!-- Views sidebar -->
+      <div class="fp-views-sidebar">
+        <div class="fp-views-header">Views</div>
+        <div class="fp-view-item active" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">📄</div>
+          <div class="fp-view-label">Normal</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">📁</div>
+          <div class="fp-view-label">Folders</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">📋</div>
+          <div class="fp-view-label">All Files</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">🗺️</div>
+          <div class="fp-view-label">Navigation</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">🔗</div>
+          <div class="fp-view-label">Hyperlinks</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">✅</div>
+          <div class="fp-view-label">Hyperlink Status</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">🎨</div>
+          <div class="fp-view-label">Themes</div>
+        </div>
+        <div class="fp-view-item" onclick="fpViewClick(this)">
+          <div class="fp-view-icon">✔️</div>
+          <div class="fp-view-label">Tasks</div>
+        </div>
+      </div>
+      <!-- Editor panels column -->
+      <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
       <!-- Normal (WYSIWYG) -->
-      <div id="fp-normal-view">
+      <div id="fp-normal-view" style="flex:1;overflow-y:auto;background:#fff;border:2px solid;border-color:#808080 #fff #fff #808080;margin:2px;display:block;">
         <div id="fp-editor" contenteditable="true" spellcheck="true">
           <p>Welcome to FrontPage Editor. Start building your page here.</p>
         </div>
@@ -2557,6 +2626,7 @@ body {
       <textarea id="fp-html-source" style="display:none;flex:1;margin:2px;border:2px solid;border-color:#808080 #fff #fff #808080;font-family:'Courier New',monospace;font-size:11px;background:#fff;color:#000;padding:8px;resize:none;outline:none;"></textarea>
       <!-- Preview (iframe) -->
       <iframe id="fp-preview-frame" style="display:none;flex:1;margin:2px;border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;" frameborder="0"></iframe>
+      </div>
     </div>
 
     <!-- View tab bar -->
@@ -4252,6 +4322,14 @@ function fpOpenColorPicker(target) {
   picker.classList.add('open');
   picker.style.zIndex = ++chatZBase;
 }
+function fpViewClick(el) {
+  document.querySelectorAll('.fp-view-item').forEach(function(i){ i.classList.remove('active'); });
+  el.classList.add('active');
+  // All views except Normal just highlight — editing stays in Normal
+  var label = el.querySelector('.fp-view-label').textContent.trim();
+  if (label === 'Normal') fpSetTab('normal');
+}
+
 function fpApplyColor(color) {
   document.getElementById('fp-color-picker').classList.remove('open');
   if (fpSavedRange) {
@@ -4260,11 +4338,16 @@ function fpApplyColor(color) {
   }
   document.getElementById('fp-editor').focus();
   if (fpColorTarget === 'text') {
+    // Use font tag approach — more reliable cross-browser than foreColor
+    document.execCommand('styleWithCSS', false, true);
     document.execCommand('foreColor', false, color);
+    document.execCommand('styleWithCSS', false, false);
     fpCurrentTextColor = color;
     document.getElementById('fp-textcolor-swatch').style.background = color;
   } else {
+    document.execCommand('styleWithCSS', false, true);
     document.execCommand('hiliteColor', false, color);
+    document.execCommand('styleWithCSS', false, false);
     fpCurrentHighlight = color;
     document.getElementById('fp-highlight-swatch').style.background = color;
   }
