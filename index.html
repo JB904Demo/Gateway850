@@ -303,6 +303,7 @@ body {
   border: 2px solid; border-color: #fff #808080 #808080 #fff;
   box-shadow: 2px 2px 0 #000;
   display: none; z-index: 2000;
+  max-height: 720px; overflow-y: auto;
 }
 #start-menu.open { display: flex; }
 .sm-sidebar {
@@ -336,6 +337,7 @@ body {
   display: none; position: absolute; left: 100%; top: -2px;
   background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
   box-shadow: 2px 2px 0 #000; min-width: 180px; z-index: 2100;
+  max-height: 480px; overflow-y: auto;
 }
 .sm-item:hover .sm-submenu { display: block; }
 .sm-submenu .sm-item { border-bottom: 1px solid #d0d0d0; }
@@ -1211,6 +1213,232 @@ body {
   padding: 2px 6px; height: 22px; display: flex;
   align-items: center; justify-content: space-between; flex-shrink: 0;
 }
+/* ════════════════════════════════════════
+   MS FRONTPAGE 98 EDITOR
+════════════════════════════════════════ */
+#fp-window {
+  position: absolute; top: 15px; left: 30px;
+  width: 720px; height: 650px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  display: none; flex-direction: column; z-index: 500;
+  font-family: 'Tahoma', Arial;
+}
+#fp-window.open { display: flex; }
+
+/* Title bar */
+.fp-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 22px;
+  cursor: grab; flex-shrink: 0;
+}
+.fp-titlebar:active { cursor: grabbing; }
+.fp-titlebar-left { display: flex; align-items: center; gap: 6px; }
+.fp-win-btns { display: flex; gap: 2px; }
+.fp-win-btn {
+  width: 16px; height: 14px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 9px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; font-weight: bold;
+}
+.fp-win-btn:active { border-color: #808080 #fff #fff #808080; }
+
+/* Menu bar */
+.fp-menubar {
+  display: flex; background: #c0c0c0; padding: 1px 2px;
+  border-bottom: 1px solid #808080; flex-shrink: 0;
+}
+.fp-menu {
+  font-size: 12px; padding: 2px 8px; cursor: pointer;
+  color: #000; position: relative;
+}
+.fp-menu:hover { background: #000080; color: #fff; }
+.fp-menu-dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; z-index: 3000; min-width: 180px;
+}
+.fp-menu:hover .fp-menu-dropdown { display: block; }
+.fp-menu-item {
+  font-size: 12px; padding: 4px 20px; color: #000;
+  cursor: pointer; white-space: nowrap; display: flex;
+  align-items: center; gap: 8px;
+}
+.fp-menu-item:hover { background: #000080; color: #fff; }
+.fp-menu-item.disabled { color: #808080; cursor: default; }
+.fp-menu-item.disabled:hover { background: transparent; color: #808080; }
+.fp-menu-sep { height: 1px; background: #808080; margin: 2px 0; border-bottom: 1px solid #fff; }
+.fp-menu-item-check { width: 14px; font-size: 11px; }
+
+/* Toolbar row 1 — file ops */
+.fp-toolbar {
+  display: flex; align-items: center; gap: 1px;
+  padding: 2px 3px; background: #c0c0c0;
+  border-bottom: 1px solid #d0d0d0; flex-shrink: 0; flex-wrap: wrap;
+}
+.fp-tb-btn {
+  width: 24px; height: 22px; background: #c0c0c0;
+  border: 1px solid transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 13px; title: '';
+}
+.fp-tb-btn:hover { border-color: #fff #808080 #808080 #fff; background: #d0d0d0; }
+.fp-tb-btn:active { border-color: #808080 #fff #fff #808080; }
+.fp-tb-sep {
+  width: 1px; background: #808080; height: 18px;
+  margin: 0 2px; border-right: 1px solid #fff;
+}
+
+/* Toolbar row 2 — formatting */
+.fp-format-bar {
+  display: flex; align-items: center; gap: 2px;
+  padding: 2px 3px; background: #c0c0c0;
+  border-bottom: 1px solid #808080; flex-shrink: 0; flex-wrap: wrap;
+}
+.fp-font-select {
+  height: 20px; font-size: 11px; font-family: 'Tahoma', Arial;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  background: #fff; padding: 0 2px; width: 130px;
+}
+.fp-size-select {
+  height: 20px; font-size: 11px; font-family: 'Tahoma', Arial;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  background: #fff; padding: 0 2px; width: 42px;
+}
+.fp-fmt-btn {
+  width: 22px; height: 20px; background: #c0c0c0;
+  border: 1px solid transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 12px; font-family: 'Times New Roman', serif;
+  font-weight: bold;
+}
+.fp-fmt-btn:hover { border-color: #fff #808080 #808080 #fff; background: #d0d0d0; }
+.fp-fmt-btn:active { border-color: #808080 #fff #fff #808080; }
+.fp-fmt-btn.active { border-color: #808080 #fff #fff #808080; background: #b8b8b8; }
+.fp-color-btn {
+  width: 22px; height: 20px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  cursor: pointer; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1px;
+  font-size: 11px; font-weight: bold;
+}
+.fp-color-btn:hover { background: #d0d0d0; }
+.fp-color-swatch { width: 14px; height: 4px; border: 1px solid #333; }
+
+/* View tab bar at bottom */
+.fp-tab-bar {
+  display: flex; align-items: flex-end; gap: 0;
+  padding: 0 4px; background: #c0c0c0;
+  border-top: 1px solid #808080; flex-shrink: 0; height: 22px;
+}
+.fp-tab {
+  padding: 2px 14px; font-size: 11px; font-family: 'Tahoma', Arial;
+  cursor: pointer; background: #c0c0c0; color: #000;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  border-bottom: none; margin-right: 2px; height: 20px;
+  display: flex; align-items: center;
+}
+.fp-tab.active {
+  background: #fff; font-weight: bold;
+  border-color: #808080 #808080 #fff #fff;
+  position: relative; z-index: 1;
+}
+.fp-tab:hover:not(.active) { background: #d0d0d0; }
+
+/* Editor area */
+.fp-editor-area {
+  flex: 1; overflow: hidden; display: flex; flex-direction: column;
+}
+/* Normal (WYSIWYG) view */
+#fp-normal-view {
+  flex: 1; overflow-y: auto; background: #fff;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  margin: 2px; display: block;
+}
+#fp-editor {
+  min-height: 100%; padding: 20px 30px;
+  outline: none; font-family: 'Times New Roman', serif;
+  font-size: 16px; color: #000; background: #fff;
+  line-height: 1.5;
+}
+/* HTML source view */
+#fp-html-view {
+  flex: 1; margin: 2px; display: none;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+}
+#fp-html-source {
+  width: 100%; height: 100%; box-sizing: border-box;
+  font-family: 'Courier New', monospace; font-size: 11px;
+  background: #fff; color: #000; padding: 8px;
+  border: none; outline: none; resize: none;
+}
+/* Preview view */
+#fp-preview-view {
+  flex: 1; margin: 2px; display: none;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  background: #fff; overflow-y: auto;
+}
+#fp-preview-frame {
+  width: 100%; height: 100%; border: none; background: #fff;
+}
+
+/* Status bar */
+.fp-statusbar {
+  height: 20px; background: #c0c0c0; border-top: 1px solid #808080;
+  display: flex; align-items: center; padding: 0 6px;
+  font-size: 10px; font-family: 'Tahoma', Arial; flex-shrink: 0; gap: 8px;
+}
+.fp-status-panel {
+  border: 1px solid; border-color: #808080 #fff #fff #808080;
+  padding: 0 6px; font-size: 10px; height: 14px;
+  display: flex; align-items: center;
+}
+
+/* Color picker popup */
+#fp-color-picker {
+  position: absolute; background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; z-index: 4000;
+  display: none; flex-direction: column; padding: 6px; gap: 4px;
+}
+#fp-color-picker.open { display: flex; }
+.fp-cp-title { font-size: 11px; font-weight: bold; font-family: 'Tahoma', Arial; }
+.fp-cp-swatches { display: grid; grid-template-columns: repeat(10,16px); gap: 2px; }
+.fp-cp-swatch {
+  width: 16px; height: 16px; border: 1px solid #808080; cursor: pointer;
+}
+.fp-cp-swatch:hover { border-color: #000; transform: scale(1.2); }
+.fp-cp-custom { display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+.fp-cp-custom input { width: 70px; height: 18px; font-size: 10px; font-family: 'Courier New'; border: 1px solid #808080; padding: 0 2px; }
+
+/* Insert image dialog */
+#fp-img-dialog {
+  position: absolute; top: 150px; left: 180px; width: 400px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 0 #000; z-index: 4000;
+  display: none; flex-direction: column;
+}
+#fp-img-dialog.open { display: flex; }
+.fp-img-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 4px; height: 22px; display: flex;
+  align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+
+/* Page Properties dialog */
+#fp-page-props {
+  position: absolute; top: 120px; left: 180px; width: 380px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 0 #000; z-index: 4000;
+  display: none; flex-direction: column;
+}
+#fp-page-props.open { display: flex; }
 </style>
 </head>
 <body>
@@ -1468,6 +1696,10 @@ body {
             <div class="sm-item" onclick="openSophocles();toggleStartMenu()">
               <span class="sm-icon">🎬</span>
               <div><span class="sm-label">Sophocles</span><span class="sm-sub">Script Writer</span></div>
+            </div>
+            <div class="sm-item" onclick="openFrontPage();toggleStartMenu()">
+              <span class="sm-icon">🌐</span>
+              <div><span class="sm-label">FrontPage Editor</span><span class="sm-sub">MS FrontPage 98</span></div>
             </div>
             <div class="sm-item">
               <span class="sm-icon">📂</span>
@@ -2145,6 +2377,289 @@ body {
       <div style="display:flex;gap:8px;justify-content:flex-end;">
         <button class="w98-login-btn" onclick="saveApiKey()">OK</button>
         <button class="w98-login-btn" onclick="skipApiKey()">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MS FRONTPAGE 98 EDITOR
+  ══════════════════════════════════════ -->
+  <div id="fp-window">
+    <div class="fp-titlebar" id="fp-titlebar">
+      <div class="fp-titlebar-left">
+        <span style="font-size:13px;">🌐</span>
+        <span id="fp-title-text">Untitled — Microsoft FrontPage Editor</span>
+      </div>
+      <div class="fp-win-btns">
+        <div class="fp-win-btn" onclick="closeFrontPage()">_</div>
+        <div class="fp-win-btn">□</div>
+        <div class="fp-win-btn" onclick="closeFrontPage()">✕</div>
+      </div>
+    </div>
+
+    <!-- Menu bar -->
+    <div class="fp-menubar">
+      <div class="fp-menu">File
+        <div class="fp-menu-dropdown">
+          <div class="fp-menu-item" onclick="fpNew()"><span class="fp-menu-item-check"></span>New</div>
+          <div class="fp-menu-item" onclick="fpOpen()"><span class="fp-menu-item-check"></span>Open...</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="fpSave()"><span class="fp-menu-item-check"></span>Save</div>
+          <div class="fp-menu-item" onclick="fpSaveAs()"><span class="fp-menu-item-check"></span>Save As...</div>
+          <div class="fp-menu-item" onclick="fpExportHTML()"><span class="fp-menu-item-check"></span>Export HTML File...</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="closeFrontPage()"><span class="fp-menu-item-check"></span>Exit</div>
+        </div>
+      </div>
+      <div class="fp-menu">Edit
+        <div class="fp-menu-dropdown">
+          <div class="fp-menu-item" onclick="document.execCommand('undo')"><span class="fp-menu-item-check"></span>Undo</div>
+          <div class="fp-menu-item" onclick="document.execCommand('redo')"><span class="fp-menu-item-check"></span>Redo</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="document.execCommand('cut')"><span class="fp-menu-item-check"></span>Cut</div>
+          <div class="fp-menu-item" onclick="document.execCommand('copy')"><span class="fp-menu-item-check"></span>Copy</div>
+          <div class="fp-menu-item" onclick="document.execCommand('paste')"><span class="fp-menu-item-check"></span>Paste</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="document.execCommand('selectAll')"><span class="fp-menu-item-check"></span>Select All</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="fpFindReplace()"><span class="fp-menu-item-check"></span>Find...</div>
+        </div>
+      </div>
+      <div class="fp-menu">View
+        <div class="fp-menu-dropdown">
+          <div class="fp-menu-item" onclick="fpSetTab('normal')"><span class="fp-menu-item-check" id="fp-view-check-normal">✓</span>Normal</div>
+          <div class="fp-menu-item" onclick="fpSetTab('html')"><span class="fp-menu-item-check" id="fp-view-check-html"></span>HTML</div>
+          <div class="fp-menu-item" onclick="fpSetTab('preview')"><span class="fp-menu-item-check" id="fp-view-check-preview"></span>Preview</div>
+        </div>
+      </div>
+      <div class="fp-menu">Insert
+        <div class="fp-menu-dropdown">
+          <div class="fp-menu-item" onclick="fpInsertImage()"><span class="fp-menu-item-check"></span>Image...</div>
+          <div class="fp-menu-item" onclick="fpInsertHR()"><span class="fp-menu-item-check"></span>Horizontal Line</div>
+          <div class="fp-menu-item" onclick="fpInsertLineBreak()"><span class="fp-menu-item-check"></span>Line Break</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="fpInsertTable()"><span class="fp-menu-item-check"></span>Table...</div>
+          <div class="fp-menu-item" onclick="fpInsertLink()"><span class="fp-menu-item-check"></span>Hyperlink...</div>
+        </div>
+      </div>
+      <div class="fp-menu">Format
+        <div class="fp-menu-dropdown">
+          <div class="fp-menu-item" onclick="fpPageProps()"><span class="fp-menu-item-check"></span>Background...</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="document.execCommand('justifyLeft')"><span class="fp-menu-item-check"></span>Align Left</div>
+          <div class="fp-menu-item" onclick="document.execCommand('justifyCenter')"><span class="fp-menu-item-check"></span>Center</div>
+          <div class="fp-menu-item" onclick="document.execCommand('justifyRight')"><span class="fp-menu-item-check"></span>Align Right</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="document.execCommand('insertUnorderedList')"><span class="fp-menu-item-check"></span>Bulleted List</div>
+          <div class="fp-menu-item" onclick="document.execCommand('insertOrderedList')"><span class="fp-menu-item-check"></span>Numbered List</div>
+        </div>
+      </div>
+      <div class="fp-menu">Help
+        <div class="fp-menu-dropdown">
+          <div class="fp-menu-item disabled"><span class="fp-menu-item-check"></span>Microsoft FrontPage Help</div>
+          <div class="fp-menu-sep"></div>
+          <div class="fp-menu-item" onclick="alert('Microsoft FrontPage 98\nVersion 3.0.2.1102\n\n© 1997 Microsoft Corporation\nAll rights reserved.')"><span class="fp-menu-item-check"></span>About FrontPage Editor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toolbar row 1: file/edit ops -->
+    <div class="fp-toolbar">
+      <div class="fp-tb-btn" onclick="fpNew()" title="New">📄</div>
+      <div class="fp-tb-btn" onclick="fpOpen()" title="Open">📂</div>
+      <div class="fp-tb-btn" onclick="fpSave()" title="Save">💾</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="document.execCommand('cut')" title="Cut">✂️</div>
+      <div class="fp-tb-btn" onclick="document.execCommand('copy')" title="Copy">📋</div>
+      <div class="fp-tb-btn" onclick="document.execCommand('paste')" title="Paste">📌</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="document.execCommand('undo')" title="Undo">↩</div>
+      <div class="fp-tb-btn" onclick="document.execCommand('redo')" title="Redo">↪</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="document.execCommand('justifyLeft')" title="Align Left">⬅</div>
+      <div class="fp-tb-btn" onclick="document.execCommand('justifyCenter')" title="Center">↔</div>
+      <div class="fp-tb-btn" onclick="document.execCommand('justifyRight')" title="Align Right">➡</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="document.execCommand('insertUnorderedList')" title="Bullet List">•</div>
+      <div class="fp-tb-btn" onclick="document.execCommand('insertOrderedList')" title="Numbered List">1.</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="fpInsertImage()" title="Insert Image">🖼️</div>
+      <div class="fp-tb-btn" onclick="fpInsertHR()" title="Horizontal Line">—</div>
+      <div class="fp-tb-btn" onclick="fpInsertLink()" title="Hyperlink">🔗</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="fpPageProps()" title="Page Properties">🎨</div>
+      <div class="fp-tb-sep"></div>
+      <div class="fp-tb-btn" onclick="fpExportHTML()" title="Export HTML">⬇️</div>
+    </div>
+
+    <!-- Toolbar row 2: formatting -->
+    <div class="fp-format-bar">
+      <!-- Font family -->
+      <select class="fp-font-select" id="fp-font-select" onchange="fpSetFont(this.value)">
+        <option>Times New Roman</option>
+        <option>Arial</option>
+        <option>Courier New</option>
+        <option>Verdana</option>
+        <option>Georgia</option>
+        <option>Comic Sans MS</option>
+        <option>Impact</option>
+        <option>Trebuchet MS</option>
+        <option>Tahoma</option>
+      </select>
+      <!-- Font size (HTML 1-7) -->
+      <select class="fp-size-select" id="fp-size-select" onchange="fpSetSize(this.value)">
+        <option value="1">8pt</option>
+        <option value="2">10pt</option>
+        <option value="3" selected>12pt</option>
+        <option value="4">14pt</option>
+        <option value="5">18pt</option>
+        <option value="6">24pt</option>
+        <option value="7">36pt</option>
+      </select>
+      <div class="fp-tb-sep"></div>
+      <!-- B/I/U/S -->
+      <div class="fp-fmt-btn" id="fp-bold-btn" onclick="fpToggle('bold')" title="Bold"><b>B</b></div>
+      <div class="fp-fmt-btn" id="fp-italic-btn" onclick="fpToggle('italic')" title="Italic"><i>I</i></div>
+      <div class="fp-fmt-btn" id="fp-underline-btn" onclick="fpToggle('underline')" title="Underline"><u>U</u></div>
+      <div class="fp-fmt-btn" id="fp-strike-btn" onclick="fpToggle('strikeThrough')" title="Strikethrough"><s>S</s></div>
+      <div class="fp-tb-sep"></div>
+      <!-- Text color -->
+      <div class="fp-color-btn" id="fp-textcolor-btn" onclick="fpOpenColorPicker('text')" title="Text Color">
+        <span style="font-size:11px;font-weight:bold;font-family:'Tahoma',Arial;">A</span>
+        <div class="fp-color-swatch" id="fp-textcolor-swatch" style="background:#000;"></div>
+      </div>
+      <!-- Highlight/background color -->
+      <div class="fp-color-btn" id="fp-bgcolor-btn" onclick="fpOpenColorPicker('highlight')" title="Highlight Color">
+        <span style="font-size:10px;">🖍</span>
+        <div class="fp-color-swatch" id="fp-highlight-swatch" style="background:#ffff00;"></div>
+      </div>
+      <div class="fp-tb-sep"></div>
+      <!-- Paragraph style -->
+      <select style="height:20px;font-size:11px;font-family:'Tahoma',Arial;border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;padding:0 2px;width:100px;" onchange="fpSetBlock(this.value); this.value='';">
+        <option value="">¶ Style</option>
+        <option value="p">Normal</option>
+        <option value="h1">Heading 1</option>
+        <option value="h2">Heading 2</option>
+        <option value="h3">Heading 3</option>
+        <option value="h4">Heading 4</option>
+        <option value="pre">Preformatted</option>
+        <option value="blockquote">Blockquote</option>
+      </select>
+    </div>
+
+    <!-- Editor area -->
+    <div class="fp-editor-area">
+      <!-- Normal (WYSIWYG) -->
+      <div id="fp-normal-view">
+        <div id="fp-editor" contenteditable="true" spellcheck="true">
+          <p>Welcome to FrontPage Editor. Start building your page here.</p>
+        </div>
+      </div>
+      <!-- HTML source -->
+      <textarea id="fp-html-source" style="display:none;flex:1;margin:2px;border:2px solid;border-color:#808080 #fff #fff #808080;font-family:'Courier New',monospace;font-size:11px;background:#fff;color:#000;padding:8px;resize:none;outline:none;"></textarea>
+      <!-- Preview (iframe) -->
+      <iframe id="fp-preview-frame" style="display:none;flex:1;margin:2px;border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;" frameborder="0"></iframe>
+    </div>
+
+    <!-- View tab bar -->
+    <div class="fp-tab-bar">
+      <div class="fp-tab active" id="fp-tab-normal" onclick="fpSetTab('normal')">Normal</div>
+      <div class="fp-tab" id="fp-tab-html" onclick="fpSetTab('html')">HTML</div>
+      <div class="fp-tab" id="fp-tab-preview" onclick="fpSetTab('preview')">Preview</div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="fp-statusbar">
+      <div class="fp-status-panel" id="fp-status-file">Untitled</div>
+      <div class="fp-status-panel" id="fp-status-size">0 bytes</div>
+      <div style="margin-left:auto;font-size:10px;color:#555;">
+        Microsoft FrontPage Editor — <span id="fp-status-mode">Normal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color Picker Popup -->
+  <div id="fp-color-picker">
+    <div class="fp-cp-title" id="fp-cp-title">Text Color</div>
+    <div class="fp-cp-swatches" id="fp-cp-swatches"></div>
+    <div class="fp-cp-custom">
+      <span style="font-size:11px;font-family:'Tahoma',Arial;">Custom:</span>
+      <input type="color" id="fp-cp-custom-input" value="#000000">
+      <div style="padding:2px 8px;background:#c0c0c0;border:2px solid;border-color:#fff #808080 #808080 #fff;cursor:pointer;font-size:11px;" onclick="fpApplyCustomColor()">OK</div>
+    </div>
+  </div>
+
+  <!-- Insert Image Dialog -->
+  <div id="fp-img-dialog">
+    <div class="fp-img-titlebar" id="fp-img-dlg-titlebar">
+      <span>🖼️ Insert Image</span>
+      <div class="fp-win-btn" onclick="document.getElementById('fp-img-dialog').classList.remove('open')" style="background:#c0c0c0;">✕</div>
+    </div>
+    <div style="padding:14px 18px;font-family:'Tahoma',Arial;font-size:12px;">
+      <div style="margin-bottom:8px;font-weight:bold;">Image URL or file path:</div>
+      <input id="fp-img-url" type="text" placeholder="http://www.example.com/image.gif"
+        style="width:100%;height:24px;border:2px solid;border-color:#808080 #fff #fff #808080;font-size:12px;padding:0 4px;font-family:'Tahoma',Arial;background:#fff;box-sizing:border-box;margin-bottom:10px;">
+      <div style="margin-bottom:4px;font-weight:bold;">Or upload from your computer:</div>
+      <input type="file" id="fp-img-file" accept="image/*" style="font-size:11px;margin-bottom:10px;">
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <div style="flex:1;">
+          <label style="font-size:11px;display:block;margin-bottom:2px;">Width (px):</label>
+          <input id="fp-img-w" type="number" value="" placeholder="auto"
+            style="width:80px;height:22px;border:2px solid;border-color:#808080 #fff #fff #808080;font-size:11px;padding:0 4px;">
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:11px;display:block;margin-bottom:2px;">Height (px):</label>
+          <input id="fp-img-h" type="number" value="" placeholder="auto"
+            style="width:80px;height:22px;border:2px solid;border-color:#808080 #fff #fff #808080;font-size:11px;padding:0 4px;">
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:11px;display:block;margin-bottom:2px;">Alt text:</label>
+          <input id="fp-img-alt" type="text" value=""
+            style="width:100%;height:22px;border:2px solid;border-color:#808080 #fff #fff #808080;font-size:11px;padding:0 4px;">
+        </div>
+      </div>
+      <div class="w98-login-divider"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="w98-login-btn" onclick="fpDoInsertImage()">OK</button>
+        <button class="w98-login-btn" onclick="document.getElementById('fp-img-dialog').classList.remove('open')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Properties Dialog -->
+  <div id="fp-page-props">
+    <div class="w98-titlebar" id="fp-page-props-titlebar">
+      <div class="w98-titlebar-left"><span class="w98-title-icon">🎨</span> Page Properties</div>
+      <div class="w98-win-btns">
+        <div class="w98-win-btn" onclick="document.getElementById('fp-page-props').classList.remove('open')">✕</div>
+      </div>
+    </div>
+    <div style="padding:14px 18px;font-family:'Tahoma',Arial;font-size:12px;">
+      <div style="margin-bottom:10px;font-weight:bold;border-bottom:1px solid #808080;padding-bottom:4px;">Background</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <label style="width:110px;">Background Color:</label>
+        <input type="color" id="fp-page-bgcolor" value="#ffffff" style="width:40px;height:22px;border:1px solid #808080;cursor:pointer;">
+        <span id="fp-page-bgcolor-label" style="font-size:11px;color:#555;">#ffffff</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <label style="width:110px;">Text Color:</label>
+        <input type="color" id="fp-page-textcolor" value="#000000" style="width:40px;height:22px;border:1px solid #808080;cursor:pointer;">
+        <span id="fp-page-textcolor-label" style="font-size:11px;color:#555;">#000000</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <label style="width:110px;">Link Color:</label>
+        <input type="color" id="fp-page-linkcolor" value="#0000ff" style="width:40px;height:22px;border:1px solid #808080;cursor:pointer;">
+      </div>
+      <div style="margin-bottom:10px;font-weight:bold;border-bottom:1px solid #808080;padding-bottom:4px;margin-top:6px;">Page</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <label style="width:110px;">Page Title:</label>
+        <input id="fp-page-title" type="text" value="My Web Page"
+          style="flex:1;height:22px;border:2px solid;border-color:#808080 #fff #fff #808080;font-size:12px;padding:0 4px;">
+      </div>
+      <div class="w98-login-divider"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;">
+        <button class="w98-login-btn" onclick="fpApplyPageProps()">OK</button>
+        <button class="w98-login-btn" onclick="document.getElementById('fp-page-props').classList.remove('open')">Cancel</button>
       </div>
     </div>
   </div>
@@ -3589,6 +4104,311 @@ function toggleApiKeyVisible() {
   var input = document.getElementById('apikey-input');
   input.type = document.getElementById('apikey-show').checked ? 'text' : 'password';
 }
+
+// ════════════════════════════════════════
+// MS FRONTPAGE 98 EDITOR
+// ════════════════════════════════════════
+var fpCurrentFile = null;
+var fpCurrentTab  = 'normal';
+var fpColorTarget = 'text';
+var fpCurrentTextColor = '#000000';
+var fpCurrentHighlight = '#ffff00';
+var fpPageBgColor    = '#ffffff';
+var fpPageTextColor  = '#000000';
+var fpSavedRange     = null;
+
+var FP_COLORS = [
+  '#000000','#333333','#666666','#999999','#cccccc','#ffffff',
+  '#ff0000','#cc0000','#990000','#660000','#330000','#ff6666',
+  '#ff6600','#cc5500','#994400','#ff9900','#ffcc00','#ffff00',
+  '#00ff00','#00cc00','#009900','#006600','#003300','#00ff99',
+  '#0000ff','#0000cc','#000099','#000066','#3399ff','#99ccff',
+  '#9900ff','#6600cc','#cc00ff','#ff00ff','#ff0099','#cc0066',
+  '#00ffff','#00cccc','#009999','#006666','#003333','#66ffff',
+];
+
+function openFrontPage(filename, content) {
+  var win = document.getElementById('fp-window');
+  win.classList.add('open');
+  win.style.zIndex = ++chatZBase;
+  if (filename && content !== undefined) {
+    fpCurrentFile = filename;
+    document.getElementById('fp-editor').innerHTML = content;
+    document.getElementById('fp-title-text').textContent = filename + ' — Microsoft FrontPage Editor';
+    document.getElementById('fp-status-file').textContent = filename;
+  }
+  fpBuildColorPicker();
+  fpSetTab('normal');
+  fpUpdateStatus();
+  setTimeout(function(){ document.getElementById('fp-editor').focus(); }, 100);
+}
+function closeFrontPage() {
+  document.getElementById('fp-window').classList.remove('open');
+}
+
+function fpSetTab(tab) {
+  fpCurrentTab = tab;
+  var htmlArea = document.getElementById('fp-html-source');
+  var preview  = document.getElementById('fp-preview-frame');
+  var normalWrap = document.getElementById('fp-normal-view');
+
+  if (tab === 'html') {
+    htmlArea.value = fpGetFullHTML();
+  } else if (tab === 'normal' && htmlArea.style.display !== 'none') {
+    fpSyncFromHTML();
+  } else if (tab === 'preview') {
+    var doc = preview.contentDocument || preview.contentWindow.document;
+    doc.open(); doc.write(fpGetFullHTML(true)); doc.close();
+  }
+
+  normalWrap.style.display = tab === 'normal' ? 'block' : 'none';
+  htmlArea.style.display   = tab === 'html'    ? 'block' : 'none';
+  preview.style.display    = tab === 'preview' ? 'block' : 'none';
+
+  ['normal','html','preview'].forEach(function(t) {
+    document.getElementById('fp-tab-' + t).classList.toggle('active', t === tab);
+    var check = document.getElementById('fp-view-check-' + t);
+    if (check) check.textContent = t === tab ? '✓' : '';
+  });
+  document.getElementById('fp-status-mode').textContent =
+    tab === 'normal' ? 'Normal' : tab === 'html' ? 'HTML Source' : 'Preview';
+}
+
+function fpGetFullHTML(forPreview) {
+  var editor = document.getElementById('fp-editor');
+  var bgStyle = 'background-color:' + fpPageBgColor + ';color:' + fpPageTextColor + ';margin:20px 30px;';
+  var titleEl = document.getElementById('fp-page-title');
+  var title = titleEl ? titleEl.value : (fpCurrentFile || 'My Web Page');
+  return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">\n'
+    + '<html>\n<head>\n'
+    + '<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">\n'
+    + '<title>' + esc(title) + '</title>\n'
+    + '<meta name="GENERATOR" content="Microsoft FrontPage 3.0">\n'
+    + '</head>\n<body style="' + bgStyle + '">\n'
+    + editor.innerHTML
+    + '\n</body>\n</html>';
+}
+
+function fpSyncFromHTML() {
+  var html = document.getElementById('fp-html-source').value;
+  var bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  if (bodyMatch) document.getElementById('fp-editor').innerHTML = bodyMatch[1];
+}
+
+function fpToggle(cmd) {
+  document.getElementById('fp-editor').focus();
+  document.execCommand(cmd, false, null);
+  fpUpdateFormatButtons();
+}
+function fpSetFont(font) {
+  document.getElementById('fp-editor').focus();
+  document.execCommand('fontName', false, font);
+}
+function fpSetSize(size) {
+  document.getElementById('fp-editor').focus();
+  document.execCommand('fontSize', false, size);
+}
+function fpSetBlock(tag) {
+  if (!tag) return;
+  document.getElementById('fp-editor').focus();
+  document.execCommand('formatBlock', false, '<' + tag + '>');
+}
+function fpUpdateFormatButtons() {
+  var cmds = [['bold','fp-bold-btn'],['italic','fp-italic-btn'],['underline','fp-underline-btn'],['strikeThrough','fp-strike-btn']];
+  cmds.forEach(function(pair) {
+    var el = document.getElementById(pair[1]);
+    if (el) el.classList.toggle('active', document.queryCommandState(pair[0]));
+  });
+}
+
+document.getElementById('fp-editor').addEventListener('keyup', fpUpdateFormatButtons);
+document.getElementById('fp-editor').addEventListener('mouseup', fpUpdateFormatButtons);
+document.getElementById('fp-editor').addEventListener('input', fpUpdateStatus);
+
+function fpBuildColorPicker() {
+  var grid = document.getElementById('fp-cp-swatches');
+  if (grid.children.length) return;
+  FP_COLORS.forEach(function(color) {
+    var sw = document.createElement('div');
+    sw.className = 'fp-cp-swatch';
+    sw.style.background = color;
+    sw.title = color;
+    sw.addEventListener('click', function(){ fpApplyColor(color); });
+    grid.appendChild(sw);
+  });
+}
+function fpOpenColorPicker(target) {
+  fpColorTarget = target;
+  var sel = window.getSelection();
+  if (sel.rangeCount) fpSavedRange = sel.getRangeAt(0).cloneRange();
+  var picker = document.getElementById('fp-color-picker');
+  document.getElementById('fp-cp-title').textContent = target === 'text' ? 'Text Color' : 'Highlight Color';
+  document.getElementById('fp-cp-custom-input').value = target === 'text' ? fpCurrentTextColor : fpCurrentHighlight;
+  var btn = document.getElementById(target === 'text' ? 'fp-textcolor-btn' : 'fp-bgcolor-btn');
+  var canvas = document.getElementById('canvas');
+  var cr = canvas.getBoundingClientRect();
+  var br = btn.getBoundingClientRect();
+  var scale = cr.width / 1024;
+  picker.style.left = Math.round((br.left - cr.left) / scale) + 'px';
+  picker.style.top  = Math.round((br.bottom - cr.top) / scale) + 'px';
+  picker.classList.add('open');
+  picker.style.zIndex = ++chatZBase;
+}
+function fpApplyColor(color) {
+  document.getElementById('fp-color-picker').classList.remove('open');
+  if (fpSavedRange) {
+    var sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(fpSavedRange);
+  }
+  document.getElementById('fp-editor').focus();
+  if (fpColorTarget === 'text') {
+    document.execCommand('foreColor', false, color);
+    fpCurrentTextColor = color;
+    document.getElementById('fp-textcolor-swatch').style.background = color;
+  } else {
+    document.execCommand('hiliteColor', false, color);
+    fpCurrentHighlight = color;
+    document.getElementById('fp-highlight-swatch').style.background = color;
+  }
+  fpSavedRange = null;
+}
+function fpApplyCustomColor() {
+  fpApplyColor(document.getElementById('fp-cp-custom-input').value);
+}
+document.addEventListener('click', function(e) {
+  var picker = document.getElementById('fp-color-picker');
+  if (picker && !picker.contains(e.target) &&
+      !e.target.closest('#fp-textcolor-btn') && !e.target.closest('#fp-bgcolor-btn')) {
+    picker.classList.remove('open');
+  }
+});
+
+function fpInsertImage() {
+  var sel = window.getSelection();
+  if (sel.rangeCount) fpSavedRange = sel.getRangeAt(0).cloneRange();
+  var dlg = document.getElementById('fp-img-dialog');
+  dlg.classList.add('open');
+  dlg.style.zIndex = ++chatZBase;
+  ['fp-img-url','fp-img-w','fp-img-h','fp-img-alt'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('fp-img-file').value = '';
+}
+function fpDoInsertImage() {
+  var url  = document.getElementById('fp-img-url').value.trim();
+  var file = document.getElementById('fp-img-file').files[0];
+  var w    = document.getElementById('fp-img-w').value;
+  var h    = document.getElementById('fp-img-h').value;
+  var alt  = document.getElementById('fp-img-alt').value;
+  document.getElementById('fp-img-dialog').classList.remove('open');
+  function insertImg(src) {
+    var imgTag = '<img src="' + src + '"' + (w?' width="'+w+'"':'') + (h?' height="'+h+'"':'') + ' alt="'+(alt||'')+'">';
+    if (fpSavedRange) { var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(fpSavedRange); }
+    document.getElementById('fp-editor').focus();
+    document.execCommand('insertHTML', false, imgTag);
+    fpSavedRange = null;
+  }
+  if (file) { var r=new FileReader(); r.onload=function(e){insertImg(e.target.result);}; r.readAsDataURL(file); }
+  else if (url) insertImg(url);
+}
+function fpInsertHR() { document.getElementById('fp-editor').focus(); document.execCommand('insertHTML',false,'<hr>'); }
+function fpInsertLineBreak() { document.getElementById('fp-editor').focus(); document.execCommand('insertHTML',false,'<br>'); }
+function fpInsertTable() {
+  var rows=prompt('Rows:','3'); var cols=prompt('Columns:','3');
+  if (!rows||!cols) return;
+  var html='<table border="1" cellpadding="4" cellspacing="0" style="border-collapse:collapse;">';
+  for(var r=0;r<+rows;r++){html+='<tr>';for(var c=0;c<+cols;c++)html+='<td>&nbsp;</td>';html+='</tr>';}
+  html+='</table><p></p>';
+  document.getElementById('fp-editor').focus();
+  document.execCommand('insertHTML',false,html);
+}
+function fpInsertLink() {
+  var url=prompt('URL:','http://'); if(!url) return;
+  document.getElementById('fp-editor').focus();
+  document.execCommand('createLink',false,url);
+}
+function fpFindReplace() {
+  var find=prompt('Find:'); if(!find) return;
+  var replace=prompt('Replace with:'); if(replace===null) return;
+  var ed=document.getElementById('fp-editor');
+  ed.innerHTML=ed.innerHTML.split(find).join(replace);
+}
+function fpPageProps() {
+  var dlg=document.getElementById('fp-page-props');
+  dlg.classList.add('open'); dlg.style.zIndex=++chatZBase;
+  document.getElementById('fp-page-bgcolor').value=fpPageBgColor;
+  document.getElementById('fp-page-textcolor').value=fpPageTextColor;
+}
+function fpApplyPageProps() {
+  fpPageBgColor=document.getElementById('fp-page-bgcolor').value;
+  fpPageTextColor=document.getElementById('fp-page-textcolor').value;
+  var ed=document.getElementById('fp-editor');
+  ed.style.backgroundColor=fpPageBgColor; ed.style.color=fpPageTextColor;
+  document.getElementById('fp-page-props').classList.remove('open');
+}
+function fpLoadFiles(){ try{return JSON.parse(localStorage.getItem('fp_pages')||'[]');}catch(e){return[];} }
+function fpSaveFiles(arr){ try{localStorage.setItem('fp_pages',JSON.stringify(arr));}catch(e){} }
+
+function fpNew() {
+  if(!confirm('Start a new page? Unsaved changes will be lost.')) return;
+  document.getElementById('fp-editor').innerHTML='<p>New page</p>';
+  fpCurrentFile=null; fpPageBgColor='#ffffff'; fpPageTextColor='#000000';
+  document.getElementById('fp-editor').style.cssText='background:#fff;color:#000;';
+  document.getElementById('fp-title-text').textContent='Untitled — Microsoft FrontPage Editor';
+  document.getElementById('fp-status-file').textContent='Untitled';
+  fpUpdateStatus();
+}
+function fpSave() {
+  if(!fpCurrentFile){fpSaveAs();return;}
+  var files=fpLoadFiles();
+  var now=new Date();
+  var entry={name:fpCurrentFile,html:document.getElementById('fp-editor').innerHTML,fullHtml:fpGetFullHTML(),bgColor:fpPageBgColor,textColor:fpPageTextColor,date:now.toLocaleDateString()+' '+now.toLocaleTimeString()};
+  var idx=files.findIndex(function(f){return f.name===fpCurrentFile;});
+  if(idx>=0)files[idx]=entry;else files.push(entry);
+  fpSaveFiles(files);
+  document.getElementById('fp-status-file').textContent=fpCurrentFile+' ✓';
+  setTimeout(function(){document.getElementById('fp-status-file').textContent=fpCurrentFile;},2000);
+}
+function fpSaveAs() {
+  var name=prompt('Save page as:',fpCurrentFile||'mypage'); if(!name) return;
+  if(!name.match(/\.html?$/i)) name+='.html';
+  fpCurrentFile=name;
+  document.getElementById('fp-title-text').textContent=name+' — Microsoft FrontPage Editor';
+  document.getElementById('fp-status-file').textContent=name;
+  fpSave();
+}
+function fpOpen() {
+  var files=fpLoadFiles();
+  if(!files.length){alert('No saved pages found.');return;}
+  var names=files.map(function(f,i){return(i+1)+'. '+f.name+' ('+(f.date||'')+')';});
+  var choice=prompt('Open page:\n\n'+names.join('\n')+'\n\nEnter number:');
+  if(!choice) return;
+  var idx=parseInt(choice)-1;
+  if(isNaN(idx)||idx<0||idx>=files.length){alert('Invalid selection.');return;}
+  var f=files[idx];
+  fpCurrentFile=f.name; fpPageBgColor=f.bgColor||'#ffffff'; fpPageTextColor=f.textColor||'#000000';
+  document.getElementById('fp-editor').innerHTML=f.html||'';
+  document.getElementById('fp-editor').style.backgroundColor=fpPageBgColor;
+  document.getElementById('fp-editor').style.color=fpPageTextColor;
+  document.getElementById('fp-title-text').textContent=f.name+' — Microsoft FrontPage Editor';
+  document.getElementById('fp-status-file').textContent=f.name;
+  fpUpdateStatus();
+}
+function fpExportHTML() {
+  var name=fpCurrentFile||'mypage.html';
+  var blob=new Blob([fpGetFullHTML()],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a'); a.href=url; a.download=name;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function fpUpdateStatus() {
+  var bytes=new Blob([document.getElementById('fp-editor').innerHTML]).size;
+  document.getElementById('fp-status-size').textContent=bytes+' bytes';
+}
+
+makeDraggable(document.getElementById('fp-window'), document.getElementById('fp-titlebar'));
+makeDraggable(document.getElementById('fp-img-dialog'), document.getElementById('fp-img-dlg-titlebar'));
+makeDraggable(document.getElementById('fp-page-props'), document.getElementById('fp-page-props-titlebar'));
+document.getElementById('fp-window').addEventListener('mousedown', function(){ this.style.zIndex = ++chatZBase; });
 
 window.addEventListener('load', function() {
   showScreen('screen-poweron');
