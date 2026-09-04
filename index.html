@@ -1468,6 +1468,222 @@ body {
   display: none; flex-direction: column;
 }
 #fp-page-props.open { display: flex; }
+/* ════════════════════════════════════════
+   NERO BURNING ROM 5.x
+════════════════════════════════════════ */
+#nero-window {
+  position: absolute; top: 20px; left: 40px;
+  width: 700px; height: 620px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+  display: none; flex-direction: column; z-index: 500;
+  font-family: 'Tahoma', Arial;
+}
+#nero-window.open { display: flex; }
+
+/* Title bar */
+.nero-titlebar {
+  background: linear-gradient(90deg, #1a0000, #8b0000, #1a0000);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 22px;
+  cursor: grab; flex-shrink: 0;
+}
+.nero-titlebar:active { cursor: grabbing; }
+.nero-titlebar-left { display: flex; align-items: center; gap: 6px; font-family: 'Tahoma', Arial; }
+.nero-win-btns { display: flex; gap: 2px; }
+.nero-win-btn {
+  width: 16px; height: 14px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 9px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; font-weight: bold;
+}
+.nero-win-btn:active { border-color: #808080 #fff #fff #808080; }
+
+/* Menu bar */
+.nero-menubar {
+  display: flex; background: #c0c0c0; padding: 1px 2px;
+  border-bottom: 1px solid #808080; flex-shrink: 0;
+}
+.nero-menu {
+  font-size: 12px; padding: 2px 8px; cursor: pointer;
+  color: #000; position: relative;
+}
+.nero-menu:hover { background: #000080; color: #fff; }
+.nero-menu-dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; z-index: 3000; min-width: 160px;
+}
+.nero-menu:hover .nero-menu-dropdown { display: block; }
+.nero-menu-item {
+  font-size: 12px; padding: 4px 20px; color: #000;
+  cursor: pointer; white-space: nowrap;
+}
+.nero-menu-item:hover { background: #000080; color: #fff; }
+.nero-menu-sep { height: 1px; background: #808080; margin: 2px 0; border-bottom: 1px solid #fff; }
+
+/* Toolbar */
+.nero-toolbar {
+  display: flex; align-items: center; gap: 2px;
+  padding: 3px 4px; background: #c0c0c0;
+  border-bottom: 2px solid; border-color: #808080 #fff #fff #808080;
+  flex-shrink: 0;
+}
+.nero-tb-btn {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 2px 6px; background: #c0c0c0; cursor: pointer;
+  border: 2px solid transparent; font-size: 9px;
+  font-family: 'Tahoma', Arial; gap: 1px; min-width: 44px; color: #000;
+}
+.nero-tb-btn:hover { border-color: #fff #808080 #808080 #fff; background: #d0d0d0; }
+.nero-tb-btn:active { border-color: #808080 #fff #fff #808080; }
+.nero-tb-btn .nero-tb-icon { font-size: 20px; line-height: 1; }
+.nero-tb-sep { width: 2px; background: #808080; height: 36px; margin: 0 2px; border-right: 1px solid #fff; }
+
+/* Main body - two panes */
+.nero-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* Top pane: file browser + disc contents */
+.nero-panes {
+  flex: 1; display: flex; overflow: hidden;
+  border-bottom: 2px solid; border-color: #808080 #fff #fff #808080;
+}
+
+/* Left: file browser */
+.nero-left-pane {
+  width: 340px; flex-shrink: 0; display: flex; flex-direction: column;
+  border-right: 2px solid; border-color: #808080 #fff #fff #808080;
+}
+.nero-pane-header {
+  background: #000080; color: #fff; font-size: 11px; font-weight: bold;
+  padding: 3px 8px; flex-shrink: 0; font-family: 'Tahoma', Arial;
+  display: flex; align-items: center; gap: 6px;
+}
+.nero-file-list {
+  flex: 1; background: #fff; overflow-y: auto;
+  border: 2px solid; border-color: #808080 #fff #fff #808080; margin: 2px;
+}
+.nero-file-item {
+  display: flex; align-items: center; gap: 8px; padding: 3px 8px;
+  font-size: 11px; font-family: 'Tahoma', Arial; cursor: pointer;
+  border-bottom: 1px solid #f0f0f0; user-select: none;
+}
+.nero-file-item:hover { background: #000080; color: #fff; }
+.nero-file-item.selected { background: #000080; color: #fff; }
+.nero-file-icon { font-size: 14px; flex-shrink: 0; }
+.nero-file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nero-file-size { color: #666; font-size: 10px; flex-shrink: 0; width: 50px; text-align: right; }
+.nero-file-item.selected .nero-file-size { color: #ccc; }
+
+/* Right: disc layout */
+.nero-right-pane {
+  flex: 1; display: flex; flex-direction: column;
+}
+.nero-disc-list {
+  flex: 1; background: #fff; overflow-y: auto;
+  border: 2px solid; border-color: #808080 #fff #fff #808080; margin: 2px;
+}
+.nero-disc-item {
+  display: flex; align-items: center; gap: 8px; padding: 3px 8px;
+  font-size: 11px; font-family: 'Tahoma', Arial;
+  border-bottom: 1px solid #f0f0f0; cursor: pointer;
+}
+.nero-disc-item:hover { background: #e8e8ff; }
+.nero-disc-item.selected { background: #000080; color: #fff; }
+.nero-disc-num { color: #808080; font-size: 10px; width: 20px; flex-shrink: 0; text-align: right; }
+.nero-disc-item.selected .nero-disc-num { color: #ccc; }
+.nero-disc-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nero-disc-dur { color: #555; font-size: 10px; flex-shrink: 0; width: 44px; text-align: right; }
+.nero-disc-item.selected .nero-disc-dur { color: #ccc; }
+
+/* Bottom: capacity bar + info */
+.nero-bottom-bar {
+  background: #000; padding: 6px 8px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.nero-cap-label {
+  display: flex; justify-content: space-between;
+  font-size: 10px; font-family: 'Tahoma', Arial; color: #0f0;
+}
+.nero-cap-bar-wrap {
+  height: 14px; background: #1a1a1a;
+  border: 1px solid #444; position: relative; overflow: hidden;
+}
+.nero-cap-bar {
+  height: 100%; width: 0%; background: linear-gradient(90deg, #003300, #00aa00);
+  transition: width 0.3s;
+}
+.nero-cap-bar.over { background: linear-gradient(90deg, #aa0000, #ff0000); }
+.nero-cap-ticks {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; pointer-events: none;
+}
+.nero-cap-tick {
+  border-right: 1px solid #333; flex: 1;
+}
+.nero-cap-tick.major { border-right-color: #555; }
+.nero-disc-info {
+  display: flex; gap: 16px; font-size: 10px;
+  font-family: 'Courier New', monospace; color: #0f0;
+}
+
+/* Burn progress dialog */
+#nero-burn-dialog {
+  position: absolute; top: 120px; left: 150px; width: 400px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 4px 4px 0 #000; z-index: 6000;
+  display: none; flex-direction: column;
+}
+#nero-burn-dialog.open { display: flex; }
+.nero-burn-titlebar {
+  background: linear-gradient(90deg, #1a0000, #8b0000, #1a0000);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 6px; height: 22px; display: flex;
+  align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.nero-burn-body { padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; }
+.nero-burn-label { font-size: 12px; font-family: 'Tahoma', Arial; font-weight: bold; }
+.nero-burn-sublabel { font-size: 11px; font-family: 'Tahoma', Arial; color: #444; }
+.nero-progress-wrap {
+  height: 20px; background: #000;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  position: relative;
+}
+.nero-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #003300, #00cc00);
+}
+.nero-progress-text {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: 'Courier New', monospace;
+  color: #0f0;
+}
+.nero-buffer-wrap {
+  height: 12px; background: #000;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  position: relative;
+}
+.nero-buffer-fill {
+  height: 100%; width: 80%;
+  background: linear-gradient(90deg, #000088, #0000ff);
+}
+.nero-log {
+  background: #000; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  height: 80px; overflow-y: auto; padding: 4px 6px;
+  font-family: 'Courier New', monospace; font-size: 10px; color: #0f0;
+}
+.nero-log-line { line-height: 1.5; }
+.nero-burn-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+  font-size: 10px; font-family: 'Courier New', monospace;
+}
+.nero-stat { display: flex; justify-content: space-between; }
+.nero-stat-label { color: #555; }
+.nero-stat-val { font-weight: bold; color: #000; }
 </style>
 </head>
 <body>
@@ -1721,6 +1937,10 @@ body {
             <div class="sm-item" onclick="openNapster();toggleStartMenu()">
               <span class="sm-icon">🎵</span>
               <div><span class="sm-label">Napster</span></div>
+            </div>
+            <div class="sm-item" onclick="openNero();toggleStartMenu()">
+              <span class="sm-icon">💿</span>
+              <div><span class="sm-label">Nero Burning ROM</span><span class="sm-sub">CD-R Burning</span></div>
             </div>
             <div class="sm-item" onclick="openSophocles();toggleStartMenu()">
               <span class="sm-icon">🎬</span>
@@ -2728,6 +2948,186 @@ body {
       <div style="display:flex;justify-content:flex-end;gap:8px;">
         <button class="w98-login-btn" onclick="fpApplyPageProps()">OK</button>
         <button class="w98-login-btn" onclick="document.getElementById('fp-page-props').classList.remove('open')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       NERO BURNING ROM 5.x
+  ══════════════════════════════════════ -->
+  <div id="nero-window">
+    <div class="nero-titlebar" id="nero-titlebar">
+      <div class="nero-titlebar-left">
+        <span style="font-size:16px;">🔥</span>
+        <span>Nero Burning ROM</span>
+        <span style="font-size:10px;opacity:0.7;margin-left:4px;">— <span id="nero-disc-title">Audio CD</span></span>
+      </div>
+      <div class="nero-win-btns">
+        <div class="nero-win-btn" onclick="closeNero()">_</div>
+        <div class="nero-win-btn">□</div>
+        <div class="nero-win-btn" onclick="closeNero()">✕</div>
+      </div>
+    </div>
+
+    <!-- Menu bar -->
+    <div class="nero-menubar">
+      <div class="nero-menu">File
+        <div class="nero-menu-dropdown">
+          <div class="nero-menu-item" onclick="neroNew()">New Compilation...</div>
+          <div class="nero-menu-sep"></div>
+          <div class="nero-menu-item" onclick="closeNero()">Exit</div>
+        </div>
+      </div>
+      <div class="nero-menu">Edit
+        <div class="nero-menu-dropdown">
+          <div class="nero-menu-item" onclick="neroSelectAll()">Select All</div>
+          <div class="nero-menu-item" onclick="neroRemoveSelected()">Remove</div>
+        </div>
+      </div>
+      <div class="nero-menu">View
+        <div class="nero-menu-dropdown">
+          <div class="nero-menu-item">Audio CD</div>
+          <div class="nero-menu-item">Data CD</div>
+        </div>
+      </div>
+      <div class="nero-menu">Recorder
+        <div class="nero-menu-dropdown">
+          <div class="nero-menu-item" onclick="neroBurn()">Burn Compilation!</div>
+          <div class="nero-menu-sep"></div>
+          <div class="nero-menu-item">Choose Recorder...</div>
+          <div class="nero-menu-item" onclick="alert('Drive: CREATIVE CD-RW RW1210E\nWrite speeds: 1x 2x 4x 8x 10x 12x\nBuffer: 2MB\nDisc: 74 min CD-R')">Recorder Information</div>
+        </div>
+      </div>
+      <div class="nero-menu">Help
+        <div class="nero-menu-dropdown">
+          <div class="nero-menu-item" onclick="alert('Nero Burning ROM Version 5.5.8.0\n\n© 1997-2000 ahead software\nAll rights reserved.\n\nThis software may only be used\nwith licensed CD recorders.\n\nSerial: 1A39-0041-9999-DEMO')">About Nero...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="nero-toolbar">
+      <div class="nero-tb-btn" onclick="neroNew()" title="New">
+        <span class="nero-tb-icon">📀</span><span>New</span>
+      </div>
+      <div class="nero-tb-sep"></div>
+      <div class="nero-tb-btn" onclick="neroAddSelected()" title="Add to disc">
+        <span class="nero-tb-icon">➡️</span><span>Add</span>
+      </div>
+      <div class="nero-tb-btn" onclick="neroRemoveSelected()" title="Remove from disc">
+        <span class="nero-tb-icon">⬅️</span><span>Remove</span>
+      </div>
+      <div class="nero-tb-sep"></div>
+      <div class="nero-tb-btn" onclick="neroBurn()" title="Burn!" style="color:#8b0000;">
+        <span class="nero-tb-icon">🔥</span><span style="font-weight:bold;">Burn!</span>
+      </div>
+      <div style="flex:1;"></div>
+      <!-- Recorder info -->
+      <div style="font-size:10px;font-family:'Tahoma',Arial;color:#555;text-align:right;padding-right:4px;">
+        <div>🖥 CREATIVE CD-RW RW1210E</div>
+        <div>Write: <span id="nero-speed-label">12x</span> &nbsp; Buffer: 2MB</div>
+      </div>
+      <!-- Speed selector -->
+      <select id="nero-speed" style="height:22px;font-size:11px;font-family:'Tahoma',Arial;border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;padding:0 4px;" onchange="document.getElementById('nero-speed-label').textContent=this.value+'x'">
+        <option value="1">1x</option>
+        <option value="2">2x</option>
+        <option value="4">4x</option>
+        <option value="8">8x</option>
+        <option value="10">10x</option>
+        <option value="12" selected>12x</option>
+      </select>
+    </div>
+
+    <!-- Main body -->
+    <div class="nero-body">
+      <div class="nero-panes">
+        <!-- Left: file browser (Winamp tracks) -->
+        <div class="nero-left-pane">
+          <div class="nero-pane-header">
+            <span>🎵</span> Available Audio Files
+          </div>
+          <div class="nero-file-list" id="nero-file-list">
+            <!-- Populated by JS from WA_PLAYLIST -->
+          </div>
+          <div style="padding:4px 6px;font-size:10px;font-family:'Tahoma',Arial;color:#555;border-top:1px solid #808080;">
+            Double-click or click Add → to add tracks to disc
+          </div>
+        </div>
+
+        <!-- Right: disc contents -->
+        <div class="nero-right-pane">
+          <div class="nero-pane-header">
+            <span>💿</span> Audio CD — <span id="nero-track-count">0 tracks</span>
+          </div>
+          <div class="nero-disc-list" id="nero-disc-list">
+            <div style="padding:20px;text-align:center;color:#808080;font-size:11px;font-family:'Tahoma',Arial;">
+              No tracks added yet.<br>Select tracks from the left panel.
+            </div>
+          </div>
+          <div style="padding:4px 6px;font-size:10px;font-family:'Tahoma',Arial;color:#555;border-top:1px solid #808080;">
+            Drag files here or use Add button. Max 74 min per disc.
+          </div>
+        </div>
+      </div>
+
+      <!-- Capacity bar -->
+      <div class="nero-bottom-bar">
+        <div class="nero-cap-label">
+          <span>Disc Capacity: 74:00 min (650 MB)</span>
+          <span id="nero-used-label">Used: 0:00 / 74:00</span>
+        </div>
+        <div class="nero-cap-bar-wrap">
+          <div class="nero-cap-bar" id="nero-cap-bar"></div>
+          <!-- Tick marks -->
+          <div class="nero-cap-ticks" id="nero-cap-ticks"></div>
+        </div>
+        <div class="nero-disc-info">
+          <span>Recorder: CREATIVE CD-RW RW1210E</span>
+          <span>Disc: 74 min CD-R (Verbatim)</span>
+          <span id="nero-remaining-label">Remaining: 74:00</span>
+          <span id="nero-overburn-label" style="color:#f00;display:none;">⚠ OVERBURN!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nero Burn Progress Dialog -->
+  <div id="nero-burn-dialog">
+    <div class="nero-burn-titlebar" id="nero-burn-titlebar">
+      <span>🔥 Nero — Writing Audio CD...</span>
+      <div class="nero-win-btn" id="nero-burn-close-btn" onclick="closeNeroBurnDialog()" style="background:#c0c0c0;display:none;">✕</div>
+    </div>
+    <div class="nero-burn-body">
+      <div class="nero-burn-label" id="nero-burn-status">Initializing recorder...</div>
+      <div class="nero-burn-sublabel" id="nero-burn-track">Track 1 of <span id="nero-burn-total">0</span></div>
+      <!-- Write progress -->
+      <div>
+        <div style="font-size:10px;font-family:'Tahoma',Arial;margin-bottom:2px;">Write Progress:</div>
+        <div class="nero-progress-wrap">
+          <div class="nero-progress-fill" id="nero-write-bar"></div>
+          <div class="nero-progress-text" id="nero-write-pct">0%</div>
+        </div>
+      </div>
+      <!-- Buffer -->
+      <div>
+        <div style="font-size:10px;font-family:'Tahoma',Arial;margin-bottom:2px;">Buffer Level:</div>
+        <div class="nero-buffer-wrap">
+          <div class="nero-buffer-fill" id="nero-buffer-bar"></div>
+        </div>
+      </div>
+      <!-- Stats -->
+      <div class="nero-burn-stats">
+        <div class="nero-stat"><span class="nero-stat-label">Write speed:</span><span class="nero-stat-val" id="nero-stat-speed">12x (1,800 KB/s)</span></div>
+        <div class="nero-stat"><span class="nero-stat-label">Time elapsed:</span><span class="nero-stat-val" id="nero-stat-elapsed">0:00</span></div>
+        <div class="nero-stat"><span class="nero-stat-label">Time remaining:</span><span class="nero-stat-val" id="nero-stat-remain">--:--</span></div>
+        <div class="nero-stat"><span class="nero-stat-label">Written:</span><span class="nero-stat-val" id="nero-stat-written">0 MB</span></div>
+      </div>
+      <!-- Log -->
+      <div style="font-size:10px;font-family:'Tahoma',Arial;margin-bottom:2px;">Nero Log:</div>
+      <div class="nero-log" id="nero-log"></div>
+      <!-- Done button -->
+      <div style="display:flex;justify-content:center;margin-top:4px;">
+        <button class="w98-login-btn" id="nero-done-btn" onclick="closeNeroBurnDialog()" style="display:none;">OK</button>
       </div>
     </div>
   </div>
@@ -4490,6 +4890,291 @@ makeDraggable(document.getElementById('fp-window'), document.getElementById('fp-
 makeDraggable(document.getElementById('fp-img-dialog'), document.getElementById('fp-img-dlg-titlebar'));
 makeDraggable(document.getElementById('fp-page-props'), document.getElementById('fp-page-props-titlebar'));
 document.getElementById('fp-window').addEventListener('mousedown', function(){ this.style.zIndex = ++chatZBase; });
+
+// ════════════════════════════════════════
+// NERO BURNING ROM 5.x
+// ════════════════════════════════════════
+var neroDiscTracks  = [];   // tracks added to disc
+var neroSelectedFile = -1;  // index in WA_PLAYLIST
+var neroSelectedDisc = -1;  // index in neroDiscTracks
+var NERO_MAX_SECS   = 74 * 60; // 74 min disc
+var neroBurning     = false;
+var neroBurnInterval = null;
+var neroBurnStartTime = null;
+
+function openNero() {
+  var win = document.getElementById('nero-window');
+  win.classList.add('open');
+  win.style.zIndex = ++chatZBase;
+  neroRenderFileList();
+  neroRenderDiscList();
+  neroUpdateCapBar();
+  neroRenderCapTicks();
+}
+function closeNero() {
+  document.getElementById('nero-window').classList.remove('open');
+}
+function neroNew() {
+  if (neroDiscTracks.length && !confirm('Clear disc and start new compilation?')) return;
+  neroDiscTracks = [];
+  neroRenderDiscList();
+  neroUpdateCapBar();
+}
+
+// ── File browser ──
+function neroRenderFileList() {
+  var list = document.getElementById('nero-file-list');
+  list.innerHTML = '';
+  WA_PLAYLIST.forEach(function(t, i) {
+    var item = document.createElement('div');
+    item.className = 'nero-file-item' + (i === neroSelectedFile ? ' selected' : '');
+    item.innerHTML =
+      '<span class="nero-file-icon">🎵</span>'
+      + '<span class="nero-file-name">' + esc(t.artist) + ' - ' + esc(t.title) + '.mp3</span>'
+      + '<span class="nero-file-size">' + t.dur + '</span>';
+    item.addEventListener('click', function() {
+      neroSelectedFile = i;
+      neroRenderFileList();
+    });
+    item.addEventListener('dblclick', function() {
+      neroSelectedFile = i;
+      neroAddSelected();
+    });
+    list.appendChild(item);
+  });
+}
+
+// ── Disc list ──
+function neroRenderDiscList() {
+  var list = document.getElementById('nero-disc-list');
+  list.innerHTML = '';
+  if (!neroDiscTracks.length) {
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:#808080;font-size:11px;font-family:Tahoma,Arial;">No tracks added yet.<br>Select tracks from the left panel.</div>';
+    document.getElementById('nero-track-count').textContent = '0 tracks';
+    return;
+  }
+  neroDiscTracks.forEach(function(t, i) {
+    var item = document.createElement('div');
+    item.className = 'nero-disc-item' + (i === neroSelectedDisc ? ' selected' : '');
+    item.innerHTML =
+      '<span class="nero-disc-num">' + (i+1) + '</span>'
+      + '<span class="nero-file-icon">🎵</span>'
+      + '<span class="nero-disc-name">' + esc(t.artist) + ' - ' + esc(t.title) + '</span>'
+      + '<span class="nero-disc-dur">' + t.dur + '</span>';
+    item.addEventListener('click', function() {
+      neroSelectedDisc = i;
+      neroRenderDiscList();
+    });
+    list.appendChild(item);
+  });
+  var total = neroDiscTracks.length;
+  document.getElementById('nero-track-count').textContent = total + ' track' + (total !== 1 ? 's' : '');
+}
+
+function neroAddSelected() {
+  if (neroSelectedFile < 0) return;
+  var track = WA_PLAYLIST[neroSelectedFile];
+  // Check capacity
+  var used = neroCalcUsedSecs();
+  var trackSecs = neroParseTime(track.dur);
+  if (used + trackSecs > NERO_MAX_SECS + 60) { // allow slight overburn
+    alert('Not enough space on disc!\n\nDisc is full. Maximum 74 minutes.');
+    return;
+  }
+  neroDiscTracks.push(Object.assign({}, track));
+  neroRenderDiscList();
+  neroUpdateCapBar();
+}
+
+function neroRemoveSelected() {
+  if (neroSelectedDisc < 0 || !neroDiscTracks.length) return;
+  neroDiscTracks.splice(neroSelectedDisc, 1);
+  neroSelectedDisc = Math.min(neroSelectedDisc, neroDiscTracks.length - 1);
+  neroRenderDiscList();
+  neroUpdateCapBar();
+}
+
+function neroSelectAll() {
+  WA_PLAYLIST.forEach(function(t) {
+    var used = neroCalcUsedSecs();
+    var trackSecs = neroParseTime(t.dur);
+    if (used + trackSecs <= NERO_MAX_SECS + 60) {
+      neroDiscTracks.push(Object.assign({}, t));
+    }
+  });
+  neroRenderDiscList();
+  neroUpdateCapBar();
+}
+
+// ── Capacity ──
+function neroParseTime(durStr) {
+  var parts = durStr.split(':');
+  return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+function neroFormatTime(secs) {
+  var m = Math.floor(secs/60), s = secs%60;
+  return m + ':' + (s<10?'0':'') + s;
+}
+function neroCalcUsedSecs() {
+  return neroDiscTracks.reduce(function(a,t){ return a + neroParseTime(t.dur); }, 0);
+}
+function neroUpdateCapBar() {
+  var used = neroCalcUsedSecs();
+  var pct  = Math.min(100, (used / NERO_MAX_SECS) * 100);
+  var bar  = document.getElementById('nero-cap-bar');
+  bar.style.width = pct + '%';
+  bar.classList.toggle('over', used > NERO_MAX_SECS);
+  document.getElementById('nero-used-label').textContent =
+    'Used: ' + neroFormatTime(used) + ' / ' + neroFormatTime(NERO_MAX_SECS);
+  var remain = Math.max(0, NERO_MAX_SECS - used);
+  document.getElementById('nero-remaining-label').textContent =
+    'Remaining: ' + neroFormatTime(remain);
+  document.getElementById('nero-overburn-label').style.display = used > NERO_MAX_SECS ? '' : 'none';
+}
+
+function neroRenderCapTicks() {
+  var ticks = document.getElementById('nero-cap-ticks');
+  ticks.innerHTML = '';
+  // One tick per minute (74 total), major every 10
+  for (var i=0; i<74; i++) {
+    var tick = document.createElement('div');
+    tick.className = 'nero-cap-tick' + (i % 10 === 0 ? ' major' : '');
+    ticks.appendChild(tick);
+  }
+}
+
+// ── Burn sequence ──
+function neroBurn() {
+  if (!neroDiscTracks.length) {
+    alert('No tracks to burn!\n\nAdd tracks to the disc first.');
+    return;
+  }
+  if (neroBurning) return;
+
+  var dlg = document.getElementById('nero-burn-dialog');
+  dlg.classList.add('open');
+  dlg.style.zIndex = ++chatZBase;
+  document.getElementById('nero-burn-close-btn').style.display = 'none';
+  document.getElementById('nero-done-btn').style.display = 'none';
+  document.getElementById('nero-log').innerHTML = '';
+  document.getElementById('nero-write-bar').style.width = '0%';
+  document.getElementById('nero-write-pct').textContent = '0%';
+  document.getElementById('nero-burn-total').textContent = neroDiscTracks.length;
+
+  var speed = parseInt(document.getElementById('nero-speed').value);
+  var kbs   = speed * 150;
+  document.getElementById('nero-stat-speed').textContent = speed + 'x (' + kbs.toLocaleString() + ' KB/s)';
+
+  neroBurning = true;
+  neroBurnStartTime = Date.now();
+
+  var totalSecs = neroCalcUsedSecs();
+  // Simulate burn time: 74 min disc at 12x takes ~6.1 min real → we fake it in ~20s
+  var fakeDuration = 20000; // ms
+  var elapsed = 0;
+  var trackProgress = 0; // 0..neroDiscTracks.length
+  var lastLogTime = 0;
+
+  var logMessages = [
+    'Initializing recorder...',
+    'Performing OPC (Optimal Power Calibration)...',
+    'Writing lead-in...',
+    'Phase 1: Writing audio tracks',
+    'Track 1: Writing...',
+    'Buffer level: OK',
+    'Track write in progress...',
+    'Verifying ATIP information...',
+    'Writing track data...',
+    'Buffer underrun protection: Active',
+    'Writing track data...',
+    'Writing track data...',
+    'Writing lead-out...',
+    'Fixating disc...',
+    'Disc successfully written!',
+  ];
+  var logIdx = 0;
+
+  function neroLog(msg) {
+    var log = document.getElementById('nero-log');
+    var line = document.createElement('div');
+    line.className = 'nero-log-line';
+    line.textContent = '> ' + msg;
+    log.appendChild(line);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  neroBurnInterval = setInterval(function() {
+    elapsed = Date.now() - neroBurnStartTime;
+    var pct = Math.min(100, (elapsed / fakeDuration) * 100);
+    var elapsedSecs = Math.floor(elapsed / 1000);
+    var remainSecs  = Math.max(0, Math.ceil((fakeDuration - elapsed) / 1000));
+
+    // Update write bar
+    document.getElementById('nero-write-bar').style.width = pct + '%';
+    document.getElementById('nero-write-pct').textContent = Math.floor(pct) + '%';
+
+    // Update buffer (fluctuate realistically)
+    var buf = 75 + Math.sin(elapsed * 0.003) * 20 + Math.random() * 5;
+    buf = Math.max(40, Math.min(100, buf));
+    document.getElementById('nero-buffer-bar').style.width = buf + '%';
+
+    // Update stats
+    document.getElementById('nero-stat-elapsed').textContent = neroFormatTime(elapsedSecs);
+    document.getElementById('nero-stat-remain').textContent  = remainSecs > 0 ? neroFormatTime(remainSecs) : '0:00';
+    var written = Math.floor((pct/100) * (totalSecs * kbs / 1024));
+    document.getElementById('nero-stat-written').textContent = written + ' MB';
+
+    // Update current track
+    trackProgress = Math.floor((pct/100) * neroDiscTracks.length);
+    trackProgress = Math.min(trackProgress, neroDiscTracks.length - 1);
+    var curTrack = neroDiscTracks[trackProgress];
+    document.getElementById('nero-burn-track').textContent =
+      'Track ' + (trackProgress+1) + ' of ' + neroDiscTracks.length + ': ' + curTrack.artist + ' - ' + curTrack.title;
+    document.getElementById('nero-burn-status').textContent =
+      pct < 95 ? 'Writing audio data...' : 'Finalizing disc...';
+
+    // Log messages
+    var logInterval = fakeDuration / logMessages.length;
+    if (elapsed > logIdx * logInterval && logIdx < logMessages.length) {
+      // Update track-specific messages
+      if (logMessages[logIdx].startsWith('Track 1:')) {
+        neroLog('Track ' + (trackProgress+1) + ': Writing ' + curTrack.artist + ' - ' + curTrack.title + '...');
+      } else {
+        neroLog(logMessages[logIdx]);
+      }
+      logIdx++;
+    }
+
+    if (pct >= 100) {
+      clearInterval(neroBurnInterval);
+      neroBurning = false;
+      document.getElementById('nero-burn-status').textContent = '✅ Disc successfully burned!';
+      document.getElementById('nero-burn-track').textContent =
+        neroDiscTracks.length + ' tracks written successfully.';
+      document.getElementById('nero-write-pct').textContent = '100%';
+      document.getElementById('nero-stat-remain').textContent = '0:00';
+      neroLog('');
+      neroLog('=== Disc successfully burned! ===');
+      neroLog('Total: ' + neroDiscTracks.length + ' tracks, ' + neroFormatTime(totalSecs));
+      neroLog('Please remove your disc from the drive.');
+      document.getElementById('nero-burn-close-btn').style.display = 'flex';
+      document.getElementById('nero-done-btn').style.display = 'block';
+    }
+  }, 100);
+}
+
+function closeNeroBurnDialog() {
+  if (neroBurning) {
+    if (!confirm('Cancel burn in progress? This will ruin the disc!')) return;
+    clearInterval(neroBurnInterval);
+    neroBurning = false;
+  }
+  document.getElementById('nero-burn-dialog').classList.remove('open');
+}
+
+makeDraggable(document.getElementById('nero-window'), document.getElementById('nero-titlebar'));
+makeDraggable(document.getElementById('nero-burn-dialog'), document.getElementById('nero-burn-titlebar'));
+document.getElementById('nero-window').addEventListener('mousedown', function(){ this.style.zIndex = ++chatZBase; });
 
 window.addEventListener('load', function() {
   showScreen('screen-poweron');
