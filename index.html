@@ -1684,6 +1684,154 @@ body {
 .nero-stat { display: flex; justify-content: space-between; }
 .nero-stat-label { color: #555; }
 .nero-stat-val { font-weight: bold; color: #000; }
+/* ════════════════════════════════════════
+   INTERNET EXPLORER 5 — LOCAL FILE VIEWER
+════════════════════════════════════════ */
+#ie-window {
+  position: absolute; top: 15px; left: 25px;
+  width: 740px; height: 640px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  display: none; flex-direction: column; z-index: 500;
+  font-family: 'Tahoma', Arial;
+}
+#ie-window.open { display: flex; }
+
+/* Title bar */
+.ie-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 22px;
+  cursor: grab; flex-shrink: 0;
+}
+.ie-titlebar:active { cursor: grabbing; }
+.ie-titlebar-left { display: flex; align-items: center; gap: 6px; }
+.ie-win-btns { display: flex; gap: 2px; }
+.ie-win-btn {
+  width: 16px; height: 14px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 9px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; font-weight: bold;
+}
+.ie-win-btn:active { border-color: #808080 #fff #fff #808080; }
+
+/* Menu bar */
+.ie-menubar {
+  display: flex; background: #c0c0c0; padding: 1px 2px;
+  border-bottom: 1px solid #808080; flex-shrink: 0;
+}
+.ie-menu {
+  font-size: 12px; padding: 2px 8px; cursor: pointer;
+  color: #000; position: relative;
+}
+.ie-menu:hover { background: #000080; color: #fff; }
+.ie-menu-dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; z-index: 3000; min-width: 180px;
+}
+.ie-menu:hover .ie-menu-dropdown { display: block; }
+.ie-menu-item {
+  font-size: 12px; padding: 4px 20px; color: #000;
+  cursor: pointer; white-space: nowrap;
+}
+.ie-menu-item:hover { background: #000080; color: #fff; }
+.ie-menu-item.disabled { color: #808080; cursor: default; }
+.ie-menu-item.disabled:hover { background: transparent; color: #808080; }
+.ie-menu-sep { height: 1px; background: #808080; margin: 2px 0; border-bottom: 1px solid #fff; }
+
+/* Toolbar */
+.ie-toolbar {
+  display: flex; align-items: center; gap: 1px;
+  padding: 2px 3px; background: #c0c0c0;
+  border-bottom: 1px solid #d0d0d0; flex-shrink: 0;
+}
+.ie-tb-btn {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 2px 5px; background: #c0c0c0; cursor: pointer;
+  border: 2px solid transparent; font-size: 8px;
+  font-family: 'Tahoma', Arial; gap: 1px; min-width: 36px; color: #000;
+}
+.ie-tb-btn:hover { border-color: #fff #808080 #808080 #fff; background: #d0d0d0; }
+.ie-tb-btn:active { border-color: #808080 #fff #fff #808080; }
+.ie-tb-btn.disabled { color: #808080; cursor: default; }
+.ie-tb-btn.disabled:hover { border-color: transparent; background: #c0c0c0; }
+.ie-tb-icon { font-size: 18px; line-height: 1; }
+.ie-tb-sep { width: 1px; background: #808080; height: 32px; margin: 0 2px; border-right: 1px solid #fff; }
+
+/* Address bar */
+.ie-address-bar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 4px; background: #c0c0c0;
+  border-bottom: 2px solid; border-color: #808080 #fff #fff #808080;
+  flex-shrink: 0;
+}
+.ie-addr-label { font-size: 12px; font-family: 'Tahoma', Arial; flex-shrink: 0; }
+.ie-addr-input {
+  flex: 1; height: 22px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  font-size: 12px; padding: 0 4px; font-family: 'Tahoma', Arial; background: #fff;
+  outline: none;
+}
+.ie-addr-go {
+  padding: 2px 10px; background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 12px; font-family: 'Tahoma', Arial; cursor: pointer;
+}
+.ie-addr-go:active { border-color: #808080 #fff #fff #808080; }
+
+/* Banner ad area */
+.ie-banner-wrap {
+  background: #000; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; overflow: hidden;
+  border-bottom: 2px solid #808080; height: 62px;
+  position: relative;
+}
+.ie-banner {
+  width: 468px; height: 60px; display: flex; align-items: center;
+  justify-content: space-between; cursor: pointer; position: relative;
+  overflow: hidden; flex-shrink: 0;
+}
+
+/* Content frame */
+.ie-content-wrap {
+  flex: 1; overflow: hidden; position: relative; background: #fff;
+  border: 2px solid; border-color: #808080 #fff #fff #808080; margin: 2px;
+}
+#ie-frame {
+  width: 100%; height: 100%; border: none; background: #fff;
+}
+
+/* Status bar */
+.ie-statusbar {
+  height: 20px; background: #c0c0c0; border-top: 1px solid #808080;
+  display: flex; align-items: center; padding: 0 4px;
+  font-size: 10px; font-family: 'Tahoma', Arial; flex-shrink: 0; gap: 4px;
+}
+.ie-status-panel {
+  border: 1px solid; border-color: #808080 #fff #fff #808080;
+  padding: 0 6px; font-size: 10px; height: 14px;
+  display: flex; align-items: center; flex-shrink: 0;
+}
+.ie-status-main { flex: 1; font-size: 10px; padding: 0 4px; }
+/* Throbber */
+.ie-throbber {
+  width: 22px; height: 22px; display: flex; align-items: center;
+  justify-content: center; font-size: 14px; flex-shrink: 0;
+}
+.ie-throbber.spinning { animation: ie-spin 0.6s linear infinite; }
+@keyframes ie-spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+
+/* Open file dialog */
+#ie-open-dialog {
+  position: absolute; top: 160px; left: 180px; width: 400px;
+  background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 0 #000; z-index: 6000;
+  display: none; flex-direction: column;
+}
+#ie-open-dialog.open { display: flex; }
 </style>
 </head>
 <body>
@@ -3132,6 +3280,157 @@ body {
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════
+       INTERNET EXPLORER 5
+  ══════════════════════════════════════ -->
+  <div id="ie-window">
+    <div class="ie-titlebar" id="ie-titlebar">
+      <div class="ie-titlebar-left">
+        <span style="font-size:14px;">🌐</span>
+        <span id="ie-title-text">Microsoft Internet Explorer</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div class="ie-throbber" id="ie-throbber">🌐</div>
+        <div class="ie-win-btns">
+          <div class="ie-win-btn" onclick="closeIE()">_</div>
+          <div class="ie-win-btn">□</div>
+          <div class="ie-win-btn" onclick="closeIE()">✕</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu bar -->
+    <div class="ie-menubar">
+      <div class="ie-menu">File
+        <div class="ie-menu-dropdown">
+          <div class="ie-menu-item" onclick="ieOpenFile()">Open Local File...</div>
+          <div class="ie-menu-item" onclick="ieOpenFPPage()">Open FrontPage Document...</div>
+          <div class="ie-menu-sep"></div>
+          <div class="ie-menu-item" onclick="ieSaveAs()">Save As...</div>
+          <div class="ie-menu-sep"></div>
+          <div class="ie-menu-item" onclick="closeIE()">Close</div>
+        </div>
+      </div>
+      <div class="ie-menu">Edit
+        <div class="ie-menu-dropdown">
+          <div class="ie-menu-item" onclick="ieEditInFP()">Edit with FrontPage</div>
+          <div class="ie-menu-sep"></div>
+          <div class="ie-menu-item disabled">Find (on this page)...</div>
+        </div>
+      </div>
+      <div class="ie-menu">View
+        <div class="ie-menu-dropdown">
+          <div class="ie-menu-item" onclick="ieViewSource()">Source</div>
+          <div class="ie-menu-sep"></div>
+          <div class="ie-menu-item" onclick="document.getElementById('ie-frame').contentWindow.location.reload()">Refresh</div>
+        </div>
+      </div>
+      <div class="ie-menu">Favorites
+        <div class="ie-menu-dropdown">
+          <div class="ie-menu-item disabled">Add to Favorites...</div>
+          <div class="ie-menu-sep"></div>
+          <div class="ie-menu-item disabled">Links</div>
+          <div class="ie-menu-item disabled">Media</div>
+        </div>
+      </div>
+      <div class="ie-menu">Tools
+        <div class="ie-menu-dropdown">
+          <div class="ie-menu-item" onclick="alert('Internet Options\n\nHome page: about:blank\nTemporary Internet Files: 32 MB\nHistory: 20 days\n\nDial-up: AOL 6.0 (56k)')">Internet Options...</div>
+        </div>
+      </div>
+      <div class="ie-menu">Help
+        <div class="ie-menu-dropdown">
+          <div class="ie-menu-item" onclick="alert('Microsoft Internet Explorer 5.5\nVersion: 5.50.4134.0100\n\n© 1995-2000 Microsoft Corporation\nAll rights reserved.\n\nUpdates available at windowsupdate.microsoft.com')">About Internet Explorer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="ie-toolbar">
+      <div class="ie-tb-btn disabled" id="ie-back-btn" onclick="ieGoBack()" title="Back">
+        <span class="ie-tb-icon">◀</span><span>Back</span>
+      </div>
+      <div class="ie-tb-btn disabled" id="ie-fwd-btn" onclick="ieGoForward()" title="Forward">
+        <span class="ie-tb-icon">▶</span><span>Forward</span>
+      </div>
+      <div class="ie-tb-btn" onclick="ieStop()" title="Stop">
+        <span class="ie-tb-icon">🛑</span><span>Stop</span>
+      </div>
+      <div class="ie-tb-btn" onclick="document.getElementById('ie-frame').contentWindow.location.reload()" title="Refresh">
+        <span class="ie-tb-icon">🔄</span><span>Refresh</span>
+      </div>
+      <div class="ie-tb-btn" onclick="ieGoHome()" title="Home">
+        <span class="ie-tb-icon">🏠</span><span>Home</span>
+      </div>
+      <div class="ie-tb-sep"></div>
+      <div class="ie-tb-btn" onclick="ieOpenFPPage()" title="Open FrontPage file">
+        <span class="ie-tb-icon">📂</span><span>Open</span>
+      </div>
+      <div class="ie-tb-btn" onclick="ieEditInFP()" title="Edit with FrontPage">
+        <span class="ie-tb-icon">✏️</span><span>Edit</span>
+      </div>
+      <div class="ie-tb-sep"></div>
+      <div class="ie-tb-btn disabled">
+        <span class="ie-tb-icon">⭐</span><span>Favorites</span>
+      </div>
+      <div class="ie-tb-btn disabled">
+        <span class="ie-tb-icon">📜</span><span>History</span>
+      </div>
+      <div class="ie-tb-btn disabled">
+        <span class="ie-tb-icon">📧</span><span>Mail</span>
+      </div>
+      <div class="ie-tb-btn disabled">
+        <span class="ie-tb-icon">🖨️</span><span>Print</span>
+      </div>
+    </div>
+
+    <!-- Address bar -->
+    <div class="ie-address-bar">
+      <span class="ie-addr-label">Address</span>
+      <input class="ie-addr-input" id="ie-addr-input" value="about:blank"
+        onkeydown="if(event.key==='Enter') ieNavigate(this.value)">
+      <div class="ie-addr-go" onclick="ieNavigate(document.getElementById('ie-addr-input').value)">Go</div>
+    </div>
+
+    <!-- Banner ad -->
+    <div class="ie-banner-wrap">
+      <div class="ie-banner" id="ie-banner" onclick="ieBannerClick()">
+        <!-- Rendered by JS -->
+      </div>
+      <div style="position:absolute;right:4px;top:2px;font-size:8px;color:#888;font-family:'Tahoma',Arial;">Advertisement</div>
+    </div>
+
+    <!-- Content frame -->
+    <div class="ie-content-wrap">
+      <iframe id="ie-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+    </div>
+
+    <!-- Status bar -->
+    <div class="ie-statusbar">
+      <div class="ie-status-main" id="ie-status">Done</div>
+      <div class="ie-status-panel">🔒 Internet</div>
+    </div>
+  </div>
+
+  <!-- IE Open FrontPage Dialog -->
+  <div id="ie-open-dialog">
+    <div class="w98-titlebar" id="ie-open-titlebar">
+      <div class="w98-titlebar-left"><span class="w98-title-icon">📂</span> Open</div>
+      <div class="w98-win-btns">
+        <div class="w98-win-btn" onclick="document.getElementById('ie-open-dialog').classList.remove('open')">✕</div>
+      </div>
+    </div>
+    <div style="padding:14px 18px;font-family:'Tahoma',Arial;font-size:12px;">
+      <div style="margin-bottom:8px;font-weight:bold;">FrontPage Documents:</div>
+      <div id="ie-open-list" style="background:#fff;border:2px solid;border-color:#808080 #fff #fff #808080;height:160px;overflow-y:auto;"></div>
+      <div style="margin-top:6px;color:#808080;font-size:11px;">Double-click to open in Internet Explorer.</div>
+      <div class="w98-login-divider"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;">
+        <button class="w98-login-btn" onclick="document.getElementById('ie-open-dialog').classList.remove('open')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /#canvas -->
 
 <script>
@@ -3631,9 +3930,155 @@ function closeMyComputer() {
 }
 
 // ════════════════════════════════════════
+// INTERNET EXPLORER 5
+// ════════════════════════════════════════
+var ieHistory    = [];
+var ieHistoryPos = -1;
+var ieCurrentFile = null;
+var ieBannerIdx  = 0;
+
+var IE_BANNERS = [
+  { bg:'linear-gradient(90deg,#003399,#0055cc)', html:'<div style="display:flex;align-items:center;width:468px;height:60px;padding:0 12px;gap:12px;box-sizing:border-box;"><div style="color:#fff;font-size:22px;font-weight:bold;font-family:Arial;letter-spacing:-1px;">AOL</div><div style="flex:1;color:#fff;font-family:Arial;font-size:13px;line-height:1.3;"><div style="font-weight:bold;font-size:15px;">Try AOL 6.0 FREE for 1000 Hours!</div><div style="font-size:11px;opacity:0.9;">The fastest, easiest way to get online. Install today!</div></div><div style="background:#ffcc00;color:#000;font-weight:bold;font-size:12px;font-family:Arial;padding:6px 12px;white-space:nowrap;">FREE CD &gt;</div></div>' },
+  { bg:'#000', html:'<div style="display:flex;align-items:center;width:468px;height:60px;padding:0 12px;gap:12px;box-sizing:border-box;border:2px solid #333;"><div style="color:#00ff41;font-size:28px;font-weight:bold;font-family:Courier New,monospace;">N</div><div style="flex:1;font-family:Arial;"><div style="color:#fff;font-weight:bold;font-size:14px;">Napster — Free Music Downloads</div><div style="color:#aaa;font-size:11px;">Share music with 38 million users worldwide. 100% Free.</div></div><div style="background:#00ff41;color:#000;font-weight:bold;font-size:11px;font-family:Arial;padding:5px 10px;">DOWNLOAD NOW</div></div>' },
+  { bg:'linear-gradient(90deg,#cc0000,#ff4400)', html:'<div style="display:flex;align-items:center;width:468px;height:60px;padding:0 14px;gap:12px;box-sizing:border-box;"><div style="font-size:32px;">&#127829;</div><div style="flex:1;font-family:Arial;"><div style="color:#fff;font-weight:bold;font-size:15px;">Pizza Hut — Order Online!</div><div style="color:#ffeecc;font-size:11px;">Hot &amp; fresh delivery in 30 minutes. Order at pizzahut.com</div></div><div style="background:#ffcc00;color:#cc0000;font-weight:bold;font-size:12px;font-family:Arial;padding:5px 10px;">ORDER NOW &gt;</div></div>' },
+  { bg:'linear-gradient(135deg,#001a33,#003366)', html:'<div style="display:flex;align-items:center;width:468px;height:60px;padding:0 14px;gap:12px;box-sizing:border-box;"><div style="font-size:28px;">&#128187;</div><div style="flex:1;font-family:Arial;"><div style="color:#fff;font-weight:bold;font-size:14px;">Dell Home Systems — From $799</div><div style="color:#99ccff;font-size:11px;">Pentium III 600MHz, 128MB RAM, 20GB HDD, 56k Modem</div></div><div style="background:#0066ff;color:#fff;font-weight:bold;font-size:11px;font-family:Arial;padding:5px 10px;border:1px solid #99ccff;">SHOP NOW</div></div>' },
+  { bg:'linear-gradient(90deg,#006600,#009900)', html:'<div style="display:flex;align-items:center;width:468px;height:60px;padding:0 14px;gap:12px;box-sizing:border-box;"><div style="color:#fff;font-size:20px;font-weight:bold;font-family:Times New Roman,serif;">eBay</div><div style="flex:1;font-family:Arial;"><div style="color:#fff;font-weight:bold;font-size:14px;">Buy &amp; Sell Anything on eBay!</div><div style="color:#ccffcc;font-size:11px;">Millions of items. It\'s new. It\'s used. It\'s everything.</div></div><div style="background:#ffcc00;color:#000;font-weight:bold;font-size:11px;font-family:Arial;padding:5px 10px;">BID NOW &gt;</div></div>' },
+  { bg:'linear-gradient(90deg,#000033,#000066)', html:'<div style="display:flex;align-items:center;width:468px;height:60px;padding:0 14px;gap:12px;box-sizing:border-box;"><div style="font-size:26px;">&#127925;</div><div style="flex:1;font-family:Arial;"><div style="color:#fff;font-weight:bold;font-size:14px;">Columbia House — 12 CDs for the price of 1!</div><div style="color:#aaaaff;font-size:11px;">Choose from thousands of titles. Join today at ColumbiaHouse.com</div></div><div style="background:#ff6600;color:#fff;font-weight:bold;font-size:11px;font-family:Arial;padding:5px 10px;">JOIN FREE</div></div>' },
+];
+
+function openIE(filename, html) {
+  var win = document.getElementById('ie-window');
+  win.classList.add('open');
+  win.style.zIndex = ++chatZBase;
+  ieRenderBanner();
+  if (!win._bannerInterval) {
+    win._bannerInterval = setInterval(function() {
+      if (win.classList.contains('open')) { ieBannerIdx=(ieBannerIdx+1)%IE_BANNERS.length; ieRenderBanner(); }
+    }, 8000);
+  }
+  if (html) { ieLoadHTML(html, filename||'document.html'); }
+  else { ieGoHome(); }
+}
+function closeIE() { document.getElementById('ie-window').classList.remove('open'); }
+function ieRenderBanner() {
+  var b=IE_BANNERS[ieBannerIdx];
+  var wrap=document.getElementById('ie-banner');
+  wrap.style.background=b.bg; wrap.innerHTML=b.html;
+}
+function ieBannerClick() { ieSetStatus('Cannot find server or DNS Error'); setTimeout(function(){ieSetStatus('Done');},2000); }
+function ieSetStatus(msg) { document.getElementById('ie-status').textContent=msg; }
+function ieSetTitle(t) { document.getElementById('ie-title-text').textContent=(t?t+' - ':'')+'Microsoft Internet Explorer'; }
+function ieStartLoad(name) { document.getElementById('ie-throbber').classList.add('spinning'); ieSetStatus('Opening '+name+'...'); document.getElementById('ie-addr-input').value='file://'+name; }
+function ieFinishLoad(t) { document.getElementById('ie-throbber').classList.remove('spinning'); ieSetStatus('Done'); ieSetTitle(t||'Local File'); }
+
+function ieLoadHTML(html, filename) {
+  ieCurrentFile=filename; ieStartLoad(filename);
+  var frame=document.getElementById('ie-frame');
+  var doc=frame.contentDocument||frame.contentWindow.document;
+  doc.open(); doc.write(html); doc.close();
+  setTimeout(function(){
+    try{ var t=frame.contentDocument.title||filename; ieFinishLoad(t); ieSetTitle(t); document.getElementById('ie-addr-input').value='file:///C:/My Documents/My Webs/'+filename; }
+    catch(e){ ieFinishLoad(filename); }
+    ieHistory=ieHistory.slice(0,ieHistoryPos+1);
+    ieHistory.push({html:html,filename:filename});
+    ieHistoryPos=ieHistory.length-1;
+    ieUpdateNavBtns();
+  },300);
+}
+
+function ieGoHome() {
+  var files=[]; try{files=JSON.parse(localStorage.getItem('fp_pages')||'[]');}catch(e){}
+  var homeHTML='<!DOCTYPE HTML><html><head><title>Internet Explorer Start Page</title></head>'
+    +'<body style="margin:0;padding:0;font-family:Arial,sans-serif;background:#fff;">'
+    +'<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="#003399" height="50" style="padding:0 16px;">'
+    +'<font color="#ffffff" size="5" face="Arial"><b>Microsoft Internet Explorer</b></font>&nbsp;&nbsp;<font color="#99ccff" size="2">Start Page</font>'
+    +'</td></tr><tr><td style="padding:16px;vertical-align:top;"><table cellpadding="8" cellspacing="0" border="0" width="100%"><tr>'
+    +'<td width="50%" valign="top"><p><font face="Arial" size="4"><b>Welcome to Internet Explorer 5</b></font></p>'
+    +'<p><font face="Arial" size="2">Use <b>File &rarr; Open FrontPage Document</b> to view your saved web pages.</font></p>'
+    +'<p><font face="Arial" size="2"><b>Tips:</b><br>&bull; Open your FrontPage creations to preview them<br>&bull; Click <b>Edit</b> to open in FrontPage Editor<br>&bull; Use Back/Forward to navigate</font></p></td>'
+    +'<td width="50%" valign="top" bgcolor="#f0f4ff" style="border:1px solid #ccddff;padding:12px;">'
+    +'<p><font face="Arial" size="3"><b>My FrontPage Documents</b></font></p>';
+  if(files.length){
+    files.forEach(function(f){
+      homeHTML+='<p style="margin:4px 0;"><font face="Arial" size="2">&#128196; <a href="#" onclick="parent.ieOpenFPByName(\''+f.name.replace(/'/g,"\\'")+'\');return false;" style="color:#0000cc;">'+esc(f.name)+'</a> <font color="#808080">('+esc(f.date||'')+')</font></font></p>';
+    });
+  } else {
+    homeHTML+='<p><font face="Arial" size="2" color="#808080"><i>No FrontPage documents saved yet.</i></font></p>';
+  }
+  homeHTML+='</td></tr></table></td></tr><tr><td bgcolor="#003399" height="24" style="padding:0 12px;"><font color="#99ccff" size="1" face="Arial">Internet Explorer 5.5 &copy; 2000 Microsoft Corporation</font></td></tr></table></body></html>';
+  ieLoadHTML(homeHTML,'Start Page');
+  document.getElementById('ie-addr-input').value='about:home';
+}
+
+function ieStop() { document.getElementById('ie-throbber').classList.remove('spinning'); ieSetStatus('Done'); }
+function ieGoBack() {
+  if(ieHistoryPos<=0) return; ieHistoryPos--;
+  var e=ieHistory[ieHistoryPos]; var frame=document.getElementById('ie-frame');
+  var doc=frame.contentDocument||frame.contentWindow.document; doc.open(); doc.write(e.html); doc.close();
+  ieSetTitle(e.filename); ieUpdateNavBtns();
+}
+function ieGoForward() {
+  if(ieHistoryPos>=ieHistory.length-1) return; ieHistoryPos++;
+  var e=ieHistory[ieHistoryPos]; var frame=document.getElementById('ie-frame');
+  var doc=frame.contentDocument||frame.contentWindow.document; doc.open(); doc.write(e.html); doc.close();
+  ieSetTitle(e.filename); ieUpdateNavBtns();
+}
+function ieUpdateNavBtns() {
+  document.getElementById('ie-back-btn').classList.toggle('disabled',ieHistoryPos<=0);
+  document.getElementById('ie-fwd-btn').classList.toggle('disabled',ieHistoryPos>=ieHistory.length-1);
+}
+function ieNavigate(url) {
+  if(url==='about:home'||url==='about:blank'||url===''){ieGoHome();return;}
+  ieSetStatus('Cannot find server or DNS Error'); setTimeout(function(){ieSetStatus('Done');},2000);
+}
+function ieOpenFPPage() {
+  var files=[]; try{files=JSON.parse(localStorage.getItem('fp_pages')||'[]');}catch(e){}
+  var list=document.getElementById('ie-open-list'); list.innerHTML='';
+  if(!files.length){ list.innerHTML='<div style="padding:12px;color:#808080;font-size:11px;font-family:Tahoma,Arial;">No FrontPage documents found. Save a page in FrontPage Editor first.</div>'; }
+  else {
+    files.forEach(function(f){
+      var item=document.createElement('div');
+      item.style.cssText='padding:5px 10px;border-bottom:1px solid #eee;cursor:pointer;font-size:12px;font-family:Tahoma,Arial;display:flex;align-items:center;gap:8px;';
+      item.innerHTML='<span style="font-size:16px;">&#128196;</span><div><div style="font-weight:bold;">'+esc(f.name)+'</div><div style="font-size:10px;color:#808080;">'+esc(f.date||'')+'</div></div>';
+      item.addEventListener('mouseenter',function(){this.style.background='#000080';this.style.color='#fff';});
+      item.addEventListener('mouseleave',function(){this.style.background='';this.style.color='';});
+      item.addEventListener('dblclick',function(){ document.getElementById('ie-open-dialog').classList.remove('open'); ieLoadHTML(f.fullHtml||f.html,f.name); });
+      list.appendChild(item);
+    });
+  }
+  var dlg=document.getElementById('ie-open-dialog'); dlg.classList.add('open'); dlg.style.zIndex=++chatZBase;
+}
+function ieOpenFPByName(name) {
+  var files=[]; try{files=JSON.parse(localStorage.getItem('fp_pages')||'[]');}catch(e){}
+  var f=files.find(function(x){return x.name===name;}); if(f) ieLoadHTML(f.fullHtml||f.html,f.name);
+}
+function ieOpenFile() {
+  var input=document.createElement('input'); input.type='file'; input.accept='.html,.htm';
+  input.onchange=function(){ var file=input.files[0]; if(!file) return; var r=new FileReader(); r.onload=function(e){ieLoadHTML(e.target.result,file.name);}; r.readAsText(file); };
+  input.click();
+}
+function ieSaveAs() {
+  if(!ieHistory[ieHistoryPos]) return;
+  var e=ieHistory[ieHistoryPos]; var blob=new Blob([e.html],{type:'text/html'});
+  var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=e.filename||'page.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+function ieEditInFP() {
+  if(!ieHistory[ieHistoryPos]){alert('No page loaded.');return;}
+  var e=ieHistory[ieHistoryPos]; openFrontPage(e.filename,e.html);
+}
+function ieViewSource() {
+  if(!ieHistory[ieHistoryPos]) return;
+  var e=ieHistory[ieHistoryPos]; openFrontPage('Source: '+(e.filename||''),e.html);
+}
+
+makeDraggable(document.getElementById('ie-window'), document.getElementById('ie-titlebar'));
+makeDraggable(document.getElementById('ie-open-dialog'), document.getElementById('ie-open-titlebar'));
+document.getElementById('ie-window').addEventListener('mousedown', function(){ this.style.zIndex = ++chatZBase; });
+
+// ════════════════════════════════════════
 // PLACEHOLDER LAUNCHERS (to be built)
 // ════════════════════════════════════════
-function openIE() { alert('Internet Explorer 5\nComing soon!'); }
 function openWinamp() { alert('Winamp 2.x\nComing soon!'); }
 function openNapster() { alert('Napster\nComing soon!'); }
 function openNotepad() { alert('Notepad\nComing soon!'); }
@@ -4689,8 +5134,8 @@ function fpUpdateFormatButtons() {
   });
 }
 
-document.getElementById('fp-editor').addEventListener('keyup', fpUpdateFormatButtons);
-document.getElementById('fp-editor').addEventListener('mouseup', fpUpdateFormatButtons);
+document.getElementById('fp-editor').addEventListener('keyup', function(){ fpUpdateFormatButtons(); fpSaveSelection(); });
+document.getElementById('fp-editor').addEventListener('mouseup', function(){ fpUpdateFormatButtons(); fpSaveSelection(); });
 document.getElementById('fp-editor').addEventListener('input', fpUpdateStatus);
 
 function fpBuildColorPicker() {
@@ -4790,21 +5235,40 @@ function fpDoInsertImage() {
   if (file) { var r=new FileReader(); r.onload=function(e){insertImg(e.target.result);}; r.readAsDataURL(file); }
   else if (url) insertImg(url);
 }
-function fpInsertHR() { document.getElementById('fp-editor').focus(); document.execCommand('insertHTML',false,'<hr>'); }
-function fpInsertLineBreak() { document.getElementById('fp-editor').focus(); document.execCommand('insertHTML',false,'<br>'); }
+function fpSaveSelection() {
+  var sel = window.getSelection();
+  if (sel && sel.rangeCount && document.getElementById('fp-editor').contains(sel.anchorNode)) {
+    fpSavedRange = sel.getRangeAt(0).cloneRange();
+  }
+}
+function fpRestoreSelection() {
+  if (!fpSavedRange) return;
+  var sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(fpSavedRange);
+}
+function fpInsertAtCursor(html) {
+  fpRestoreSelection();
+  document.getElementById('fp-editor').focus();
+  document.execCommand('insertHTML', false, html);
+  fpSavedRange = null;
+}
+function fpInsertHR() { fpInsertAtCursor('<hr>'); }
+function fpInsertLineBreak() { fpInsertAtCursor('<br>'); }
 function fpInsertTable() {
   var rows=prompt('Rows:','3'); var cols=prompt('Columns:','3');
   if (!rows||!cols) return;
   var html='<table border="1" cellpadding="4" cellspacing="0" style="border-collapse:collapse;">';
   for(var r=0;r<+rows;r++){html+='<tr>';for(var c=0;c<+cols;c++)html+='<td>&nbsp;</td>';html+='</tr>';}
   html+='</table><p></p>';
-  document.getElementById('fp-editor').focus();
-  document.execCommand('insertHTML',false,html);
+  fpInsertAtCursor(html);
 }
 function fpInsertLink() {
   var url=prompt('URL:','http://'); if(!url) return;
+  fpRestoreSelection();
   document.getElementById('fp-editor').focus();
   document.execCommand('createLink',false,url);
+  fpSavedRange = null;
 }
 function fpFindReplace() {
   var find=prompt('Find:'); if(!find) return;
