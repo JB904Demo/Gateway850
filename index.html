@@ -1832,6 +1832,211 @@ body {
   display: none; flex-direction: column;
 }
 #ie-open-dialog.open { display: flex; }
+/* ════════════════════════════════════════
+   NAPSTER 2.0 BETA 9.5
+════════════════════════════════════════ */
+#napster-window {
+  position: absolute; top: 20px; left: 30px;
+  width: 720px; height: 600px;
+  background: #ffffff;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  display: none; flex-direction: column; z-index: 500;
+  font-family: 'Tahoma', Arial;
+}
+#napster-window.open { display: flex; }
+
+/* Title bar */
+.nap-titlebar {
+  background: linear-gradient(90deg, #000000, #222222);
+  color: #fff; font-size: 12px; font-weight: bold;
+  padding: 2px 4px; display: flex; align-items: center;
+  justify-content: space-between; height: 22px;
+  cursor: grab; flex-shrink: 0;
+}
+.nap-titlebar:active { cursor: grabbing; }
+.nap-titlebar-left { display: flex; align-items: center; gap: 8px; }
+.nap-logo-text {
+  font-size: 14px; font-weight: bold; font-family: Arial;
+  color: #fff; letter-spacing: -0.5px;
+}
+.nap-logo-text span { color: #ffcc00; }
+.nap-win-btns { display: flex; gap: 2px; }
+.nap-win-btn {
+  width: 16px; height: 14px; background: #555;
+  border: 1px solid; border-color: #888 #333 #333 #888;
+  font-size: 9px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff; font-weight: bold;
+}
+.nap-win-btn:active { border-color: #333 #888 #888 #333; }
+
+/* Menu bar */
+.nap-menubar {
+  display: flex; background: #f0f0f0; padding: 1px 2px;
+  border-bottom: 1px solid #ccc; flex-shrink: 0;
+}
+.nap-menu {
+  font-size: 12px; padding: 2px 8px; cursor: pointer; color: #000; position: relative;
+}
+.nap-menu:hover { background: #000080; color: #fff; }
+.nap-menu-dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: #fff; border: 1px solid #808080;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2); z-index: 3000; min-width: 160px;
+}
+.nap-menu:hover .nap-menu-dropdown { display: block; }
+.nap-menu-item {
+  font-size: 12px; padding: 4px 20px; color: #000; cursor: pointer; white-space: nowrap;
+}
+.nap-menu-item:hover { background: #000080; color: #fff; }
+.nap-menu-sep { height: 1px; background: #ccc; margin: 2px 0; }
+
+/* Top status bar - connection info */
+.nap-conn-bar {
+  background: #1a1a1a; color: #fff; padding: 4px 8px;
+  display: flex; align-items: center; gap: 16px; flex-shrink: 0;
+  font-size: 11px; font-family: 'Tahoma', Arial;
+}
+.nap-conn-dot { width: 8px; height: 8px; border-radius: 50%; background: #00cc00; flex-shrink: 0; box-shadow: 0 0 4px #00ff00; }
+.nap-conn-info { color: #aaa; }
+.nap-conn-info span { color: #fff; font-weight: bold; }
+.nap-conn-users { margin-left: auto; color: #ffcc00; font-weight: bold; }
+
+/* Tab bar */
+.nap-tabs {
+  display: flex; background: #e8e8e8; border-bottom: 2px solid #000;
+  flex-shrink: 0;
+}
+.nap-tab {
+  padding: 6px 20px; font-size: 12px; font-weight: bold;
+  font-family: 'Tahoma', Arial; cursor: pointer; color: #555;
+  border-right: 1px solid #ccc; border-bottom: 2px solid transparent;
+  margin-bottom: -2px; background: #e8e8e8;
+}
+.nap-tab:hover { background: #d8d8d8; color: #000; }
+.nap-tab.active {
+  background: #fff; color: #000; border-bottom: 2px solid #fff;
+  border-top: 2px solid #000; border-left: 1px solid #ccc;
+}
+
+/* Tab panels */
+.nap-panel { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+.nap-panel.active { display: flex; }
+
+/* ── SEARCH PANEL ── */
+.nap-search-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px; background: #f8f8f8; border-bottom: 1px solid #ccc; flex-shrink: 0;
+}
+.nap-search-label { font-size: 12px; font-weight: bold; white-space: nowrap; }
+.nap-search-input {
+  flex: 1; height: 24px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  font-size: 12px; padding: 0 6px; font-family: 'Tahoma', Arial; outline: none;
+}
+.nap-search-type {
+  height: 24px; font-size: 11px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  background: #fff; padding: 0 4px; font-family: 'Tahoma', Arial;
+}
+.nap-search-btn {
+  padding: 3px 16px; background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 12px; font-weight: bold; font-family: 'Tahoma', Arial; cursor: pointer;
+}
+.nap-search-btn:active { border-color: #808080 #fff #fff #808080; }
+.nap-results-header {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 60px 70px 60px 70px;
+  background: #ddd; border-bottom: 1px solid #aaa;
+  font-size: 11px; font-weight: bold; font-family: 'Tahoma', Arial;
+  flex-shrink: 0;
+}
+.nap-results-header div { padding: 3px 6px; border-right: 1px solid #aaa; cursor: pointer; }
+.nap-results-header div:hover { background: #ccc; }
+.nap-results-list { flex: 1; overflow-y: auto; background: #fff; }
+.nap-result-row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 60px 70px 60px 70px;
+  font-size: 11px; font-family: 'Tahoma', Arial;
+  border-bottom: 1px solid #f0f0f0; cursor: pointer;
+}
+.nap-result-row:hover { background: #e8eeff; }
+.nap-result-row.selected { background: #000080; color: #fff; }
+.nap-result-row div { padding: 2px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-right: 1px solid #f0f0f0; }
+.nap-result-row.selected div { border-right-color: #0000aa; }
+.nap-result-t1 { color: #0000cc; font-weight: bold; }
+.nap-result-row.selected .nap-result-t1 { color: #aaccff; }
+.nap-search-footer {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 8px; background: #f0f0f0; border-top: 1px solid #ccc;
+  font-size: 11px; font-family: 'Tahoma', Arial; flex-shrink: 0;
+}
+.nap-dl-btn {
+  padding: 3px 14px; background: #c0c0c0;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: 11px; font-weight: bold; cursor: pointer;
+}
+.nap-dl-btn:active { border-color: #808080 #fff #fff #808080; }
+
+/* ── TRANSFER PANEL ── */
+.nap-transfer-section { flex-shrink: 0; }
+.nap-transfer-header {
+  background: #1a1a1a; color: #fff; font-size: 11px; font-weight: bold;
+  padding: 3px 8px; display: flex; align-items: center; gap: 8px;
+}
+.nap-transfer-cols {
+  display: grid;
+  grid-template-columns: 2fr 1fr 90px 70px 80px 70px;
+  background: #ddd; border-bottom: 1px solid #aaa;
+  font-size: 11px; font-weight: bold; flex-shrink: 0;
+}
+.nap-transfer-cols div { padding: 2px 6px; border-right: 1px solid #aaa; }
+.nap-transfer-list { overflow-y: auto; background: #fff; }
+.nap-transfer-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 90px 70px 80px 70px;
+  font-size: 11px; font-family: 'Tahoma', Arial;
+  border-bottom: 1px solid #f0f0f0; align-items: center;
+}
+.nap-transfer-row:hover { background: #f0f0f8; }
+.nap-transfer-row div { padding: 2px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Progress bar inside transfer row */
+.nap-xfer-bar-wrap { background: #e0e0e0; height: 10px; border: 1px solid #aaa; margin: 0 4px; position: relative; }
+.nap-xfer-bar { height: 100%; background: linear-gradient(90deg, #0044cc, #4488ff); }
+.nap-xfer-status-dl { color: #0000cc; font-size: 10px; }
+.nap-xfer-status-ul { color: #006600; font-size: 10px; }
+.nap-xfer-status-seed { color: #888; font-size: 10px; }
+
+/* ── MY MUSIC PANEL ── */
+.nap-music-toolbar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 8px; background: #f8f8f8; border-bottom: 1px solid #ccc; flex-shrink: 0;
+}
+.nap-music-cols {
+  display: grid;
+  grid-template-columns: 2.5fr 1.5fr 60px 60px;
+  background: #ddd; border-bottom: 1px solid #aaa;
+  font-size: 11px; font-weight: bold; flex-shrink: 0;
+}
+.nap-music-cols div { padding: 3px 6px; border-right: 1px solid #aaa; cursor: pointer; }
+.nap-music-list { flex: 1; overflow-y: auto; background: #fff; }
+.nap-music-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1.5fr 60px 60px;
+  font-size: 11px; font-family: 'Tahoma', Arial;
+  border-bottom: 1px solid #f0f0f0; cursor: pointer;
+}
+.nap-music-row:hover { background: #e8eeff; }
+.nap-music-row.selected { background: #000080; color: #fff; }
+.nap-music-row div { padding: 3px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-right: 1px solid #f0f0f0; }
+.nap-music-shared { color: #008800; font-size: 10px; }
+.nap-music-row.selected .nap-music-shared { color: #aaffaa; }
+
+/* Status bar */
+.nap-statusbar {
+  height: 20px; background: #f0f0f0; border-top: 1px solid #ccc;
+  display: flex; align-items: center; padding: 0 8px;
+  font-size: 10px; font-family: 'Tahoma', Arial; flex-shrink: 0; gap: 12px;
+}
 </style>
 </head>
 <body>
@@ -3431,6 +3636,132 @@ body {
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════
+       NAPSTER 2.0 BETA 9.5
+  ══════════════════════════════════════ -->
+  <div id="napster-window">
+    <div class="nap-titlebar" id="nap-titlebar">
+      <div class="nap-titlebar-left">
+        <div class="nap-logo-text"><span>nap</span>ster</div>
+        <span style="font-size:10px;color:#888;">beta 9.5 — not affiliated with the RIAA</span>
+      </div>
+      <div class="nap-win-btns">
+        <div class="nap-win-btn" onclick="closeNapster()">_</div>
+        <div class="nap-win-btn">□</div>
+        <div class="nap-win-btn" onclick="closeNapster()">✕</div>
+      </div>
+    </div>
+
+    <div class="nap-menubar">
+      <div class="nap-menu">File
+        <div class="nap-menu-dropdown">
+          <div class="nap-menu-item" onclick="napSetTab('music')">My Music Library</div>
+          <div class="nap-menu-sep"></div>
+          <div class="nap-menu-item" onclick="closeNapster()">Exit</div>
+        </div>
+      </div>
+      <div class="nap-menu">Napster
+        <div class="nap-menu-dropdown">
+          <div class="nap-menu-item">Setup Wizard...</div>
+          <div class="nap-menu-item" onclick="alert('User: Y2JoeyFSU\nConnection: 56k Modem\nFiles Shared: 47\nStatus: Connected to napster.com\n\nTotal downloads: 312\nTotal uploads: 89')">My Profile</div>
+          <div class="nap-menu-sep"></div>
+          <div class="nap-menu-item">Preferences...</div>
+        </div>
+      </div>
+      <div class="nap-menu">Help
+        <div class="nap-menu-dropdown">
+          <div class="nap-menu-item" onclick="alert('Napster 2.0 Beta 9.5\nBuild 9.5.148\n\n© 2000 Napster, Inc.\nAll rights reserved.\n\nCurrently fighting for your right\nto share music. Stay tuned.')">About Napster</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection status bar -->
+    <div class="nap-conn-bar">
+      <div class="nap-conn-dot" id="nap-conn-dot"></div>
+      <div class="nap-conn-info">Connected to <span>napster.com</span> as <span>Y2JoeyFSU</span> via <span>56k Modem</span></div>
+      <div class="nap-conn-users">🎵 <span id="nap-user-count">57,284</span> users online · <span id="nap-file-count">312,847</span> files shared</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="nap-tabs">
+      <div class="nap-tab active" id="nap-tab-search" onclick="napSetTab('search')">🔍 Search</div>
+      <div class="nap-tab" id="nap-tab-transfer" onclick="napSetTab('transfer')">⬇ Transfer</div>
+      <div class="nap-tab" id="nap-tab-music" onclick="napSetTab('music')">🎵 My Music</div>
+    </div>
+
+    <!-- SEARCH PANEL -->
+    <div class="nap-panel active" id="nap-panel-search">
+      <div class="nap-search-bar">
+        <span class="nap-search-label">Artist:</span>
+        <input class="nap-search-input" id="nap-search-artist" placeholder="e.g. Dashboard Confessional"
+          onkeydown="if(event.key==='Enter') napDoSearch()">
+        <span class="nap-search-label">Song:</span>
+        <input class="nap-search-input" id="nap-search-song" placeholder="optional"
+          onkeydown="if(event.key==='Enter') napDoSearch()">
+        <select class="nap-search-type">
+          <option>MP3</option><option>Any</option>
+        </select>
+        <div class="nap-search-btn" onclick="napDoSearch()">Find It!</div>
+      </div>
+      <div class="nap-results-header">
+        <div>Filename</div><div>User</div><div>Bitrate</div><div>Freq</div><div>Size</div><div>Speed</div>
+      </div>
+      <div class="nap-results-list" id="nap-results-list">
+        <div style="padding:30px;text-align:center;color:#808080;font-size:12px;font-family:Tahoma,Arial;">
+          Enter an artist name above and click <b>Find It!</b> to search.
+        </div>
+      </div>
+      <div class="nap-search-footer">
+        <div class="nap-dl-btn" onclick="napDownloadSelected()">Download</div>
+        <div class="nap-dl-btn" onclick="napGetMoreResults()">More Results</div>
+        <span id="nap-result-count" style="color:#555;"></span>
+        <span style="margin-left:auto;color:#888;font-size:10px;">Double-click to download · Right-click for options</span>
+      </div>
+    </div>
+
+    <!-- TRANSFER PANEL -->
+    <div class="nap-panel" id="nap-panel-transfer">
+      <!-- Downloads section -->
+      <div class="nap-transfer-section" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+        <div class="nap-transfer-header">
+          <span>⬇</span> Downloading (<span id="nap-dl-count">0</span>)
+        </div>
+        <div class="nap-transfer-cols">
+          <div>Filename</div><div>User</div><div>Progress</div><div>Size</div><div>Speed</div><div>Status</div>
+        </div>
+        <div class="nap-transfer-list" id="nap-dl-list" style="flex:1;"></div>
+      </div>
+      <!-- Uploads section -->
+      <div class="nap-transfer-section" style="flex:1;display:flex;flex-direction:column;min-height:0;border-top:2px solid #aaa;">
+        <div class="nap-transfer-header">
+          <span>⬆</span> Uploading to others (<span id="nap-ul-count">0</span>)
+        </div>
+        <div class="nap-transfer-cols">
+          <div>Filename</div><div>User</div><div>Progress</div><div>Size</div><div>Speed</div><div>Status</div>
+        </div>
+        <div class="nap-transfer-list" id="nap-ul-list" style="flex:1;"></div>
+      </div>
+    </div>
+
+    <!-- MY MUSIC PANEL -->
+    <div class="nap-panel" id="nap-panel-music">
+      <div class="nap-music-toolbar">
+        <span style="font-weight:bold;font-size:12px;">Shared folder:</span>
+        <span style="font-size:11px;color:#555;">C:\My Documents\My Music\</span>
+        <div style="margin-left:auto;font-size:11px;color:#555;" id="nap-lib-count"></div>
+      </div>
+      <div class="nap-music-cols">
+        <div>Filename</div><div>Artist</div><div>Size</div><div>Shared</div>
+      </div>
+      <div class="nap-music-list" id="nap-music-list"></div>
+    </div>
+
+    <div class="nap-statusbar">
+      <span id="nap-status-left">Ready</span>
+      <span style="margin-left:auto;" id="nap-status-right">57,284 users · 312,847 files</span>
+    </div>
+  </div>
+
 </div><!-- /#canvas -->
 
 <script>
@@ -4080,7 +4411,384 @@ document.getElementById('ie-window').addEventListener('mousedown', function(){ t
 // PLACEHOLDER LAUNCHERS (to be built)
 // ════════════════════════════════════════
 function openWinamp() { alert('Winamp 2.x\nComing soon!'); }
-function openNapster() { alert('Napster\nComing soon!'); }
+// ════════════════════════════════════════
+// NAPSTER 2.0 BETA 9.5
+// ════════════════════════════════════════
+
+// ── Full MP3 library (My Music) ──
+var NAP_LIBRARY = [
+  // Brand New
+  { file:'Brand New - Seventy Times 7.mp3',           artist:'Brand New',           size:'3.2 MB', dur:'3:31', kbps:128 },
+  { file:'Brand New - Jude Law and a Semester Abroad.mp3', artist:'Brand New',      size:'3.5 MB', dur:'3:50', kbps:128 },
+  { file:'Brand New - The Quiet Things That No One Ever.mp3', artist:'Brand New',   size:'3.8 MB', dur:'4:08', kbps:128 },
+  { file:'Brand New - Sic Transit Gloria.mp3',        artist:'Brand New',           size:'3.1 MB', dur:'3:22', kbps:128 },
+  // Taking Back Sunday
+  { file:'Taking Back Sunday - Cute Without the E.mp3', artist:'Taking Back Sunday', size:'3.6 MB', dur:'3:55', kbps:128 },
+  { file:'Taking Back Sunday - Great Romances of the 20th Century.mp3', artist:'Taking Back Sunday', size:'3.3 MB', dur:'3:35', kbps:128 },
+  { file:'Taking Back Sunday - You Know How I Do.mp3', artist:'Taking Back Sunday', size:'3.0 MB', dur:'3:16', kbps:128 },
+  { file:'Taking Back Sunday - There Is No I in Team.mp3', artist:'Taking Back Sunday', size:'3.4 MB', dur:'3:42', kbps:128 },
+  // Something Corporate
+  { file:'Something Corporate - Konstantine.mp3',     artist:'Something Corporate', size:'9.1 MB', dur:'9:57', kbps:128 },
+  { file:'Something Corporate - Punk Rock Princess.mp3', artist:'Something Corporate', size:'3.4 MB', dur:'3:41', kbps:128 },
+  { file:'Something Corporate - I Woke Up in a Car.mp3', artist:'Something Corporate', size:'3.2 MB', dur:'3:28', kbps:128 },
+  { file:'Something Corporate - Cavanaugh Park.mp3',  artist:'Something Corporate', size:'4.1 MB', dur:'4:28', kbps:128 },
+  // New Found Glory
+  { file:'New Found Glory - Hit or Miss.mp3',         artist:'New Found Glory',     size:'2.7 MB', dur:'2:58', kbps:128 },
+  { file:'New Found Glory - My Friends Over You.mp3', artist:'New Found Glory',     size:'3.1 MB', dur:'3:22', kbps:128 },
+  { file:'New Found Glory - Dressed to Kill.mp3',     artist:'New Found Glory',     size:'2.5 MB', dur:'2:41', kbps:128 },
+  { file:'New Found Glory - Better Off Dead.mp3',     artist:'New Found Glory',     size:'2.6 MB', dur:'2:52', kbps:128 },
+  // Saves the Day
+  { file:'Saves the Day - At Your Funeral.mp3',       artist:'Saves the Day',       size:'2.7 MB', dur:'2:55', kbps:128 },
+  { file:'Saves the Day - Shoulder to the Wheel.mp3', artist:'Saves the Day',       size:'2.8 MB', dur:'3:02', kbps:128 },
+  { file:'Saves the Day - I\'m Sorry I\'m Leaving.mp3', artist:'Saves the Day',    size:'3.3 MB', dur:'3:36', kbps:128 },
+  { file:'Saves the Day - Holly Hox Forget Me Nots.mp3', artist:'Saves the Day',   size:'3.0 MB', dur:'3:18', kbps:128 },
+  // Yellowcard
+  { file:'Yellowcard - Way Away.mp3',                 artist:'Yellowcard',          size:'3.2 MB', dur:'3:24', kbps:128 },
+  { file:'Yellowcard - Ocean Avenue.mp3',             artist:'Yellowcard',          size:'3.2 MB', dur:'3:21', kbps:128 },
+  { file:'Yellowcard - One Year Six Months.mp3',      artist:'Yellowcard',          size:'3.3 MB', dur:'3:31', kbps:128 },
+  // The Ataris
+  { file:'The Ataris - In This Diary.mp3',            artist:'The Ataris',          size:'3.5 MB', dur:'3:50', kbps:128 },
+  { file:'The Ataris - San Dimas High School Football Rules.mp3', artist:'The Ataris', size:'3.0 MB', dur:'3:14', kbps:128 },
+  { file:'The Ataris - Boys of Summer.mp3',           artist:'The Ataris',          size:'4.3 MB', dur:'4:40', kbps:128 },
+  { file:'The Ataris - I Won\'t Spend Another Night Alone.mp3', artist:'The Ataris', size:'3.1 MB', dur:'3:21', kbps:128 },
+  // Student Rick
+  { file:'Student Rick - Warmth of the Sand.mp3',     artist:'Student Rick',        size:'3.6 MB', dur:'3:55', kbps:128 },
+  { file:'Student Rick - Summer Lovin.mp3',           artist:'Student Rick',        size:'3.2 MB', dur:'3:28', kbps:128 },
+  { file:'Student Rick - All My Friends Are Marrying.mp3', artist:'Student Rick',   size:'3.4 MB', dur:'3:42', kbps:128 },
+  // The Starting Line
+  { file:'The Starting Line - Best of Me.mp3',        artist:'The Starting Line',   size:'3.0 MB', dur:'3:16', kbps:128 },
+  { file:'The Starting Line - The Best Thing.mp3',    artist:'The Starting Line',   size:'2.9 MB', dur:'3:09', kbps:128 },
+  { file:'The Starting Line - Given the Chance.mp3',  artist:'The Starting Line',   size:'3.3 MB', dur:'3:34', kbps:128 },
+  // Drive-Thru / scene fillers
+  { file:'Finch - What It Is to Burn.mp3',            artist:'Finch',               size:'4.1 MB', dur:'4:28', kbps:128 },
+  { file:'Finch - Letters to You.mp3',                artist:'Finch',               size:'3.6 MB', dur:'3:54', kbps:128 },
+  { file:'Rufio - Above Me.mp3',                      artist:'Rufio',               size:'3.0 MB', dur:'3:14', kbps:128 },
+  { file:'Senses Fail - Lady Bug.mp3',                artist:'Senses Fail',         size:'2.8 MB', dur:'3:02', kbps:128 },
+  { file:'Midtown - Give It Up.mp3',                  artist:'Midtown',             size:'3.2 MB', dur:'3:27', kbps:128 },
+  { file:'Allister - Somewhere on Fullerton.mp3',     artist:'Allister',            size:'2.9 MB', dur:'3:08', kbps:128 },
+  { file:'The Early November - Everything\'s Too Cold.mp3', artist:'The Early November', size:'3.5 MB', dur:'3:49', kbps:128 },
+  { file:'Hellogoodbye - Here In Your Arms.mp3',      artist:'Hellogoodbye',        size:'3.1 MB', dur:'3:21', kbps:128 },
+  { file:'Acceptance - So Contagious.mp3',            artist:'Acceptance',          size:'3.3 MB', dur:'3:34', kbps:128 },
+  { file:'Rooney - Blueside.mp3',                     artist:'Rooney',              size:'3.0 MB', dur:'3:14', kbps:128 },
+  { file:'Limbeck - That Was Then This Is Now.mp3',   artist:'Limbeck',             size:'3.4 MB', dur:'3:40', kbps:128 },
+  { file:'Something Corporate - Hurricane.mp3',       artist:'Something Corporate', size:'3.8 MB', dur:'4:06', kbps:128 },
+  { file:'Alkaline Trio - Radio.mp3',                 artist:'Alkaline Trio',       size:'2.4 MB', dur:'2:39', kbps:128 },
+  { file:'Dashboard Confessional - Screaming Infidelities.mp3', artist:'Dashboard Confessional', size:'3.5 MB', dur:'3:51', kbps:128 },
+  { file:'Dashboard Confessional - The Swiss Army Romance.mp3',  artist:'Dashboard Confessional', size:'3.2 MB', dur:'3:32', kbps:128 },
+];
+
+// ── Fake user pool for search results ──
+var NAP_USERS = [
+  { name:'xXpunkr0cker99Xx', spd:'56k',  ping:142 },
+  { name:'sk8er_boi2001',    spd:'56k',  ping:289 },
+  { name:'FLseminole00',     spd:'56k',  ping:198 },
+  { name:'MiamiHurricane01', spd:'56k',  ping:312 },
+  { name:'napsterfan_tpa',   spd:'56k',  ping:167 },
+  { name:'DriveThruRocks',   spd:'DSL',  ping:54  },
+  { name:'indie_girl_uf',    spd:'DSL',  ping:67  },
+  { name:'collegedorm_fsu',  spd:'T1',   ping:18  },
+  { name:'UCF_RESNET01',     spd:'T1',   ping:22  },
+  { name:'uf_library_srv',   spd:'T3',   ping:8   },
+  { name:'miami_t3_node',    spd:'T3',   ping:11  },
+  { name:'darkstar_records', spd:'DSL',  ping:88  },
+  { name:'punknotdead1987',  spd:'56k',  ping:445 },
+  { name:'emo_kid_orlando',  spd:'56k',  ping:203 },
+  { name:'KAZAA_REFUGEE',    spd:'Cable',ping:44  },
+  { name:'tallymusicfan',    spd:'56k',  ping:178 },
+  { name:'scene_queen_2001', spd:'Cable',ping:39  },
+  { name:'warped_tour_kid',  spd:'DSL',  ping:71  },
+];
+
+var napCurrentTab = 'search';
+var napSearchResults = [];
+var napSelectedResult = -1;
+var napDownloads = [];
+var napUploads   = [];
+var napTickInterval = null;
+var napUserFlicker = null;
+
+function openNapster() {
+  var win = document.getElementById('napster-window');
+  win.classList.add('open');
+  win.style.zIndex = ++chatZBase;
+  napRenderLibrary();
+  napStartSimulation();
+  napFlickerUsers();
+}
+function closeNapster() {
+  document.getElementById('napster-window').classList.remove('open');
+}
+
+function napSetTab(tab) {
+  napCurrentTab = tab;
+  ['search','transfer','music'].forEach(function(t) {
+    document.getElementById('nap-tab-' + t).classList.toggle('active', t === tab);
+    document.getElementById('nap-panel-' + t).classList.toggle('active', t === tab);
+  });
+}
+
+// ── User count flicker (authentically random) ──
+function napFlickerUsers() {
+  if (napUserFlicker) clearInterval(napUserFlicker);
+  napUserFlicker = setInterval(function() {
+    var base = 57284;
+    var u = base + Math.floor(Math.random() * 400 - 200);
+    var f = 312847 + Math.floor(Math.random() * 1000 - 500);
+    document.getElementById('nap-user-count').textContent = u.toLocaleString();
+    document.getElementById('nap-file-count').textContent = f.toLocaleString();
+    document.getElementById('nap-status-right').textContent = u.toLocaleString() + ' users · ' + f.toLocaleString() + ' files';
+  }, 4000);
+}
+
+// ── Search ──
+function napDoSearch() {
+  var artist = document.getElementById('nap-search-artist').value.trim().toLowerCase();
+  var song   = document.getElementById('nap-search-song').value.trim().toLowerCase();
+  if (!artist && !song) return;
+
+  napSearchResults = [];
+  var list = document.getElementById('nap-results-list');
+  list.innerHTML = '<div style="padding:12px 20px;font-size:11px;font-family:Tahoma,Arial;color:#555;">Searching napster.com...</div>';
+  document.getElementById('nap-result-count').textContent = '';
+
+  setTimeout(function() {
+    // Find matching tracks from library
+    var matches = NAP_LIBRARY.filter(function(t) {
+      var fileMatch = t.file.toLowerCase().includes(artist) || t.artist.toLowerCase().includes(artist);
+      var songMatch = !song || t.file.toLowerCase().includes(song);
+      return fileMatch && songMatch;
+    });
+
+    // For each match generate 3-8 fake peers sharing it
+    matches.forEach(function(track) {
+      var numPeers = 3 + Math.floor(Math.random() * 6);
+      for (var i = 0; i < numPeers; i++) {
+        var user = NAP_USERS[Math.floor(Math.random() * NAP_USERS.length)];
+        // Slightly vary bitrate and size
+        var kbps = [96,128,128,128,160,192][Math.floor(Math.random()*6)];
+        napSearchResults.push({
+          file: track.file, artist: track.artist,
+          user: user.name, spd: user.spd, ping: user.ping + Math.floor(Math.random()*30-15),
+          kbps: kbps, size: track.size, dur: track.dur,
+          track: track
+        });
+      }
+    });
+
+    // Sort: T3 first, then T1, DSL, Cable, 56k — authentic Napster behavior
+    var spdOrder = { 'T3':0,'T1':1,'Cable':2,'DSL':3,'56k':4 };
+    napSearchResults.sort(function(a,b){ return (spdOrder[a.spd]||5)-(spdOrder[b.spd]||5); });
+
+    napRenderResults();
+    document.getElementById('nap-status-left').textContent = 'Search complete — ' + napSearchResults.length + ' results found';
+  }, 800 + Math.random() * 600);
+}
+
+function napRenderResults() {
+  var list = document.getElementById('nap-results-list');
+  list.innerHTML = '';
+  if (!napSearchResults.length) {
+    list.innerHTML = '<div style="padding:20px;text-align:center;font-size:11px;color:#808080;font-family:Tahoma,Arial;">No results found. Try a different search.</div>';
+    document.getElementById('nap-result-count').textContent = '';
+    return;
+  }
+  document.getElementById('nap-result-count').textContent = napSearchResults.length + ' results';
+  napSearchResults.forEach(function(r, i) {
+    var row = document.createElement('div');
+    row.className = 'nap-result-row' + (i === napSelectedResult ? ' selected' : '');
+    var spdClass = (r.spd === 'T3' || r.spd === 'T1') ? ' class="nap-result-t1"' : '';
+    row.innerHTML =
+      '<div title="' + esc(r.file) + '">' + esc(r.file) + '</div>'
+      + '<div' + spdClass + '>' + esc(r.user) + '</div>'
+      + '<div>' + r.kbps + 'kbps</div>'
+      + '<div>44kHz</div>'
+      + '<div>' + r.size + '</div>'
+      + '<div' + spdClass + '>' + r.spd + ' (' + r.ping + 'ms)</div>';
+    row.addEventListener('click', function() {
+      napSelectedResult = i;
+      napRenderResults();
+    });
+    row.addEventListener('dblclick', function() {
+      napSelectedResult = i;
+      napDownloadSelected();
+    });
+    list.appendChild(row);
+  });
+}
+
+function napGetMoreResults() {
+  if (!napSearchResults.length) return;
+  // Add a few more random users for existing tracks
+  var existing = napSearchResults.slice(0, 3);
+  existing.forEach(function(r) {
+    var user = NAP_USERS[Math.floor(Math.random() * NAP_USERS.length)];
+    napSearchResults.push({ file:r.file, artist:r.artist, user:user.name, spd:user.spd, ping:user.ping, kbps:r.kbps, size:r.size, dur:r.dur, track:r.track });
+  });
+  napRenderResults();
+  document.getElementById('nap-result-count').textContent = napSearchResults.length + ' results';
+}
+
+function napDownloadSelected() {
+  if (napSelectedResult < 0 || !napSearchResults[napSelectedResult]) return;
+  var r = napSearchResults[napSelectedResult];
+  // Check not already downloading
+  if (napDownloads.find(function(d){ return d.file === r.file; })) {
+    document.getElementById('nap-status-left').textContent = 'Already downloading: ' + r.file; return;
+  }
+  var dlSpeed = { 'T3':180,'T1':120,'Cable':50,'DSL':35,'56k':6 }[r.spd] || 6;
+  var sizeMB = parseFloat(r.size) || 3.5;
+  napDownloads.push({
+    file: r.file, user: r.user, spd: r.spd,
+    sizeMB: sizeMB, downloaded: 0,
+    kbps: dlSpeed, status: 'Downloading',
+    done: false
+  });
+  napSetTab('transfer');
+  document.getElementById('nap-status-left').textContent = 'Downloading: ' + r.file;
+  napRenderTransfers();
+}
+
+// ── Library ──
+function napRenderLibrary() {
+  var list = document.getElementById('nap-music-list');
+  list.innerHTML = '';
+  NAP_LIBRARY.forEach(function(t, i) {
+    var row = document.createElement('div');
+    row.className = 'nap-music-row';
+    row.innerHTML =
+      '<div title="' + esc(t.file) + '">' + esc(t.file) + '</div>'
+      + '<div>' + esc(t.artist) + '</div>'
+      + '<div>' + t.size + '</div>'
+      + '<div class="nap-music-shared">✓ shared</div>';
+    row.addEventListener('click', function() {
+      document.querySelectorAll('.nap-music-row').forEach(function(r){ r.classList.remove('selected'); });
+      row.classList.add('selected');
+    });
+    list.appendChild(row);
+  });
+  document.getElementById('nap-lib-count').textContent = NAP_LIBRARY.length + ' files shared';
+}
+
+// ── Transfer simulation ──
+function napStartSimulation() {
+  // Seed a few active uploads from library
+  if (!napUploads.length) {
+    var uploadCandidates = NAP_LIBRARY.slice(0, 6);
+    uploadCandidates.forEach(function(t) {
+      var user = NAP_USERS[Math.floor(Math.random() * NAP_USERS.length)];
+      var prog = Math.random() * 0.7; // already partially uploaded
+      napUploads.push({
+        file: t.file, user: user.name, spd: '56k',
+        sizeMB: parseFloat(t.size) || 3.5,
+        uploaded: parseFloat(t.size) * prog || 1.5,
+        kbps: 4.5, status: 'Uploading', done: false
+      });
+    });
+  }
+
+  if (napTickInterval) clearInterval(napTickInterval);
+  napTickInterval = setInterval(function() {
+    var tickSecs = 0.5; // tick every 500ms
+
+    // Advance downloads
+    napDownloads.forEach(function(d) {
+      if (d.done) return;
+      d.downloaded += (d.kbps * tickSecs) / 1024; // MB
+      if (d.downloaded >= d.sizeMB) {
+        d.downloaded = d.sizeMB; d.done = true; d.status = 'Complete ✓';
+        // Add to library if not already there
+        if (!NAP_LIBRARY.find(function(t){ return t.file === d.file; })) {
+          NAP_LIBRARY.push({ file:d.file, artist:'', size:d.sizeMB.toFixed(1)+' MB', dur:'?:??', kbps:128 });
+          napRenderLibrary();
+        }
+      }
+    });
+
+    // Advance uploads — cycle them
+    napUploads.forEach(function(u) {
+      if (u.done) return;
+      u.uploaded += (u.kbps * tickSecs) / 1024;
+      if (u.uploaded >= u.sizeMB) {
+        // Reset to simulate new upload request
+        u.uploaded = 0;
+        var newUser = NAP_USERS[Math.floor(Math.random() * NAP_USERS.length)];
+        u.user = newUser.name;
+        var newTrack = NAP_LIBRARY[Math.floor(Math.random() * NAP_LIBRARY.length)];
+        u.file = newTrack.file; u.sizeMB = parseFloat(newTrack.size) || 3.5;
+      }
+    });
+
+    // Occasionally add a new spontaneous upload
+    if (Math.random() < 0.02 && napUploads.filter(function(u){ return !u.done; }).length < 8) {
+      var user = NAP_USERS[Math.floor(Math.random() * NAP_USERS.length)];
+      var track = NAP_LIBRARY[Math.floor(Math.random() * NAP_LIBRARY.length)];
+      napUploads.push({ file:track.file, user:user.name, spd:'56k', sizeMB:parseFloat(track.size)||3.5, uploaded:0, kbps:4+Math.random()*2, status:'Uploading', done:false });
+    }
+
+    // Keep uploads list reasonable
+    if (napUploads.length > 10) napUploads = napUploads.slice(-8);
+
+    if (document.getElementById('napster-window').classList.contains('open')) {
+      napRenderTransfers();
+    }
+  }, 500);
+}
+
+function napRenderTransfers() {
+  // Downloads
+  var dlList = document.getElementById('nap-dl-list');
+  var activeDl = napDownloads.slice(-8);
+  document.getElementById('nap-dl-count').textContent = activeDl.filter(function(d){ return !d.done; }).length;
+  dlList.innerHTML = '';
+  if (!activeDl.length) {
+    dlList.innerHTML = '<div style="padding:12px 20px;font-size:11px;font-family:Tahoma,Arial;color:#808080;">No active downloads. Search for music and click Download.</div>';
+  } else {
+    activeDl.forEach(function(d) {
+      var pct = Math.min(100, Math.round((d.downloaded / d.sizeMB) * 100));
+      var row = document.createElement('div');
+      row.className = 'nap-transfer-row';
+      row.innerHTML =
+        '<div title="' + esc(d.file) + '">' + esc(d.file) + '</div>'
+        + '<div>' + esc(d.user) + '</div>'
+        + '<div><div class="nap-xfer-bar-wrap"><div class="nap-xfer-bar" style="width:' + pct + '%;"></div></div></div>'
+        + '<div>' + d.sizeMB.toFixed(1) + ' MB</div>'
+        + '<div>' + (d.done ? '—' : (d.kbps).toFixed(1) + ' KB/s') + '</div>'
+        + '<div class="nap-xfer-status-dl">' + (d.done ? '✓ Complete' : pct + '% (' + d.downloaded.toFixed(1) + ' MB)') + '</div>';
+      dlList.appendChild(row);
+    });
+  }
+
+  // Uploads
+  var ulList = document.getElementById('nap-ul-list');
+  var activeUl = napUploads.filter(function(u){ return !u.done; }).slice(0, 6);
+  document.getElementById('nap-ul-count').textContent = activeUl.length;
+  ulList.innerHTML = '';
+  if (!activeUl.length) {
+    ulList.innerHTML = '<div style="padding:12px 20px;font-size:11px;font-family:Tahoma,Arial;color:#808080;">No active uploads.</div>';
+  } else {
+    activeUl.forEach(function(u) {
+      var pct = Math.min(99, Math.round((u.uploaded / u.sizeMB) * 100));
+      var row = document.createElement('div');
+      row.className = 'nap-transfer-row';
+      row.innerHTML =
+        '<div title="' + esc(u.file) + '">' + esc(u.file) + '</div>'
+        + '<div>' + esc(u.user) + '</div>'
+        + '<div><div class="nap-xfer-bar-wrap"><div class="nap-xfer-bar" style="width:' + pct + '%;background:linear-gradient(90deg,#006600,#00aa00);"></div></div></div>'
+        + '<div>' + u.sizeMB.toFixed(1) + ' MB</div>'
+        + '<div>' + u.kbps.toFixed(1) + ' KB/s</div>'
+        + '<div class="nap-xfer-status-ul">↑ ' + pct + '%</div>';
+      ulList.appendChild(row);
+    });
+  }
+}
+
+makeDraggable(document.getElementById('napster-window'), document.getElementById('nap-titlebar'));
+document.getElementById('napster-window').addEventListener('mousedown', function(){ this.style.zIndex = ++chatZBase; });
+
+// ════════════════════════════════════════
+// PLACEHOLDER LAUNCHERS (to be built)
+// ════════════════════════════════════════
+function openWinamp() { alert('Winamp 2.x\nComing soon!'); }
 function openNotepad() { alert('Notepad\nComing soon!'); }
 function openCalculator() { alert('Calculator\nComing soon!'); }
 function openRecycleBin() { alert('Recycle Bin\nComing soon!'); }
