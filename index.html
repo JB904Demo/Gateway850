@@ -1846,9 +1846,9 @@ body {
 }
 #napster-window.open { display: flex; }
 
-/* Title bar */
+/* Title bar — authentic Win98 native look */
 .nap-titlebar {
-  background: linear-gradient(90deg, #000000, #222222);
+  background: linear-gradient(90deg, #000080, #1084d0);
   color: #fff; font-size: 12px; font-weight: bold;
   padding: 2px 4px; display: flex; align-items: center;
   justify-content: space-between; height: 22px;
@@ -1856,187 +1856,209 @@ body {
 }
 .nap-titlebar:active { cursor: grabbing; }
 .nap-titlebar-left { display: flex; align-items: center; gap: 8px; }
-.nap-logo-text {
-  font-size: 14px; font-weight: bold; font-family: Arial;
-  color: #fff; letter-spacing: -0.5px;
-}
-.nap-logo-text span { color: #ffcc00; }
+.nap-logo-text { font-size: 13px; font-weight: bold; font-family: Arial; color: #fff; }
+.nap-logo-text span { color: #ffdd44; }
 .nap-win-btns { display: flex; gap: 2px; }
 .nap-win-btn {
-  width: 16px; height: 14px; background: #555;
-  border: 1px solid; border-color: #888 #333 #333 #888;
+  width: 16px; height: 14px; background: #c0c0c0;
+  border: 1px solid; border-color: #fff #808080 #808080 #fff;
   font-size: 9px; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: #fff; font-weight: bold;
+  cursor: pointer; color: #000; font-weight: bold;
 }
-.nap-win-btn:active { border-color: #333 #888 #888 #333; }
+.nap-win-btn:active { border-color: #808080 #fff #fff #808080; }
 
 /* Menu bar */
 .nap-menubar {
-  display: flex; background: #f0f0f0; padding: 1px 2px;
-  border-bottom: 1px solid #ccc; flex-shrink: 0;
+  display: flex; background: #c0c0c0; padding: 1px 2px;
+  border-bottom: 1px solid #808080; flex-shrink: 0;
 }
-.nap-menu {
-  font-size: 12px; padding: 2px 8px; cursor: pointer; color: #000; position: relative;
-}
+.nap-menu { font-size: 12px; padding: 2px 8px; cursor: pointer; color: #000; position: relative; }
 .nap-menu:hover { background: #000080; color: #fff; }
 .nap-menu-dropdown {
   display: none; position: absolute; top: 100%; left: 0;
-  background: #fff; border: 1px solid #808080;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2); z-index: 3000; min-width: 160px;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  box-shadow: 2px 2px 0 #000; z-index: 3000; min-width: 160px;
 }
 .nap-menu:hover .nap-menu-dropdown { display: block; }
-.nap-menu-item {
-  font-size: 12px; padding: 4px 20px; color: #000; cursor: pointer; white-space: nowrap;
-}
+.nap-menu-item { font-size: 12px; padding: 4px 20px; color: #000; cursor: pointer; white-space: nowrap; }
 .nap-menu-item:hover { background: #000080; color: #fff; }
-.nap-menu-sep { height: 1px; background: #ccc; margin: 2px 0; }
+.nap-menu-sep { height: 1px; background: #808080; margin: 2px 0; border-bottom: 1px solid #fff; }
 
-/* Top status bar - connection info */
+/* Toolbar button tabs — Napster v2 style */
 .nap-conn-bar {
-  background: #1a1a1a; color: #fff; padding: 4px 8px;
-  display: flex; align-items: center; gap: 16px; flex-shrink: 0;
-  font-size: 11px; font-family: 'Tahoma', Arial;
+  background: #c0c0c0; border-bottom: 2px solid #808080;
+  display: flex; align-items: center; gap: 2px;
+  padding: 3px 4px; flex-shrink: 0;
 }
-.nap-conn-dot { width: 8px; height: 8px; border-radius: 50%; background: #00cc00; flex-shrink: 0; box-shadow: 0 0 4px #00ff00; }
-.nap-conn-info { color: #aaa; }
-.nap-conn-info span { color: #fff; font-weight: bold; }
-.nap-conn-users { margin-left: auto; color: #ffcc00; font-weight: bold; }
+.nap-conn-dot { width: 8px; height: 8px; border-radius: 50%; background: #00cc00; flex-shrink: 0; box-shadow: 0 0 3px #00aa00; margin-right: 4px; }
+.nap-conn-info { font-size: 11px; font-family: Tahoma,Arial; color: #000; }
+.nap-conn-info span { color: #000080; font-weight: bold; }
+.nap-conn-users { margin-left: auto; font-size: 10px; font-family: Tahoma,Arial; color: #444; }
 
-/* Tab bar */
+/* Napster-style toolbar tabs */
 .nap-tabs {
-  display: flex; background: #e8e8e8; border-bottom: 2px solid #000;
-  flex-shrink: 0;
+  display: flex; background: #c0c0c0;
+  border-bottom: 2px solid #808080; flex-shrink: 0; padding: 2px 2px 0;
 }
 .nap-tab {
-  padding: 6px 20px; font-size: 12px; font-weight: bold;
-  font-family: 'Tahoma', Arial; cursor: pointer; color: #555;
-  border-right: 1px solid #ccc; border-bottom: 2px solid transparent;
-  margin-bottom: -2px; background: #e8e8e8;
+  padding: 4px 14px; font-size: 11px; font-weight: bold;
+  font-family: Tahoma,Arial; cursor: pointer; color: #000;
+  background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  margin-right: 2px; border-bottom: none;
+  display: flex; align-items: center; gap: 4px;
 }
-.nap-tab:hover { background: #d8d8d8; color: #000; }
+.nap-tab:hover { background: #d8d8d8; }
 .nap-tab.active {
-  background: #fff; color: #000; border-bottom: 2px solid #fff;
-  border-top: 2px solid #000; border-left: 1px solid #ccc;
+  background: #ffffff; border-color: #808080 #fff #808080 #808080;
+  border-bottom: 2px solid #fff; position: relative; z-index: 1;
 }
 
 /* Tab panels */
-.nap-panel { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+.nap-panel { flex: 1; display: none; flex-direction: column; overflow: hidden; background: #fff; }
 .nap-panel.active { display: flex; }
 
 /* ── SEARCH PANEL ── */
 .nap-search-bar {
-  display: flex; align-items: center; gap: 6px;
-  padding: 8px; background: #f8f8f8; border-bottom: 1px solid #ccc; flex-shrink: 0;
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px 6px; background: #f0f0f0;
+  border-bottom: 1px solid #808080; flex-shrink: 0;
 }
-.nap-search-label { font-size: 12px; font-weight: bold; white-space: nowrap; }
+.nap-search-label { font-size: 11px; font-weight: bold; white-space: nowrap; font-family: Tahoma,Arial; }
 .nap-search-input {
-  flex: 1; height: 24px; border: 2px solid; border-color: #808080 #fff #fff #808080;
-  font-size: 12px; padding: 0 6px; font-family: 'Tahoma', Arial; outline: none;
+  flex: 1; height: 22px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  font-size: 11px; padding: 0 4px; font-family: Tahoma,Arial; outline: none; background: #fff;
 }
 .nap-search-type {
-  height: 24px; font-size: 11px; border: 2px solid; border-color: #808080 #fff #fff #808080;
-  background: #fff; padding: 0 4px; font-family: 'Tahoma', Arial;
+  height: 22px; font-size: 11px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+  background: #fff; padding: 0 2px; font-family: Tahoma,Arial;
 }
 .nap-search-btn {
-  padding: 3px 16px; background: #c0c0c0;
+  padding: 2px 12px; background: #c0c0c0;
   border: 2px solid; border-color: #fff #808080 #808080 #fff;
-  font-size: 12px; font-weight: bold; font-family: 'Tahoma', Arial; cursor: pointer;
+  font-size: 11px; font-weight: bold; font-family: Tahoma,Arial; cursor: pointer;
 }
 .nap-search-btn:active { border-color: #808080 #fff #fff #808080; }
+/* Column headers — Win98 list view style */
 .nap-results-header {
   display: grid;
   grid-template-columns: 2fr 1.2fr 60px 70px 60px 70px;
-  background: #ddd; border-bottom: 1px solid #aaa;
-  font-size: 11px; font-weight: bold; font-family: 'Tahoma', Arial;
+  background: #c0c0c0; border-bottom: 2px solid #808080;
+  font-size: 11px; font-weight: bold; font-family: Tahoma,Arial;
   flex-shrink: 0;
 }
-.nap-results-header div { padding: 3px 6px; border-right: 1px solid #aaa; cursor: pointer; }
-.nap-results-header div:hover { background: #ccc; }
+.nap-results-header div {
+  padding: 2px 6px; border-right: 1px solid #808080; cursor: pointer;
+  border-bottom: 1px solid #808080;
+}
+.nap-results-header div:hover { background: #b0b0b0; }
 .nap-results-list { flex: 1; overflow-y: auto; background: #fff; }
 .nap-result-row {
   display: grid;
   grid-template-columns: 2fr 1.2fr 60px 70px 60px 70px;
-  font-size: 11px; font-family: 'Tahoma', Arial;
-  border-bottom: 1px solid #f0f0f0; cursor: pointer;
+  font-size: 11px; font-family: Tahoma,Arial;
+  border-bottom: 1px solid #ececec; cursor: pointer;
 }
-.nap-result-row:hover { background: #e8eeff; }
+.nap-result-row:hover { background: #dce8ff; }
 .nap-result-row.selected { background: #000080; color: #fff; }
-.nap-result-row div { padding: 2px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-right: 1px solid #f0f0f0; }
+.nap-result-row div { padding: 2px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-right: 1px solid #ececec; }
 .nap-result-row.selected div { border-right-color: #0000aa; }
 .nap-result-t1 { color: #0000cc; font-weight: bold; }
 .nap-result-row.selected .nap-result-t1 { color: #aaccff; }
 .nap-search-footer {
-  display: flex; align-items: center; gap: 8px;
-  padding: 4px 8px; background: #f0f0f0; border-top: 1px solid #ccc;
-  font-size: 11px; font-family: 'Tahoma', Arial; flex-shrink: 0;
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 6px; background: #c0c0c0; border-top: 2px solid #808080;
+  font-size: 11px; font-family: Tahoma,Arial; flex-shrink: 0;
 }
 .nap-dl-btn {
-  padding: 3px 14px; background: #c0c0c0;
+  padding: 2px 12px; background: #c0c0c0;
   border: 2px solid; border-color: #fff #808080 #808080 #fff;
-  font-size: 11px; font-weight: bold; cursor: pointer;
+  font-size: 11px; font-weight: bold; cursor: pointer; font-family: Tahoma,Arial;
 }
 .nap-dl-btn:active { border-color: #808080 #fff #fff #808080; }
 
 /* ── TRANSFER PANEL ── */
 .nap-transfer-section { flex-shrink: 0; }
 .nap-transfer-header {
-  background: #1a1a1a; color: #fff; font-size: 11px; font-weight: bold;
-  padding: 3px 8px; display: flex; align-items: center; gap: 8px;
+  background: #c0c0c0; color: #000; font-size: 11px; font-weight: bold;
+  padding: 2px 6px; border-bottom: 1px solid #808080; border-top: 1px solid #fff;
+  font-family: Tahoma,Arial;
 }
 .nap-transfer-cols {
   display: grid;
-  grid-template-columns: 2fr 1fr 90px 70px 80px 70px;
-  background: #ddd; border-bottom: 1px solid #aaa;
-  font-size: 11px; font-weight: bold; flex-shrink: 0;
+  grid-template-columns: 2fr 1fr 100px 60px 70px 60px;
+  background: #c0c0c0; border-bottom: 2px solid #808080;
+  font-size: 11px; font-weight: bold; font-family: Tahoma,Arial; flex-shrink: 0;
 }
-.nap-transfer-cols div { padding: 2px 6px; border-right: 1px solid #aaa; }
+.nap-transfer-cols div { padding: 2px 6px; border-right: 1px solid #808080; }
 .nap-transfer-list { overflow-y: auto; background: #fff; }
 .nap-transfer-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 90px 70px 80px 70px;
-  font-size: 11px; font-family: 'Tahoma', Arial;
-  border-bottom: 1px solid #f0f0f0; align-items: center;
+  grid-template-columns: 2fr 1fr 100px 60px 70px 60px;
+  font-size: 11px; font-family: Tahoma,Arial;
+  border-bottom: 1px solid #ececec; align-items: center;
 }
-.nap-transfer-row:hover { background: #f0f0f8; }
-.nap-transfer-row div { padding: 2px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-/* Progress bar inside transfer row */
-.nap-xfer-bar-wrap { background: #e0e0e0; height: 10px; border: 1px solid #aaa; margin: 0 4px; position: relative; }
-.nap-xfer-bar { height: 100%; background: linear-gradient(90deg, #0044cc, #4488ff); }
-.nap-xfer-status-dl { color: #0000cc; font-size: 10px; }
-.nap-xfer-status-ul { color: #006600; font-size: 10px; }
-.nap-xfer-status-seed { color: #888; font-size: 10px; }
+.nap-transfer-row:hover { background: #f8f8ff; }
+.nap-transfer-row div { padding: 1px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Progress bars — blue for dl, yellow for ul exactly like screenshot */
+.nap-xfer-bar-wrap {
+  background: #d0d0d0; height: 12px; border: 1px inset #999;
+  margin: 1px 4px; position: relative; overflow: hidden;
+}
+.nap-xfer-bar-dl { height: 100%; background: #3366cc; }
+.nap-xfer-bar-ul { height: 100%; background: #ddcc00; }
+.nap-xfer-pct {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-family: Tahoma,Arial; font-weight: bold; color: #000;
+}
+.nap-xfer-status-dl { color: #333; font-size: 10px; }
+.nap-xfer-status-ul { color: #333; font-size: 10px; }
+/* Bottom bar */
+.nap-transfer-bottom {
+  background: #c0c0c0; border-top: 2px solid #808080;
+  padding: 3px 8px; font-size: 10px; font-family: Tahoma,Arial;
+  display: flex; align-items: center; gap: 20px; flex-shrink: 0;
+}
 
 /* ── MY MUSIC PANEL ── */
 .nap-music-toolbar {
   display: flex; align-items: center; gap: 6px;
-  padding: 6px 8px; background: #f8f8f8; border-bottom: 1px solid #ccc; flex-shrink: 0;
+  padding: 4px 6px; background: #f0f0f0; border-bottom: 1px solid #808080; flex-shrink: 0;
+  font-size: 11px; font-family: Tahoma,Arial;
 }
 .nap-music-cols {
-  display: grid;
-  grid-template-columns: 2.5fr 1.5fr 60px 60px;
-  background: #ddd; border-bottom: 1px solid #aaa;
-  font-size: 11px; font-weight: bold; flex-shrink: 0;
+  display: grid; grid-template-columns: 2.5fr 1.5fr 70px 60px;
+  background: #c0c0c0; border-bottom: 2px solid #808080;
+  font-size: 11px; font-weight: bold; font-family: Tahoma,Arial; flex-shrink: 0;
 }
-.nap-music-cols div { padding: 3px 6px; border-right: 1px solid #aaa; cursor: pointer; }
+.nap-music-cols div { padding: 2px 6px; border-right: 1px solid #808080; cursor: pointer; }
 .nap-music-list { flex: 1; overflow-y: auto; background: #fff; }
 .nap-music-row {
-  display: grid;
-  grid-template-columns: 2.5fr 1.5fr 60px 60px;
-  font-size: 11px; font-family: 'Tahoma', Arial;
-  border-bottom: 1px solid #f0f0f0; cursor: pointer;
+  display: grid; grid-template-columns: 2.5fr 1.5fr 70px 60px;
+  font-size: 11px; font-family: Tahoma,Arial;
+  border-bottom: 1px solid #ececec; cursor: pointer;
 }
-.nap-music-row:hover { background: #e8eeff; }
+.nap-music-row:hover { background: #dce8ff; }
 .nap-music-row.selected { background: #000080; color: #fff; }
-.nap-music-row div { padding: 3px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-right: 1px solid #f0f0f0; }
+.nap-music-row div { padding: 2px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-right: 1px solid #ececec; }
 .nap-music-shared { color: #008800; font-size: 10px; }
 .nap-music-row.selected .nap-music-shared { color: #aaffaa; }
 
 /* Status bar */
 .nap-statusbar {
-  height: 20px; background: #f0f0f0; border-top: 1px solid #ccc;
-  display: flex; align-items: center; padding: 0 8px;
-  font-size: 10px; font-family: 'Tahoma', Arial; flex-shrink: 0; gap: 12px;
+  height: 20px; background: #c0c0c0; border-top: 2px solid #808080;
+  display: flex; align-items: center; padding: 0;
+  font-size: 10px; font-family: Tahoma,Arial; flex-shrink: 0;
 }
+.nap-status-left {
+  flex: 1; padding: 0 6px; border-right: 1px solid #808080;
+  height: 100%; display: flex; align-items: center;
+  border-right: 2px solid; border-color: #808080 #fff #fff #808080;
+}
+.nap-status-right {
+  padding: 0 8px; height: 100%; display: flex; align-items: center;
+}
+
 </style>
 </head>
 <body>
@@ -3727,7 +3749,7 @@ body {
           <span>⬇</span> Downloading (<span id="nap-dl-count">0</span>)
         </div>
         <div class="nap-transfer-cols">
-          <div>Filename</div><div>User</div><div>Progress</div><div>Size</div><div>Speed</div><div>Status</div>
+          <div>Filename</div><div>User</div><div>Progress</div><div>Size</div><div>Rate</div><div>Status</div>
         </div>
         <div class="nap-transfer-list" id="nap-dl-list" style="flex:1;"></div>
       </div>
@@ -3737,7 +3759,7 @@ body {
           <span>⬆</span> Uploading to others (<span id="nap-ul-count">0</span>)
         </div>
         <div class="nap-transfer-cols">
-          <div>Filename</div><div>User</div><div>Progress</div><div>Size</div><div>Speed</div><div>Status</div>
+          <div>Filename</div><div>User</div><div>Progress</div><div>Size</div><div>Rate</div><div>Status</div>
         </div>
         <div class="nap-transfer-list" id="nap-ul-list" style="flex:1;"></div>
       </div>
@@ -3757,8 +3779,8 @@ body {
     </div>
 
     <div class="nap-statusbar">
-      <span id="nap-status-left">Ready</span>
-      <span style="margin-left:auto;" id="nap-status-right">57,284 users · 312,847 files</span>
+      <div class="nap-status-left" id="nap-status-left">Ready</div>
+      <div class="nap-status-right" id="nap-status-right">57,284 users · 312,847 files</div>
     </div>
   </div>
 
@@ -4750,10 +4772,10 @@ function napRenderTransfers() {
       row.innerHTML =
         '<div title="' + esc(d.file) + '">' + esc(d.file) + '</div>'
         + '<div>' + esc(d.user) + '</div>'
-        + '<div><div class="nap-xfer-bar-wrap"><div class="nap-xfer-bar" style="width:' + pct + '%;"></div></div></div>'
+        + '<div><div class="nap-xfer-bar-wrap"><div class="nap-xfer-bar-dl" style="width:' + pct + '%;"></div><div class="nap-xfer-pct">' + pct + '%</div></div></div>'
         + '<div>' + d.sizeMB.toFixed(1) + ' MB</div>'
-        + '<div>' + (d.done ? '—' : (d.kbps).toFixed(1) + ' KB/s') + '</div>'
-        + '<div class="nap-xfer-status-dl">' + (d.done ? '✓ Complete' : pct + '% (' + d.downloaded.toFixed(1) + ' MB)') + '</div>';
+        + '<div>' + (d.done ? '—' : d.kbps.toFixed(1) + ' k/s') + '</div>'
+        + '<div class="nap-xfer-status-dl">' + (d.done ? 'Complete' : 'Downloading...') + '</div>';
       dlList.appendChild(row);
     });
   }
@@ -4773,10 +4795,10 @@ function napRenderTransfers() {
       row.innerHTML =
         '<div title="' + esc(u.file) + '">' + esc(u.file) + '</div>'
         + '<div>' + esc(u.user) + '</div>'
-        + '<div><div class="nap-xfer-bar-wrap"><div class="nap-xfer-bar" style="width:' + pct + '%;background:linear-gradient(90deg,#006600,#00aa00);"></div></div></div>'
+        + '<div><div class="nap-xfer-bar-wrap"><div class="nap-xfer-bar-ul" style="width:' + pct + '%;"></div><div class="nap-xfer-pct">' + pct + '%</div></div></div>'
         + '<div>' + u.sizeMB.toFixed(1) + ' MB</div>'
-        + '<div>' + u.kbps.toFixed(1) + ' KB/s</div>'
-        + '<div class="nap-xfer-status-ul">↑ ' + pct + '%</div>';
+        + '<div>' + u.kbps.toFixed(1) + ' k/s</div>'
+        + '<div class="nap-xfer-status-ul">Uploading...</div>';
       ulList.appendChild(row);
     });
   }
